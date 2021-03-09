@@ -1,3 +1,4 @@
+import 'package:MedAgenda/ResetPassword/reset_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -59,17 +60,23 @@ class FormCard extends StatelessWidget {
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(35),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Text(
-                  "Esqueceu a senha?",
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontFamily: "Poppins-Medium",
-                      fontSize: ScreenUtil.getInstance().setSp(28)),
-                )
-              ],
+            Container(
+              height: 40,
+              alignment: Alignment.centerRight,
+              child: FlatButton(
+                child: Text(
+                  "Recuperar Senha",
+                  textAlign: TextAlign.right,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResetPassword(),
+                    ),
+                  );
+                },
+              ),
             )
           ],
         ),
