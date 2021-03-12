@@ -1,3 +1,4 @@
+import 'package:MedAgenda/add_horarios.dart';
 import 'package:MedAgenda/main__drawer_clinica.dart';
 import 'package:MedAgenda/main_drawer_paciente.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class _TelaInicialClinica extends State<TelaInicialClinica> {
             ],
           ),
         ),
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(8.0),
         child: GridView.count(
           crossAxisCount: 2,
           children: <Widget>[
@@ -85,7 +86,14 @@ class _TelaInicialClinica extends State<TelaInicialClinica> {
             Card(
               margin: EdgeInsets.all(8.0),
               child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddHorario(),
+                      ),
+                    );
+                  },
                   splashColor: Colors.cyan,
                   child: Center(
                     child: Column(
