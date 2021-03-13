@@ -24,13 +24,13 @@ class _AddHorario extends State<AddHorario> {
         padding: EdgeInsets.all(2.0),
         decoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            border: Border.all(width: 2.0, color: Colors.black)),
+            border: Border.all(width: 2.0, color: Colors.blue)),
         child: isSelected
             ? Container(
                 width: double.infinity,
                 height: double.infinity,
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.black),
+                    shape: BoxShape.rectangle, color: Colors.blue),
               )
             : Container(),
       );
@@ -52,7 +52,7 @@ class _AddHorario extends State<AddHorario> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             TableCalendar(
-              initialCalendarFormat: CalendarFormat.week,
+              initialCalendarFormat: CalendarFormat.month,
               calendarStyle: CalendarStyle(
                   todayColor: Colors.orange,
                   selectedColor: Theme.of(context).primaryColor,
@@ -106,19 +106,15 @@ class _AddHorario extends State<AddHorario> {
                   new Padding(
                     padding: new EdgeInsets.all(8.0),
                   ),
-                  new Divider(height: 5.0, color: Colors.black),
-                  new Padding(
-                    padding: new EdgeInsets.all(8.0),
-                  ),
                   new Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                      ),
                       GestureDetector(
                         onTap: _radio,
                         child: radioButton(_isSelected),
+                      ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
                       ),
                       new Text(
                         '07:00',
@@ -130,6 +126,9 @@ class _AddHorario extends State<AddHorario> {
                       GestureDetector(
                         onTap: _radio,
                         child: radioButton(_isSelected),
+                      ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
                       ),
                       new Text(
                         '07:30',
@@ -144,6 +143,9 @@ class _AddHorario extends State<AddHorario> {
                         onTap: _radio,
                         child: radioButton(_isSelected),
                       ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
+                      ),
                       new Text(
                         '08:00',
                         style: new TextStyle(fontSize: 20.0),
@@ -155,22 +157,25 @@ class _AddHorario extends State<AddHorario> {
                         onTap: _radio,
                         child: radioButton(_isSelected),
                       ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
+                      ),
                       new Text(
                         '08:30',
                         style: new TextStyle(fontSize: 20.0),
                       ),
                     ],
                   ),
-                  new Divider(height: 25.0, color: Colors.black),
+                  new Divider(height: 15.0, color: Colors.cyan),
                   new Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                      ),
                       GestureDetector(
                         onTap: _radio,
                         child: radioButton(_isSelected),
+                      ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
                       ),
                       new Text(
                         '09:00',
@@ -182,6 +187,9 @@ class _AddHorario extends State<AddHorario> {
                       GestureDetector(
                         onTap: _radio,
                         child: radioButton(_isSelected),
+                      ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
                       ),
                       new Text(
                         '09:30',
@@ -196,6 +204,9 @@ class _AddHorario extends State<AddHorario> {
                         onTap: _radio,
                         child: radioButton(_isSelected),
                       ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
+                      ),
                       new Text(
                         '10:00',
                         style: new TextStyle(fontSize: 20.0),
@@ -207,22 +218,25 @@ class _AddHorario extends State<AddHorario> {
                         onTap: _radio,
                         child: radioButton(_isSelected),
                       ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
+                      ),
                       new Text(
                         '10:30',
                         style: new TextStyle(fontSize: 20.0),
                       ),
                     ],
                   ),
-                  new Divider(height: 25.0, color: Colors.black),
+                  new Divider(height: 15.0, color: Colors.cyan),
                   new Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                      ),
                       GestureDetector(
                         onTap: _radio,
                         child: radioButton(_isSelected),
+                      ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
                       ),
                       new Text(
                         '11:00',
@@ -234,6 +248,9 @@ class _AddHorario extends State<AddHorario> {
                       GestureDetector(
                         onTap: _radio,
                         child: radioButton(_isSelected),
+                      ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
                       ),
                       new Text(
                         '11:30',
@@ -248,6 +265,9 @@ class _AddHorario extends State<AddHorario> {
                         onTap: _radio,
                         child: radioButton(_isSelected),
                       ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
+                      ),
                       new Text(
                         '12:00',
                         style: new TextStyle(fontSize: 20.0),
@@ -259,22 +279,25 @@ class _AddHorario extends State<AddHorario> {
                         onTap: _radio,
                         child: radioButton(_isSelected),
                       ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
+                      ),
                       new Text(
                         '12:30',
                         style: new TextStyle(fontSize: 20.0),
                       ),
                     ],
                   ),
-                  new Divider(height: 25.0, color: Colors.black),
+                  new Divider(height: 15.0, color: Colors.cyan),
                   new Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                      ),
                       GestureDetector(
                         onTap: _radio,
                         child: radioButton(_isSelected),
+                      ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
                       ),
                       new Text(
                         '13:00',
@@ -286,6 +309,9 @@ class _AddHorario extends State<AddHorario> {
                       GestureDetector(
                         onTap: _radio,
                         child: radioButton(_isSelected),
+                      ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
                       ),
                       new Text(
                         '13:30',
@@ -300,6 +326,9 @@ class _AddHorario extends State<AddHorario> {
                         onTap: _radio,
                         child: radioButton(_isSelected),
                       ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
+                      ),
                       new Text(
                         '14:00',
                         style: new TextStyle(fontSize: 20.0),
@@ -311,22 +340,25 @@ class _AddHorario extends State<AddHorario> {
                         onTap: _radio,
                         child: radioButton(_isSelected),
                       ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
+                      ),
                       new Text(
                         '14:30',
                         style: new TextStyle(fontSize: 20.0),
                       ),
                     ],
                   ),
-                  new Divider(height: 25.0, color: Colors.black),
+                  new Divider(height: 15.0, color: Colors.cyan),
                   new Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      new Padding(
-                        padding: new EdgeInsets.all(10.0),
-                      ),
                       GestureDetector(
                         onTap: _radio,
                         child: radioButton(_isSelected),
+                      ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
                       ),
                       new Text(
                         '15:00',
@@ -338,6 +370,9 @@ class _AddHorario extends State<AddHorario> {
                       GestureDetector(
                         onTap: _radio,
                         child: radioButton(_isSelected),
+                      ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
                       ),
                       new Text(
                         '15:30',
@@ -352,6 +387,9 @@ class _AddHorario extends State<AddHorario> {
                         onTap: _radio,
                         child: radioButton(_isSelected),
                       ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
+                      ),
                       new Text(
                         '16:00',
                         style: new TextStyle(fontSize: 20.0),
@@ -363,8 +401,72 @@ class _AddHorario extends State<AddHorario> {
                         onTap: _radio,
                         child: radioButton(_isSelected),
                       ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
+                      ),
                       new Text(
                         '16:30',
+                        style: new TextStyle(fontSize: 20.0),
+                      ),
+                    ],
+                  ),
+                  new Divider(height: 15.0, color: Colors.cyan),
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: _radio,
+                        child: radioButton(_isSelected),
+                      ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
+                      ),
+                      new Text(
+                        '17:00',
+                        style: new TextStyle(fontSize: 20.0),
+                      ),
+                      new Padding(
+                        padding: new EdgeInsets.all(10.0),
+                      ),
+                      GestureDetector(
+                        onTap: _radio,
+                        child: radioButton(_isSelected),
+                      ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
+                      ),
+                      new Text(
+                        '17:30',
+                        style: new TextStyle(
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      new Padding(
+                        padding: new EdgeInsets.all(10.0),
+                      ),
+                      GestureDetector(
+                        onTap: _radio,
+                        child: radioButton(_isSelected),
+                      ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
+                      ),
+                      new Text(
+                        '18:00',
+                        style: new TextStyle(fontSize: 20.0),
+                      ),
+                      new Padding(
+                        padding: new EdgeInsets.all(10.0),
+                      ),
+                      GestureDetector(
+                        onTap: _radio,
+                        child: radioButton(_isSelected),
+                      ),
+                      new Padding(
+                        padding: new EdgeInsets.all(5.0),
+                      ),
+                      new Text(
+                        '18:30',
                         style: new TextStyle(fontSize: 20.0),
                       ),
                     ],

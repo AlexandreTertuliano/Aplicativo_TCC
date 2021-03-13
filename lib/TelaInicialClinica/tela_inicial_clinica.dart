@@ -1,4 +1,5 @@
 import 'package:MedAgenda/add_horarios.dart';
+import 'package:MedAgenda/main.dart';
 import 'package:MedAgenda/main__drawer_clinica.dart';
 import 'package:MedAgenda/main_drawer_paciente.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class _TelaInicialClinica extends State<TelaInicialClinica> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-        title: Text("Bem Vindo"),
+        title: Text("Bem Vindo(a)"),
         backgroundColor: Colors.cyan,
       ),
       drawer: MainDrawerClinica(),
@@ -42,11 +43,10 @@ class _TelaInicialClinica extends State<TelaInicialClinica> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Icon(
-                          Icons.apartment,
-                          color: Colors.blueGrey,
-                          size: 90.0,
-                        ),
+                        Image.network(
+                            "https://www2.unifap.br/drh/files/2010/04/formulário1.png",
+                            height: 100,
+                            width: 100),
                         Text(
                           "Meus Dados",
                           style: TextStyle(
@@ -67,11 +67,10 @@ class _TelaInicialClinica extends State<TelaInicialClinica> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Icon(
-                          Icons.calendar_today,
-                          color: Colors.blueGrey,
-                          size: 90.0,
-                        ),
+                        Image.network(
+                            "https://image.freepik.com/vetores-gratis/ilustracao-de-calendario-icone_53876-5588.jpg",
+                            height: 100,
+                            width: 100),
                         Text(
                           "Ver agendas",
                           style: TextStyle(
@@ -99,11 +98,10 @@ class _TelaInicialClinica extends State<TelaInicialClinica> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Icon(
-                          Icons.person_add,
-                          color: Colors.blueGrey,
-                          size: 90.0,
-                        ),
+                        Image.network(
+                            "https://idigestivo.com.br/wp-content/uploads/2016/03/icone-medico.png",
+                            height: 100,
+                            width: 100),
                         Text(
                           "Adicionar \n Médicos",
                           style: TextStyle(
@@ -124,11 +122,10 @@ class _TelaInicialClinica extends State<TelaInicialClinica> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Icon(
-                          Icons.local_hospital,
-                          color: Colors.blueGrey,
-                          size: 90.0,
-                        ),
+                        Image.network(
+                            "https://static.vecteezy.com/ti/vetor-gratis/p1/1880046-staff-medical-using-face-mask-isolated-icon-grátis-vetor.jpg",
+                            height: 100,
+                            width: 100),
                         Text(
                           " Ver Médicos\n Cadastrados",
                           style: TextStyle(
@@ -149,11 +146,10 @@ class _TelaInicialClinica extends State<TelaInicialClinica> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Icon(
-                          Icons.settings_applications,
-                          color: Colors.blueGrey,
-                          size: 90.0,
-                        ),
+                        Image.network(
+                            "https://i.pinimg.com/originals/33/69/7f/33697f6bc37bacb5c924d3f73af0ab0f.png",
+                            height: 100,
+                            width: 100),
                         Text(
                           "Configurações",
                           style: TextStyle(
@@ -174,11 +170,10 @@ class _TelaInicialClinica extends State<TelaInicialClinica> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Icon(
-                          Icons.exit_to_app,
-                          color: Colors.blueGrey,
-                          size: 90.0,
-                        ),
+                        Image.network(
+                            "https://img.icons8.com/plasticine/2x/exit.png",
+                            height: 100,
+                            width: 100),
                         Text(
                           "Sair",
                           style: TextStyle(

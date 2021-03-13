@@ -12,7 +12,7 @@ class _TelaInicialPaciente extends State<TelaInicialPaciente> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-        title: Text("Bem Vindo"),
+        title: Text("Bem Vindo(a)"),
         backgroundColor: Colors.cyan,
       ),
       drawer: MainDrawerPaciente(),
@@ -41,11 +41,10 @@ class _TelaInicialPaciente extends State<TelaInicialPaciente> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Icon(
-                          Icons.person_pin,
-                          color: Colors.blueGrey,
-                          size: 90.0,
-                        ),
+                        Image.network(
+                            "https://s3-us-west-2.amazonaws.com/userdata123/www/htmlblocks-images/1591/1591803/1591803_3559161_5b2ce2977ce44.png",
+                            height: 100,
+                            width: 100),
                         Text(
                           "Meu Perfil",
                           style: TextStyle(
@@ -66,11 +65,10 @@ class _TelaInicialPaciente extends State<TelaInicialPaciente> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Icon(
-                          Icons.calendar_today,
-                          color: Colors.blueGrey,
-                          size: 90.0,
-                        ),
+                        Image.network(
+                            "https://image.flaticon.com/icons/png/512/284/284301.png",
+                            height: 100,
+                            width: 100),
                         Text(
                           "Minha Agenda",
                           style: TextStyle(
@@ -91,11 +89,10 @@ class _TelaInicialPaciente extends State<TelaInicialPaciente> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Icon(
-                          Icons.person_search,
-                          color: Colors.blueGrey,
-                          size: 90.0,
-                        ),
+                        Image.network(
+                            "https://www.endocrino.org.br/static/images/buscamedico.c0ef0097a775.png",
+                            height: 100,
+                            width: 100),
                         Text(
                           "Pesquisar \n Médicos",
                           style: TextStyle(
@@ -116,11 +113,10 @@ class _TelaInicialPaciente extends State<TelaInicialPaciente> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Icon(
-                          Icons.settings_applications,
-                          color: Colors.blueGrey,
-                          size: 90.0,
-                        ),
+                        Image.network(
+                            "https://i.pinimg.com/originals/33/69/7f/33697f6bc37bacb5c924d3f73af0ab0f.png",
+                            height: 100,
+                            width: 100),
                         Text(
                           "Configurações",
                           style: TextStyle(
@@ -141,11 +137,10 @@ class _TelaInicialPaciente extends State<TelaInicialPaciente> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Icon(
-                          Icons.exit_to_app,
-                          color: Colors.blueGrey,
-                          size: 90.0,
-                        ),
+                        Image.network(
+                            "https://img.icons8.com/plasticine/2x/exit.png",
+                            height: 100,
+                            width: 100),
                         Text(
                           "Sair",
                           style: TextStyle(
