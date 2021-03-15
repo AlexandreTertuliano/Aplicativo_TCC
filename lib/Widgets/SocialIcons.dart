@@ -16,7 +16,7 @@ class SocialIcon extends StatelessWidget {
         decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.cyan),
         child: RawMaterialButton(
           shape: CircleBorder(),
-          onPressed: onPressed,
+          onPressed: () {},
           child: Icon(iconData, color: Colors.white),
         ),
       ),

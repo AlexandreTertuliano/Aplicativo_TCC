@@ -1,3 +1,5 @@
+import 'package:MedAgenda/Splash/Splash.dart';
+import 'package:MedAgenda/TelaInicialClinica/tela_inicial_clinica.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'Widgets/FormCard.dart';
@@ -6,7 +8,7 @@ import 'CustomIcons.dart';
 import 'dart:ui';
 
 void main() => runApp(MaterialApp(
-      home: MyApp(),
+      home: Splash(),
       debugShowCheckedModeBanner: false,
     ));
 
@@ -57,7 +59,7 @@ class _MyAppState extends State<MyApp> {
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     return new Scaffold(
       backgroundColor: Colors.white,
-      resizeToAvoidBottomPadding: true,
+      resizeToAvoidBottomInset: true,
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
@@ -124,18 +126,30 @@ class _MyAppState extends State<MyApp> {
                           width: ScreenUtil.getInstance().setWidth(330),
                           height: ScreenUtil.getInstance().setHeight(100),
                           decoration: BoxDecoration(
-                              color: Colors.cyan,
-                              borderRadius: BorderRadius.circular(6.0),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xFF6078ea).withOpacity(.3),
-                                    offset: Offset(0.0, 8.0),
-                                    blurRadius: 8.0)
-                              ]),
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              stops: [0.3, 1],
+                              colors: [
+                                Color(0xFF17ead9),
+                                Color(0xFF6078ea),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
                           child: Material(
                             color: Colors.transparent,
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TelaInicialClinica(),
+                                  ),
+                                );
+                              },
                               child: Center(
                                 child: Text("ENTRAR",
                                     style: TextStyle(
