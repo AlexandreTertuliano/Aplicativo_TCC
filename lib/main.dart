@@ -1,6 +1,5 @@
 import 'package:MedAgenda/Splash/Splash.dart';
 import 'package:MedAgenda/TelaInicialClinica/tela_inicial_clinica.dart';
-import 'package:MedAgenda/TelaInicialPaciente/tela_inicial_paciente.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'Widgets/FormCard.dart';

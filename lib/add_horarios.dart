@@ -1,5 +1,3 @@
-import 'package:MedAgenda/main__drawer_clinica.dart';
-import 'package:MedAgenda/main_drawer_paciente.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
