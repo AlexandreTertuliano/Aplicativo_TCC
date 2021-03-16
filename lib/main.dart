@@ -1,8 +1,11 @@
+import 'package:MedAgenda/FormCard_Clinica.dart';
+import 'package:MedAgenda/ResetPassword/reset_password.dart';
 import 'package:MedAgenda/Splash/Splash.dart';
 import 'package:MedAgenda/TelaInicialClinica/tela_inicial_clinica.dart';
+import 'package:MedAgenda/Widgets/FormCard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'Widgets/FormCard.dart';
 import 'Widgets/SocialIcons.dart';
 import 'CustomIcons.dart';
 import 'dart:ui';
@@ -25,6 +28,8 @@ class _MyAppState extends State<MyApp> {
       _isSelected = !_isSelected;
     });
   }
+
+  PageController _pageController;
 
   Widget radioButton(bool isSelected) => Container(
         width: 16.0,
@@ -99,7 +104,49 @@ class _MyAppState extends State<MyApp> {
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(180),
                   ),
-                  FormCard(),
+                  Container(
+                    height: 270,
+                    child:  SingleChildScrollView(
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height:  ScreenUtil.getInstance().setHeight(575),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 2,
+                      child: PageView(
+                        
+                        onPageChanged: (i){
+                          if (i == 0){
+                            setState(() {
+                              print('Tela Usuario');
+                            });
+                          }else{
+                            setState(() {
+                              print('Tela Clinica');
+                            });
+                          }
+                        },
+
+                        //controller: _pageController,
+                        children: <Widget>[
+                          new ConstrainedBox(
+                            constraints: const BoxConstraints.expand(),
+                            child: FormCard(),
+                          ),
+                          new ConstrainedBox(
+                            constraints: const BoxConstraints.expand(),
+                            child: FormCard_Clinica(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+                    ),
                   SizedBox(height: ScreenUtil.getInstance().setHeight(40)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

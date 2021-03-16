@@ -82,6 +82,7 @@ class ResetPassword extends StatelessWidget {
                 ),
               ),
               child: SizedBox.expand(
+                // ignore: deprecated_member_use
                 child: FlatButton(
                   child: Text(
                     "Enviar",

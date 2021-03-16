@@ -3,10 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class FormCard extends StatelessWidget {
+class FormCard_Clinica extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
+      width: double.infinity,
 //      height: ScreenUtil.getInstance().setHeight(500),
       padding: EdgeInsets.only(bottom: 1),
       decoration: BoxDecoration(
@@ -27,7 +28,7 @@ class FormCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("Login Usuário ",
+            Text("Login Clinica ",
                 style: TextStyle(
                     fontSize: ScreenUtil.getInstance().setSp(45),
                     fontFamily: "Poppins-Bold",
