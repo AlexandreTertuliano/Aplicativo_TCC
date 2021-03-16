@@ -1,5 +1,5 @@
 import 'package:MedAgenda/add_horarios.dart';
-import 'package:MedAgenda/add_meus_dados.dart';
+import 'package:MedAgenda/add_meus_dados_clinica.dart';
 import 'package:MedAgenda/main__drawer_clinica.dart';
 import 'package:flutter/material.dart';
 
@@ -37,10 +37,10 @@ class _TelaInicialClinica extends State<TelaInicialClinica> {
               margin: EdgeInsets.all(8.0),
               child: InkWell(
                   onTap: () {
-                     Navigator.push(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DadosPessoais(),
+                        builder: (context) => DadosClinica(),
                       ),
                     );
                   },    

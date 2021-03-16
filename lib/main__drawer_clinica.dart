@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:MedAgenda/add_meus_dados.dart';
+import 'package:MedAgenda/add_meus_dados_clientes.dart';
 import 'package:flutter/material.dart';
 
 class MainDrawerClinica extends StatelessWidget {
@@ -67,14 +67,7 @@ class MainDrawerClinica extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-            onTap: () {
-              Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DadosPessoais(),
-                      ),
-                    );
-            },
+            onTap: () {},
           ),
           ListTile(
             leading: Icon(Icons.calendar_today, color: Colors.black),

@@ -1,7 +1,7 @@
 import 'package:MedAgenda/FormCard_Clinica.dart';
-import 'package:MedAgenda/ResetPassword/reset_password.dart';
 import 'package:MedAgenda/Splash/Splash.dart';
 import 'package:MedAgenda/TelaInicialClinica/tela_inicial_clinica.dart';
+import 'package:MedAgenda/TelaInicialPaciente/tela_inicial_paciente.dart';
 import 'package:MedAgenda/Widgets/FormCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -29,8 +29,6 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  PageController _pageController;
-
   Widget radioButton(bool isSelected) => Container(
         width: 16.0,
         height: 16.0,
@@ -57,8 +55,11 @@ class _MyAppState extends State<MyApp> {
         ),
       );
 
+  var _tela = 0;
+
   @override
   Widget build(BuildContext context) {
+
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
@@ -116,15 +117,14 @@ class _MyAppState extends State<MyApp> {
                     Expanded(
                       flex: 2,
                       child: PageView(
-                        
                         onPageChanged: (i){
                           if (i == 0){
                             setState(() {
-                              print('Tela Usuario');
+                              _tela = 0;
                             });
                           }else{
                             setState(() {
-                              print('Tela Clinica');
+                              _tela = 1;
                             });
                           }
                         },
@@ -190,12 +190,22 @@ class _MyAppState extends State<MyApp> {
                             color: Colors.transparent,
                             child: InkWell(
                               onTap: () {
-                                Navigator.push(
+                               if(_tela == 0){
+                                  Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TelaInicialPaciente(),
+                                  ),
+                                );
+                               }
+                               if(_tela == 1){
+                                  Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => TelaInicialClinica(),
                                   ),
                                 );
+                               }
                               },
                               child: Center(
                                 child: Text("ENTRAR",

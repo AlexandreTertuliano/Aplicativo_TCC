@@ -1,3 +1,4 @@
+import 'package:MedAgenda/add_meus_dados_clientes.dart';
 import 'package:MedAgenda/main_drawer_paciente.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +35,14 @@ class _TelaInicialPaciente extends State<TelaInicialPaciente> {
             Card(
               margin: EdgeInsets.all(8.0),
               child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                     Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DadosPessoais(),
+                      ),
+                    );
+                  },
                   splashColor: Colors.cyan,
                   child: Center(
                     child: Column(
@@ -48,7 +56,7 @@ class _TelaInicialPaciente extends State<TelaInicialPaciente> {
                           "Meu Perfil",
                           style: TextStyle(
                               color: Colors.blueGrey,
-                              fontSize: 20,
+                              fontSize: 15,
                               fontFamily: "Poppins-Medium"),
                         )
                       ],
@@ -72,7 +80,7 @@ class _TelaInicialPaciente extends State<TelaInicialPaciente> {
                           "Minha Agenda",
                           style: TextStyle(
                               color: Colors.blueGrey,
-                              fontSize: 20,
+                              fontSize: 15,
                               fontFamily: "Poppins-Medium"),
                         )
                       ],
@@ -96,7 +104,7 @@ class _TelaInicialPaciente extends State<TelaInicialPaciente> {
                           "Pesquisar \n Médicos",
                           style: TextStyle(
                               color: Colors.blueGrey,
-                              fontSize: 20,
+                              fontSize: 15,
                               fontFamily: "Poppins-Medium"),
                         ),
                       ],
@@ -120,7 +128,7 @@ class _TelaInicialPaciente extends State<TelaInicialPaciente> {
                           "Configurações",
                           style: TextStyle(
                               color: Colors.blueGrey,
-                              fontSize: 20,
+                              fontSize: 15,
                               fontFamily: "Poppins-Medium"),
                         )
                       ],
@@ -144,7 +152,7 @@ class _TelaInicialPaciente extends State<TelaInicialPaciente> {
                           "Sair",
                           style: TextStyle(
                               color: Colors.blueGrey,
-                              fontSize: 20,
+                              fontSize: 15,
                               fontFamily: "Poppins-Medium"),
                         )
                       ],
