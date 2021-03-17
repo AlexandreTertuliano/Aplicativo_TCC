@@ -59,7 +59,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
@@ -73,7 +72,7 @@ class _MyAppState extends State<MyApp> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(top: 20.0),
+                padding: EdgeInsets.only(top: 10.0),
                 child: Image.asset("assets/image_01.png"),
               ),
               Expanded(
@@ -84,7 +83,7 @@ class _MyAppState extends State<MyApp> {
           ),
           SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 60.0),
+              padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 50.0),
               child: Column(
                 children: <Widget>[
                   Row(
@@ -106,47 +105,59 @@ class _MyAppState extends State<MyApp> {
                     height: ScreenUtil.getInstance().setHeight(180),
                   ),
                   Container(
-                    height: 270,
-                    child:  SingleChildScrollView(
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height:  ScreenUtil.getInstance().setHeight(575),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 2,
-                      child: PageView(
-                        onPageChanged: (i){
-                          if (i == 0){
-                            setState(() {
-                              _tela = 0;
-                            });
-                          }else{
-                            setState(() {
-                              _tela = 1;
-                            });
-                          }
-                        },
-
-                        //controller: _pageController,
-                        children: <Widget>[
-                          new ConstrainedBox(
-                            constraints: const BoxConstraints.expand(),
-                            child: FormCard(),
-                          ),
-                          new ConstrainedBox(
-                            constraints: const BoxConstraints.expand(),
-                            child: FormCard_Clinica(),
-                          ),
-                        ],
+                    height: 300,
+                    child: SingleChildScrollView(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: ScreenUtil.getInstance().setHeight(575),
+                        decoration: new BoxDecoration(
+                          gradient: new LinearGradient(
+                              colors: [
+                                Colors.transparent,
+                                Colors.transparent,
+                              ],
+                              begin: const FractionalOffset(0.0, 0.0),
+                              end: const FractionalOffset(1.0, 1.0),
+                              stops: [0.0, 1.0],
+                              tileMode: TileMode.clamp),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Expanded(
+                              flex: 2,
+                              child: PageView(
+                                scrollDirection: Axis.horizontal,
+                                onPageChanged: (i) {
+                                  if (i == 0) {
+                                    setState(() {
+                                      _tela = 0;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      _tela = 1;
+                                    });
+                                  }
+                                },
+                                children: <Widget>[
+                                  new Container(
+                                    constraints: const BoxConstraints.expand(),
+                                    child: FormCard(),
+                                    padding: EdgeInsets.all(10),
+                                  ),
+                                  new Container(
+                                    constraints: const BoxConstraints.expand(),
+                                    child: FormCard_Clinica(),
+                                    padding: EdgeInsets.all(10),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-                    ),
+                  ),
                   SizedBox(height: ScreenUtil.getInstance().setHeight(40)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -190,22 +201,24 @@ class _MyAppState extends State<MyApp> {
                             color: Colors.transparent,
                             child: InkWell(
                               onTap: () {
-                               if(_tela == 0){
+                                if (_tela == 0) {
                                   Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TelaInicialPaciente(),
-                                  ),
-                                );
-                               }
-                               if(_tela == 1){
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          TelaInicialPaciente(),
+                                    ),
+                                  );
+                                }
+                                if (_tela == 1) {
                                   Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TelaInicialClinica(),
-                                  ),
-                                );
-                               }
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          TelaInicialClinica(),
+                                    ),
+                                  );
+                                }
                               },
                               child: Center(
                                 child: Text("ENTRAR",

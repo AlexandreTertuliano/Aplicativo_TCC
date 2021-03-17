@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:MedAgenda/TelaCovid/tela_Covid.dart';
 import 'package:flutter/material.dart';
 
 class MainDrawerPaciente extends StatelessWidget {
@@ -107,6 +108,23 @@ class MainDrawerPaciente extends StatelessWidget {
               ),
             ),
             onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(Icons.masks_outlined, color: Colors.black),
+            title: Text(
+              'Covid-19',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Tela_Covid(),
+                ),
+              );
+            },
           ),
         ],
       ),

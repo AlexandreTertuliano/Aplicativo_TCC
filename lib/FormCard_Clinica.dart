@@ -24,17 +24,17 @@ class FormCard_Clinica extends StatelessWidget {
                 blurRadius: 10.0),
           ]),
       child: Padding(
-        padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+        padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 5.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("Login Clinica ",
+            Text("Clínica ",
                 style: TextStyle(
                     fontSize: ScreenUtil.getInstance().setSp(45),
                     fontFamily: "Poppins-Bold",
                     letterSpacing: .6)),
             SizedBox(
-              height: ScreenUtil.getInstance().setHeight(30),
+              height: ScreenUtil.getInstance().setHeight(20),
             ),
             Text("E-mail",
                 style: TextStyle(
@@ -46,7 +46,7 @@ class FormCard_Clinica extends StatelessWidget {
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
             ),
             SizedBox(
-              height: ScreenUtil.getInstance().setHeight(30),
+              height: ScreenUtil.getInstance().setHeight(20),
             ),
             Text("Senha",
                 style: TextStyle(
@@ -59,7 +59,7 @@ class FormCard_Clinica extends StatelessWidget {
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
             ),
             SizedBox(
-              height: ScreenUtil.getInstance().setHeight(35),
+              height: ScreenUtil.getInstance().setHeight(30),
             ),
             Container(
               height: 40,

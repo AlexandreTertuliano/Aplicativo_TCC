@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:MedAgenda/add_meus_dados_clientes.dart';
 import 'package:flutter/material.dart';
 
 class MainDrawerClinica extends StatelessWidget {

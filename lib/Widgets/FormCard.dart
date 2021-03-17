@@ -7,7 +7,7 @@ class FormCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
-//      height: ScreenUtil.getInstance().setHeight(500),
+      //height: ScreenUtil.getInstance().setHeight(300),
       padding: EdgeInsets.only(bottom: 1),
       decoration: BoxDecoration(
           color: Colors.white,
@@ -23,17 +23,17 @@ class FormCard extends StatelessWidget {
                 blurRadius: 10.0),
           ]),
       child: Padding(
-        padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+        padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 5.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("Login Usuário ",
+            Text("Paciente ",
                 style: TextStyle(
                     fontSize: ScreenUtil.getInstance().setSp(45),
                     fontFamily: "Poppins-Bold",
                     letterSpacing: .6)),
             SizedBox(
-              height: ScreenUtil.getInstance().setHeight(30),
+              height: ScreenUtil.getInstance().setHeight(20),
             ),
             Text("E-mail",
                 style: TextStyle(
@@ -45,7 +45,7 @@ class FormCard extends StatelessWidget {
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
             ),
             SizedBox(
-              height: ScreenUtil.getInstance().setHeight(30),
+              height: ScreenUtil.getInstance().setHeight(20),
             ),
             Text("Senha",
                 style: TextStyle(
@@ -55,10 +55,10 @@ class FormCard extends StatelessWidget {
               obscureText: true,
               decoration: InputDecoration(
                   hintText: "senha",
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0))
             ),
             SizedBox(
-              height: ScreenUtil.getInstance().setHeight(35),
+              height: ScreenUtil.getInstance().setHeight(30),
             ),
             Container(
               height: 40,
