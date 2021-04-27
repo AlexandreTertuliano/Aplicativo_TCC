@@ -93,7 +93,7 @@ class _MyAppState extends State<MyApp> {
                         width: ScreenUtil.getInstance().setWidth(110),
                         height: ScreenUtil.getInstance().setHeight(110),
                       ),
-                      Text("Agenda_Med",
+                      Text("Agenda Médica",
                           style: TextStyle(
                               fontFamily: "Poppins-Bold",
                               fontSize: ScreenUtil.getInstance().setSp(46),
