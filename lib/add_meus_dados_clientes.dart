@@ -10,9 +10,23 @@ class DadosPessoais extends StatefulWidget {
 }
 
 class _DadosPessoaisState extends State<DadosPessoais> {
+  // ignore: non_constant_identifier_names
+  String _value_Nome;
+  // ignore: non_constant_identifier_names
+  String _value_Cpf;
+  // ignore: non_constant_identifier_names
+  String _value_Data_Aniversario;
+  // ignore: non_constant_identifier_names
+  String _value_Telefone;
+  // ignore: non_constant_identifier_names
+  String _value_Cidade;
+  // ignore: non_constant_identifier_names
+  String _value_Tipo_Sangue;
+  // ignore: non_constant_identifier_names
   String _value_Genero;
+  // ignore: non_constant_identifier_names
   String _value_Doador;
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +60,11 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                   decoration: InputDecoration(
                       hintText: "Nome Completo",
                       hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
+                      onChanged: (String value) {
+                    setState(() {
+                      _value_Nome = value;
+                    });
+                  },
                 ),
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(20),
@@ -63,6 +82,11 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                       hintText:
                           "Suas informações estão em um banco de Dados seguro.",
                       hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
+                      onChanged: (String value) {
+                    setState(() {
+                      _value_Cpf = value;
+                    });
+                  }
                 ),
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(20),
@@ -75,6 +99,11 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                   decoration: InputDecoration(
                       hintText: "??/??/????",
                       hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
+                       onChanged: (String value) {
+                    setState(() {
+                      _value_Data_Aniversario = value;
+                    });
+                  }
                 ),
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(20),
@@ -87,6 +116,11 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                   decoration: InputDecoration(
                       hintText: "Ex : (35)9 1234-5678",
                       hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
+                       onChanged: (String value) {
+                    setState(() {
+                      _value_Telefone = value;
+                    });
+                  }
                 ),
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(20),
@@ -99,6 +133,11 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                   decoration: InputDecoration(
                       hintText: "Ex : Pouso Alegre",
                       hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
+                       onChanged: (String value) {
+                    setState(() {
+                      _value_Cidade = value;
+                    });
+                  }
                 ),
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(40),
@@ -115,10 +154,48 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                     style: TextStyle(
                         fontFamily: "Poppins-Medium",
                         fontSize: ScreenUtil.getInstance().setSp(26))),
-                TextField(
-                  decoration: InputDecoration(
-                      hintText: "Ex : 'O' Negativo",
-                      hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
+                DropdownButton<String>(
+                  items: [
+                    DropdownMenuItem<String>(
+                      child: Text('Sangue A+'),
+                      value: 'A+',
+                    ),
+                    DropdownMenuItem<String>(
+                      child: Text('Sangue A-'),
+                      value: 'A-',
+                    ),
+                    DropdownMenuItem<String>(
+                      child: Text('Sangue B+'),
+                      value: 'B+',
+                    ),
+                     DropdownMenuItem<String>(
+                      child: Text('Sangue B-'),
+                      value: 'B-',
+                    ),
+                     DropdownMenuItem<String>(
+                      child: Text('Sangue AB+'),
+                      value: 'AB+',
+                    ),
+                     DropdownMenuItem<String>(
+                      child: Text('Sangue AB-'),
+                      value: 'AB-',
+                    ),  
+                     DropdownMenuItem<String>(
+                      child: Text('Sangue O+'),
+                      value: 'O+',
+                    ),
+                     DropdownMenuItem<String>(
+                      child: Text('Sangue O-'),
+                      value: 'O-',
+                    ),
+                  ],
+                  onChanged: (String value) {
+                    setState(() {
+                      _value_Tipo_Sangue = value;
+                    });
+                  },
+                  hint: Text('Selecione'),
+                  value: _value_Tipo_Sangue,
                 ),
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(20),
@@ -197,6 +274,7 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                     ),
                   ),
                  child: SizedBox.expand(
+                     // ignore: deprecated_member_use
                      child: FlatButton(
                     child: Text(
                       "Salvar",
@@ -208,7 +286,14 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                       textAlign: TextAlign.center,
                     ),
                     onPressed: () {
-                      //Aqui vai o back que manda o o pedido de renovação de senha para o email do usuário
+                      print(_value_Nome);
+                      print(_value_Cpf);
+                      print(_value_Data_Aniversario);
+                      print(_value_Telefone);
+                      print(_value_Cidade);
+                      print(_value_Tipo_Sangue);
+                      print(_value_Genero);
+                      print(_value_Doador);
                     },
                   ),
                  ),

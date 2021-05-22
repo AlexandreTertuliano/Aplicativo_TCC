@@ -1,8 +1,11 @@
+import 'package:MedAgenda/FormCard_Clinica.dart';
 import 'package:MedAgenda/Splash/Splash.dart';
 import 'package:MedAgenda/TelaInicialClinica/tela_inicial_clinica.dart';
+import 'package:MedAgenda/TelaInicialPaciente/tela_inicial_paciente.dart';
+import 'package:MedAgenda/Widgets/FormCard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'Widgets/FormCard.dart';
 import 'Widgets/SocialIcons.dart';
 import 'CustomIcons.dart';
 import 'dart:ui';
@@ -52,6 +55,8 @@ class _MyAppState extends State<MyApp> {
         ),
       );
 
+  var _tela = 0;
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
@@ -67,7 +72,7 @@ class _MyAppState extends State<MyApp> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(top: 20.0),
+                padding: EdgeInsets.only(top: 10.0),
                 child: Image.asset("assets/image_01.png"),
               ),
               Expanded(
@@ -78,7 +83,7 @@ class _MyAppState extends State<MyApp> {
           ),
           SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 60.0),
+              padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 50.0),
               child: Column(
                 children: <Widget>[
                   Row(
@@ -88,7 +93,7 @@ class _MyAppState extends State<MyApp> {
                         width: ScreenUtil.getInstance().setWidth(110),
                         height: ScreenUtil.getInstance().setHeight(110),
                       ),
-                      Text("Agenda_Med",
+                      Text("Agenda Médica",
                           style: TextStyle(
                               fontFamily: "Poppins-Bold",
                               fontSize: ScreenUtil.getInstance().setSp(46),
@@ -99,7 +104,60 @@ class _MyAppState extends State<MyApp> {
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(180),
                   ),
-                  FormCard(),
+                  Container(
+                    height: 300,
+                    child: SingleChildScrollView(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: ScreenUtil.getInstance().setHeight(575),
+                        decoration: new BoxDecoration(
+                          gradient: new LinearGradient(
+                              colors: [
+                                Colors.transparent,
+                                Colors.transparent,
+                              ],
+                              begin: const FractionalOffset(0.0, 0.0),
+                              end: const FractionalOffset(1.0, 1.0),
+                              stops: [0.0, 1.0],
+                              tileMode: TileMode.clamp),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Expanded(
+                              flex: 2,
+                              child: PageView(
+                                scrollDirection: Axis.horizontal,
+                                onPageChanged: (i) {
+                                  if (i == 0) {
+                                    setState(() {
+                                      _tela = 0;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      _tela = 1;
+                                    });
+                                  }
+                                },
+                                children: <Widget>[
+                                  new Container(
+                                    constraints: const BoxConstraints.expand(),
+                                    child: FormCard(),
+                                    padding: EdgeInsets.all(10),
+                                  ),
+                                  new Container(
+                                    constraints: const BoxConstraints.expand(),
+                                    child: FormCard_Clinica(),
+                                    padding: EdgeInsets.all(10),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                   SizedBox(height: ScreenUtil.getInstance().setHeight(40)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -143,12 +201,24 @@ class _MyAppState extends State<MyApp> {
                             color: Colors.transparent,
                             child: InkWell(
                               onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TelaInicialClinica(),
-                                  ),
-                                );
+                                if (_tela == 0) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          TelaInicialPaciente(),
+                                    ),
+                                  );
+                                }
+                                if (_tela == 1) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          TelaInicialClinica(),
+                                    ),
+                                  );
+                                }
                               },
                               child: Center(
                                 child: Text("ENTRAR",
