@@ -92,11 +92,7 @@ class _MyAppState extends State<MyApp> {
                         width: ScreenUtil.getInstance().setWidth(110),
                         height: ScreenUtil.getInstance().setHeight(110),
                       ),
-<<<<<<< HEAD:lib/main.dart
                       Text("MarqueMed",
-=======
-                      Text("Agenda Médica",
->>>>>>> 49e837a42da380cd657006a34c02cac99196796c:aplicacaoAgendaMedicaMobile/lib/main.dart
                           style: TextStyle(
                               fontFamily: "Poppins-Bold",
                               fontSize: ScreenUtil.getInstance().setSp(46),
