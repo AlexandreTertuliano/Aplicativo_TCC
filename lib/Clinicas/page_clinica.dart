@@ -2,9 +2,6 @@ import 'package:MedAgenda/Clinicas/cadastrar_clinica.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:table_calendar/table_calendar.dart';
-import 'package:intl/intl.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 class PageClinica extends StatefulWidget {
   @override
@@ -13,6 +10,14 @@ class PageClinica extends StatefulWidget {
 
 class _PageClinica extends State<PageClinica> {
   int _page = 0;
+  var carregando;
+  var dados;
+  var clinicasNome;
+
+  listarDados() {
+    final url = "marquemed.c5b8pct8bfdk.us-east-2.rds.amazonaws.com";
+  }
+
   final formGlobalKey = GlobalKey<FormState>();
 
   @override
@@ -59,7 +64,6 @@ class _PageClinica extends State<PageClinica> {
                       style: GoogleFonts.oswald(fontSize: 30),
                     )),
                   ),
-                  
                 ],
               ),
             ]),
@@ -83,7 +87,9 @@ class _PageClinica extends State<PageClinica> {
                 Navigator.pop(context);
               } else if (index == 1) {
                 Navigator.push(
-          context, MaterialPageRoute(builder: (context) => CadastrarClinica()));
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CadastrarClinica()));
               }
             });
           },
