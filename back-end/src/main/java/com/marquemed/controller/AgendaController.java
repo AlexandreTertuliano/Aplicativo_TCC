@@ -34,14 +34,14 @@ public class AgendaController {
 	
 	@GetMapping
 	public ResponseEntity<List<Agenda>> all(){
-		logger.info("Get agenda()");
+		logger.info("Get agenda");
 		
 		return ResponseEntity.status(HttpStatus.OK).body(agendaService.findAll());
 	}
 	
 	@PostMapping
 	public ResponseEntity<?> save(@RequestBody Agenda agenda) {
-		logger.info("Save agenda()");
+		logger.info("Save agenda");
 
 		agendaService.save(agenda);		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -51,14 +51,14 @@ public class AgendaController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Agenda>> one(@PathVariable Long id) throws Exception {
-		logger.info("Get by id agenda()");
+		logger.info("Get by id agenda");
 
 		return ResponseEntity.status(HttpStatus.OK).body(agendaService.findById(id));
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
-		logger.info("Delete agenda()");
+		logger.info("Delete agenda");
 
 		agendaService.delete(id);
 		return ResponseEntity.noContent().build();
@@ -66,7 +66,7 @@ public class AgendaController {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@RequestBody Agenda agenda, @PathVariable Long id) throws Exception {
-		logger.info("Put agenda()");
+		logger.info("Put agenda");
 		
 		agenda.setId(id);
 		agendaService.update(agenda);
