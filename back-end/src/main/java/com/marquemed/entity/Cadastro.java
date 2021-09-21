@@ -1,24 +1,31 @@
 package com.marquemed.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Cadastro {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private Integer email;
 	
 	private String senha;
 	
-	@JoinColumn(name = "paciente_idpaciente")
-	private Integer idPaciente;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "paciente_id")
+	private Paciente paciente;
 	
-	@JoinColumn(name = "carteira_idcarteira")
-	private Integer idCarteira;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "carteira_id")
+	private Carteira carteira;
 
 	public Long getId() {
 		return id;
@@ -44,20 +51,22 @@ public class Cadastro {
 		this.senha = senha;
 	}
 
-	public Integer getIdPaciente() {
-		return idPaciente;
+	public Paciente getPaciente() {
+		return paciente;
 	}
 
-	public void setIdPaciente(Integer idPaciente) {
-		this.idPaciente = idPaciente;
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
-	public Integer getIdCarteira() {
-		return idCarteira;
+	public Carteira getCarteira() {
+		return carteira;
 	}
 
-	public void setIdCarteira(Integer idCarteira) {
-		this.idCarteira = idCarteira;
+	public void setCarteira(Carteira carteira) {
+		this.carteira = carteira;
 	}
+
+	
 	
 }

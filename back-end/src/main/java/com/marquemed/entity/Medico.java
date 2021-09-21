@@ -1,10 +1,12 @@
 package com.marquemed.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Medico {
@@ -21,17 +23,21 @@ public class Medico {
 	
 	private String especialidadeMedico;
 
-	@JoinColumn(name = "id_clinica")
-	private Integer idClinica;
+	@JoinColumn(name = "clinica_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Clinica clinica;
 	
-	@JoinColumn(name = "id_carteira")
-	private Integer idCarteira;
+	@JoinColumn(name = "carteira_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Carteira carteira;
 	
-	@JoinColumn(name = "id_agenda")
-	private Integer idAgenda;
+	@JoinColumn(name = "agenda_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Agenda agenda;
 	
-	@JoinColumn(name = "id_cadastro")
-	private Integer idCadastro;
+	@JoinColumn(name = "cadastro_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Cadastro cadastro;
 
 	public Long getId() {
 		return id;
@@ -73,35 +79,37 @@ public class Medico {
 		this.especialidadeMedico = especialidadeMedico;
 	}
 
-	public Integer getIdClinica() {
-		return idClinica;
+	public Clinica getClinica() {
+		return clinica;
 	}
 
-	public void setIdClinica(Integer idClinica) {
-		this.idClinica = idClinica;
+	public void setClinica(Clinica clinica) {
+		this.clinica = clinica;
 	}
 
-	public Integer getIdCarteira() {
-		return idCarteira;
+	public Carteira getCarteira() {
+		return carteira;
 	}
 
-	public void setIdCarteira(Integer idCarteira) {
-		this.idCarteira = idCarteira;
+	public void setCarteira(Carteira carteira) {
+		this.carteira = carteira;
 	}
 
-	public Integer getIdAgenda() {
-		return idAgenda;
+	public Agenda getAgenda() {
+		return agenda;
 	}
 
-	public void setIdAgenda(Integer idAgenda) {
-		this.idAgenda = idAgenda;
+	public void setAgenda(Agenda agenda) {
+		this.agenda = agenda;
 	}
 
-	public Integer getIdCadastro() {
-		return idCadastro;
+	public Cadastro getCadastro() {
+		return cadastro;
 	}
 
-	public void setIdCadastro(Integer idCadastro) {
-		this.idCadastro = idCadastro;
+	public void setCadastro(Cadastro cadastro) {
+		this.cadastro = cadastro;
 	}
+
+	
 }

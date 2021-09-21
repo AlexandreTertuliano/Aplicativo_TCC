@@ -3,10 +3,12 @@ package com.marquemed.entity;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Paciente {
@@ -37,8 +39,9 @@ public class Paciente {
 	
 	private String emailPaciente;
 	
-	@JoinColumn(name = "id_carteira")
-	private Integer idCarteira;
+	@JoinColumn(name = "carteira_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Carteira carteira;
 
 	public Long getId() {
 		return id;
@@ -136,12 +139,13 @@ public class Paciente {
 		this.emailPaciente = emailPaciente;
 	}
 
-	public Integer getIdCarteira() {
-		return idCarteira;
+	public Carteira getCarteira() {
+		return carteira;
 	}
 
-	public void setIdCarteira(Integer idCarteira) {
-		this.idCarteira = idCarteira;
+	public void setCarteira(Carteira carteira) {
+		this.carteira = carteira;
 	}
-	
+
+
 }
