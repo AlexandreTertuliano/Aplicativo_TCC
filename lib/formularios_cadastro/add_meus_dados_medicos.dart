@@ -13,10 +13,6 @@ class _DadosMedicoState extends State<DadosMedico> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Meus Dados'),
-        backgroundColor: Colors.cyan,
-      ),
       backgroundColor: Colors.white,
       body: Container(
           padding: EdgeInsets.only(

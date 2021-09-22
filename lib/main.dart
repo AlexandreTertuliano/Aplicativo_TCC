@@ -1,6 +1,7 @@
 import 'package:MedAgenda/Widgets/FormCard_Medicos.dart';
 import 'package:MedAgenda/Splash/Splash.dart';
 import 'package:MedAgenda/Widgets/FormCard_Pacientes.dart';
+import 'package:MedAgenda/cadastrar/cadastrar_page.dart';
 import 'package:MedAgenda/menuMedico/menu_page_medico.dart';
 import 'package:MedAgenda/menuPaciente/menu_page_paciente.dart';
 import 'package:flutter/material.dart';
@@ -273,7 +274,14 @@ class _MyAppState extends State<MyApp> {
                         style: TextStyle(fontFamily: "Poppins-Medium"),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CadastrarPage(),
+                            ),
+                          );
+                        },
                         child: Text("Cadastrar",
                             style: TextStyle(
                                 color: Color(0xFF5d74e3),
