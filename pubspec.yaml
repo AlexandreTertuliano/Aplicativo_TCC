@@ -30,6 +30,8 @@ dependencies:
   google_fonts: ^2.1.0
   scoped_model: ^1.1.0
   http: ^0.13.3
+  mercadopago_sdk: ^1.3.0
+  mercado_pago_mobile_checkout: ^0.1.1
 
 dev_dependencies:
   flutter_test:

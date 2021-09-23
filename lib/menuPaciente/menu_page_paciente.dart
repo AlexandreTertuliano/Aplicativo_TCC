@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:MedAgenda/formularios_cadastro/add_meus_dados_paciente.dart';
+import 'package:MedAgenda/pagamentos/carteira.dart';
 import 'package:flutter/material.dart';
 
 import 'home_icon_buttoms.dart';
@@ -80,9 +81,7 @@ class MenuPagePaciente extends StatelessWidget {
                                     text: 'Agenda',
                                     color: Color(0xFFFFFF00),
                                   ),
-                                  onTap: () {
-
-                                  },
+                                  onTap: () {},
                                 )
                               ],
                             ),
@@ -106,7 +105,13 @@ class MenuPagePaciente extends StatelessWidget {
                                       text: 'Carteira',
                                       color: Color(0xFF1E90FF),
                                     ),
-                                    onTap: () {})
+                                    onTap: () {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Pagamentos()));
+                                    })
                               ],
                             ),
                             SizedBox(

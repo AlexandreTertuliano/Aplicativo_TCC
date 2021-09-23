@@ -1,8 +1,6 @@
 import 'dart:io';
-import 'package:MedAgenda/Clinicas/cadastrar_clinica.dart';
 import 'package:MedAgenda/Clinicas/page_clinica.dart';
 import 'package:MedAgenda/formularios_cadastro/add_meus_dados_medicos.dart';
-import 'package:MedAgenda/tela_agendamento/add_horarios.dart';
 import 'package:MedAgenda/tela_agendamento/page_agenda.dart';
 import 'package:flutter/material.dart';
 
@@ -72,7 +70,10 @@ class MenuPageMedico extends StatelessWidget {
                                   ),
                                   onTap: () {
                                     Navigator.push(
-          context, MaterialPageRoute(builder: (context) => DadosMedico()));
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                DadosMedicos()));
                                   },
                                 ),
                                 GestureDetector(
@@ -83,7 +84,10 @@ class MenuPageMedico extends StatelessWidget {
                                   ),
                                   onTap: () {
                                     Navigator.push(
-          context, MaterialPageRoute(builder: (context) => PageAgenda()));
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PageAgenda()));
                                   },
                                 )
                               ],
@@ -100,8 +104,7 @@ class MenuPageMedico extends StatelessWidget {
                                     text: 'Carteira',
                                     color: Color(0xFFFD47DF),
                                   ),
-                                  onTap: () {
-                                  },
+                                  onTap: () {},
                                 ),
                                 GestureDetector(
                                     child: CatigoryW(
@@ -111,7 +114,10 @@ class MenuPageMedico extends StatelessWidget {
                                     ),
                                     onTap: () {
                                       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => PageClinica()));
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PageClinica()));
                                     })
                               ],
                             ),

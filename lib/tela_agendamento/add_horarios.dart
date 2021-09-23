@@ -170,28 +170,6 @@ class _AddHorario extends State<AddHorario> {
                     ),
                   ])),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    child: Material(
-                        child: Chip(
-                      backgroundColor: Colors.orange,
-                      label: Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: Text(
-                          _fromDate,
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      elevation: 6.0,
-                      shadowColor: Colors.black,
-                      padding: EdgeInsets.all(8.0),
-                    )),
-                  ),
-                ),
               ],
             ),
           ]),

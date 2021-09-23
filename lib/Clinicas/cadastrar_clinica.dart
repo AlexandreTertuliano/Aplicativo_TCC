@@ -1,9 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:table_calendar/table_calendar.dart';
-import 'package:intl/intl.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 class CadastrarClinica extends StatefulWidget {
   @override
@@ -142,9 +139,7 @@ class _CadastrarClinica extends State<CadastrarClinica> {
               _page = index;
               if (index == 0) {
                 Navigator.pop(context);
-              } else if (index == 1) {
-                //ADICIONA OS DADOS DO CONTROLLER E ENVIA PARA O SERVIDOR E DEPOIS RETORNA OS DADOS.
-              }
+              } else if (index == 1) {}
             });
           },
         ),
