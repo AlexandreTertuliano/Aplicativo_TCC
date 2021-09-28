@@ -10,6 +10,15 @@ class CadastrarClinica extends StatefulWidget {
 class _CadastrarClinica extends State<CadastrarClinica> {
   int _page = 0;
   final formGlobalKey = GlobalKey<FormState>();
+  TextEditingController _controllerName = TextEditingController();
+  TextEditingController _controllerCnpj = TextEditingController();
+  TextEditingController _controllerTelefone = TextEditingController();
+  TextEditingController _controllerCep = TextEditingController();
+  TextEditingController _controllerEstado = TextEditingController();
+  TextEditingController _controllerCidade = TextEditingController();
+  TextEditingController _controllerBairro = TextEditingController();
+  TextEditingController _controllerRua = TextEditingController();
+  TextEditingController _controllerNumero = TextEditingController();
 
   @override
   void initState() {
@@ -62,56 +71,92 @@ class _CadastrarClinica extends State<CadastrarClinica> {
                       child: Column(
                         children: [
                           TextFormField(
+                            controller: _controllerName,
                             decoration: InputDecoration(
                                 labelText: "🏥 Nome Fictício :",
                                 labelStyle: TextStyle(color: Colors.black)),
+                            onChanged: (value) {
+                              _controllerName.text = value;
+                            },
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            controller: _controllerCnpj,
                             decoration: InputDecoration(
                                 labelText: "📑 CNPJ :",
                                 labelStyle: TextStyle(color: Colors.black)),
+                            onChanged: (value) {
+                              _controllerCnpj.text = value;
+                            },
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            controller: _controllerTelefone,
                             decoration: InputDecoration(
                                 labelText: "📞 Telefone :",
                                 labelStyle: TextStyle(color: Colors.black)),
+                            onChanged: (value) {
+                              _controllerTelefone.text = value;
+                            },
                           ),
                           TextFormField(
+                            controller: _controllerCep,
                             decoration: InputDecoration(
                                 labelText: "🌍 CEP :",
                                 labelStyle: TextStyle(color: Colors.black)),
+                            onChanged: (value) {
+                              _controllerCep.text = value;
+                            },
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            controller: _controllerEstado,
                             decoration: InputDecoration(
                                 labelText: "🗾 Estado :",
                                 labelStyle: TextStyle(color: Colors.black)),
+                            onChanged: (value) {
+                              _controllerEstado.text = value;
+                            },
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            controller: _controllerCidade,
                             decoration: InputDecoration(
                                 labelText: "🗾 Cidade :",
                                 labelStyle: TextStyle(color: Colors.black)),
+                            onChanged: (value) {
+                              _controllerCidade.text = value;
+                            },
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            controller: _controllerBairro,
                             decoration: InputDecoration(
                                 labelText: "🗾 Bairro :",
                                 labelStyle: TextStyle(color: Colors.black)),
+                            onChanged: (value) {
+                              _controllerBairro.text = value;
+                            },
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            controller: _controllerRua,
                             decoration: InputDecoration(
                                 labelText: "🗾 Rua :",
                                 labelStyle: TextStyle(color: Colors.black)),
+                            onChanged: (value) {
+                              _controllerRua.text = value;
+                            },
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            controller: _controllerNumero,
                             decoration: InputDecoration(
                                 labelText: "🗾 N° :",
                                 labelStyle: TextStyle(color: Colors.black)),
+                            onChanged: (value) {
+                              _controllerNumero.text = value;
+                            },
                           ),
                           const SizedBox(height: 10),
                         ],

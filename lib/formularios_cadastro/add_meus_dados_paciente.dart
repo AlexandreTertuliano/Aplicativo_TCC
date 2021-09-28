@@ -179,6 +179,20 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                               _value_Telefone = value;
                             });
                           }),
+                      Text("Genero ",
+                          style: TextStyle(
+                              fontFamily: "Poppins-Medium",
+                              fontSize: ScreenUtil.getInstance().setSp(26))),
+                      TextField(
+                          decoration: InputDecoration(
+                              hintText: "Ex :  Feminino",
+                              hintStyle: TextStyle(
+                                  color: Colors.brown, fontSize: 12.0)),
+                          onChanged: (String value) {
+                            setState(() {
+                              _value_Tipo_Sangue = value;
+                            });
+                          }),
                       Text("Peso ",
                           style: TextStyle(
                               fontFamily: "Poppins-Medium",
@@ -232,6 +246,20 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                       SizedBox(
                         height: ScreenUtil.getInstance().setHeight(40),
                       ),
+                      Text("CEP ",
+                          style: TextStyle(
+                              fontFamily: "Poppins-Medium",
+                              fontSize: ScreenUtil.getInstance().setSp(26))),
+                      TextField(
+                          decoration: InputDecoration(
+                              hintText: "Ex : 00000-000",
+                              hintStyle: TextStyle(
+                                  color: Colors.brown, fontSize: 12.0)),
+                          onChanged: (String value) {
+                            setState(() {
+                              _value_Cidade = value;
+                            });
+                          }),
                       Text("Cidade ",
                           style: TextStyle(
                               fontFamily: "Poppins-Medium",
@@ -333,16 +361,7 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-                              onPressed: () {
-                                print(_value_Nome);
-                                print(_value_Cpf);
-                                print(_value_Data_Aniversario);
-                                print(_value_Telefone);
-                                print(_value_Cidade);
-                                print(_value_Tipo_Sangue);
-                                print(_value_Genero);
-                                print(_value_Doador);
-                              },
+                              onPressed: () {},
                             ),
                           ),
                         ),

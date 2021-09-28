@@ -57,6 +57,7 @@ class RegisterMedicoPage extends StatelessWidget {
                       ),
                     ),
                     inputFile(label: "Nome Completo"),
+                    inputFile(label: "CPF"),
                     inputFile(label: "Data de nascimento"),
                     inputFile(label: "Idade"),
                     inputFile(label: "Sexo"),

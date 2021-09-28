@@ -14,7 +14,7 @@ class SignupPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 40,vertical: 20),
+          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
           height: MediaQuery.of(context).size.height - 50,
           width: double.infinity,
           child: Column(

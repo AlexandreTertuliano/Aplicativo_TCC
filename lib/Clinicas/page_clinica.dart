@@ -14,10 +14,6 @@ class _PageClinica extends State<PageClinica> {
   var dados;
   var clinicasNome;
 
-  listarDados() {
-    final url = "marquemed.c5b8pct8bfdk.us-east-2.rds.amazonaws.com";
-  }
-
   final formGlobalKey = GlobalKey<FormState>();
 
   @override
