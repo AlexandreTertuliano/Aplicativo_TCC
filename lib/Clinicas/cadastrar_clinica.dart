@@ -75,9 +75,6 @@ class _CadastrarClinica extends State<CadastrarClinica> {
                             decoration: InputDecoration(
                                 labelText: "🏥 Nome Fictício :",
                                 labelStyle: TextStyle(color: Colors.black)),
-                            onChanged: (value) {
-                              _controllerName.text = value;
-                            },
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
@@ -85,9 +82,6 @@ class _CadastrarClinica extends State<CadastrarClinica> {
                             decoration: InputDecoration(
                                 labelText: "📑 CNPJ :",
                                 labelStyle: TextStyle(color: Colors.black)),
-                            onChanged: (value) {
-                              _controllerCnpj.text = value;
-                            },
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
@@ -95,18 +89,12 @@ class _CadastrarClinica extends State<CadastrarClinica> {
                             decoration: InputDecoration(
                                 labelText: "📞 Telefone :",
                                 labelStyle: TextStyle(color: Colors.black)),
-                            onChanged: (value) {
-                              _controllerTelefone.text = value;
-                            },
                           ),
                           TextFormField(
                             controller: _controllerCep,
                             decoration: InputDecoration(
                                 labelText: "🌍 CEP :",
                                 labelStyle: TextStyle(color: Colors.black)),
-                            onChanged: (value) {
-                              _controllerCep.text = value;
-                            },
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
@@ -114,9 +102,6 @@ class _CadastrarClinica extends State<CadastrarClinica> {
                             decoration: InputDecoration(
                                 labelText: "🗾 Estado :",
                                 labelStyle: TextStyle(color: Colors.black)),
-                            onChanged: (value) {
-                              _controllerEstado.text = value;
-                            },
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
@@ -124,9 +109,6 @@ class _CadastrarClinica extends State<CadastrarClinica> {
                             decoration: InputDecoration(
                                 labelText: "🗾 Cidade :",
                                 labelStyle: TextStyle(color: Colors.black)),
-                            onChanged: (value) {
-                              _controllerCidade.text = value;
-                            },
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
@@ -134,9 +116,6 @@ class _CadastrarClinica extends State<CadastrarClinica> {
                             decoration: InputDecoration(
                                 labelText: "🗾 Bairro :",
                                 labelStyle: TextStyle(color: Colors.black)),
-                            onChanged: (value) {
-                              _controllerBairro.text = value;
-                            },
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
@@ -144,9 +123,6 @@ class _CadastrarClinica extends State<CadastrarClinica> {
                             decoration: InputDecoration(
                                 labelText: "🗾 Rua :",
                                 labelStyle: TextStyle(color: Colors.black)),
-                            onChanged: (value) {
-                              _controllerRua.text = value;
-                            },
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
@@ -154,9 +130,6 @@ class _CadastrarClinica extends State<CadastrarClinica> {
                             decoration: InputDecoration(
                                 labelText: "🗾 N° :",
                                 labelStyle: TextStyle(color: Colors.black)),
-                            onChanged: (value) {
-                              _controllerNumero.text = value;
-                            },
                           ),
                           const SizedBox(height: 10),
                         ],
