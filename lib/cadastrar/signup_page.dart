@@ -1,15 +1,28 @@
 import 'package:MedAgenda/cadastrar/register_medico.dart';
 import 'package:MedAgenda/cadastrar/register_paciente.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends StatefulWidget {
   int type;
-
   SignupPage(this.type);
 
   @override
+  _SignupPageState createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+  TextEditingController _controllerNome = TextEditingController();
+  TextEditingController _controllerEmail = TextEditingController();
+  TextEditingController _controllerSenha = TextEditingController();
+  TextEditingController _controllerRepetirSenha = TextEditingController();
+  final formKey = new GlobalKey<FormState>();
+  final scaffoldKey = new GlobalKey<ScaffoldState>();
+  bool _validate = false;
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -41,13 +54,37 @@ class SignupPage extends StatelessWidget {
                   ),
                 ],
               ),
-              Column(
-                children: <Widget>[
-                  inputFile(label: "Nome"),
-                  inputFile(label: "Email"),
-                  inputFile(label: "Senha", obscureText: true),
-                  inputFile(label: "Confirme a senha ", obscureText: true),
-                ],
+              Form(
+                key: formKey,
+                autovalidate: _validate,
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                      controller: _controllerNome,
+                      decoration: new InputDecoration(hintText: 'Nome'),
+                      validator: _validarNome,
+                    ),
+                    const SizedBox(height: 10),
+                    TextFormField(
+                      controller: _controllerEmail,
+                      decoration: new InputDecoration(hintText: 'Email'),
+                      validator: _validarEmail,
+                    ),
+                    const SizedBox(height: 10),
+                    TextFormField(
+                      controller: _controllerSenha,
+                      decoration: new InputDecoration(hintText: 'Senha'),
+                      validator: _validarSenha,
+                    ),
+                    const SizedBox(height: 10),
+                    TextFormField(
+                      controller: _controllerRepetirSenha,
+                      decoration:
+                          new InputDecoration(hintText: 'Repetir Senha'),
+                      validator: _validarRepetirSenha,
+                    ),
+                  ],
+                ),
               ),
               Container(
                 padding: EdgeInsets.only(top: 3, left: 3),
@@ -62,19 +99,7 @@ class SignupPage extends StatelessWidget {
                 child: MaterialButton(
                   minWidth: double.infinity,
                   height: 60,
-                  onPressed: () {
-                    if (type == 1) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RegisterMedicoPage()));
-                    } else {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RegisterPacientePage()));
-                    }
-                  },
+                  onPressed: _submit,
                   color: Colors.lightBlue,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
@@ -96,34 +121,68 @@ class SignupPage extends StatelessWidget {
       ),
     );
   }
-}
 
-// we will be creating a widget for text field
-Widget inputFile({label, obscureText = false}) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: <Widget>[
-      Text(
-        label,
-        style: TextStyle(
-            fontSize: 15, fontWeight: FontWeight.w400, color: Colors.black87),
-      ),
-      SizedBox(
-        height: 5,
-      ),
-      TextField(
-        obscureText: obscureText,
-        decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey[400]),
-            ),
-            border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey[400]))),
-      ),
-      SizedBox(
-        height: 10,
-      )
-    ],
-  );
+  String _validarNome(String value) {
+    String patttern = r'(^[a-zA-Z ]*$)';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      return "Informe o nome";
+    } else if (!regExp.hasMatch(value)) {
+      return "O nome deve conter caracteres de a-z ou A-Z";
+    }
+    return null;
+  }
+
+  String _validarEmail(String value) {
+    String pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regExp = new RegExp(pattern);
+    if (value.length == 0) {
+      return "Informe o Email";
+    } else if (!regExp.hasMatch(value)) {
+      return "Email inválido";
+    } else {
+      return null;
+    }
+  }
+
+  String _validarSenha(String value) {
+    if (value.length == 0) {
+      return "Informe a senha";
+    } else if (value.length < 6) {
+      return "A senha deve ter 6 dígitos";
+    }
+    return null;
+  }
+
+  String _validarRepetirSenha(String value) {
+    if (value.length == 0) {
+      return "Informe a senha novamente";
+    } else if (value.length < 6) {
+      return "A senha deve ser igual a anterior";
+    }
+    return null;
+  }
+
+  void _submit() {
+    final form = formKey.currentState;
+
+    if (formKey.currentState.validate()) {
+      // Sem erros na validação
+      form.save();
+
+      if (widget.type == 1) {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => RegisterMedicoPage()));
+      } else {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => RegisterPacientePage()));
+      }
+    } else {
+      // erro de validação
+      setState(() {
+        _validate = true;
+      });
+    }
+  }
 }

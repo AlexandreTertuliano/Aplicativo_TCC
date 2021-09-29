@@ -1,11 +1,42 @@
+import 'package:cupertino_date_textbox/cupertino_date_textbox.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class RegisterMedicoPage extends StatelessWidget {
-  final formGlobalKey = GlobalKey<FormState>();
+class RegisterMedicoPage extends StatefulWidget {
+  @override
+  _RegisterMedicoPageState createState() => _RegisterMedicoPageState();
+}
+
+class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
+  TextEditingController _controllerNomeCompleto = TextEditingController();
+  TextEditingController _controllerCpf = TextEditingController();
+  TextEditingController _controllerDataNascimento = TextEditingController();
+  TextEditingController _controllerIdade = TextEditingController();
+  TextEditingController _controllerSexo = TextEditingController();
+  TextEditingController _controllerCRM = TextEditingController();
+  TextEditingController _controllerEsp1 = TextEditingController();
+  TextEditingController _controllerEsp2 = TextEditingController();
+  TextEditingController _controllerEsp3 = TextEditingController();
+  TextEditingController _controllerAnoFormacao = TextEditingController();
+  TextEditingController _controllerCidadeFormacao = TextEditingController();
+  TextEditingController _controllerFaculdade = TextEditingController();
+  TextEditingController _controllerCEP = TextEditingController();
+  TextEditingController _controllerEstado = TextEditingController();
+  TextEditingController _controllerCidade = TextEditingController();
+  TextEditingController _controllerBairro = TextEditingController();
+  TextEditingController _controllerRua = TextEditingController();
+  TextEditingController _controllerNumero = TextEditingController();
+  final formKey = new GlobalKey<FormState>();
+  final scaffoldKey = new GlobalKey<ScaffoldState>();
+  bool _validate = false;
+  DateTime _selectedDateTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
+    final String formattedDate = DateFormat.yMd().format(_selectedDateTime);
+    final selectedText = Text('You selected: $formattedDate');
     return Scaffold(
+      key: scaffoldKey,
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -56,29 +87,143 @@ class RegisterMedicoPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    inputFile(label: "Nome Completo"),
-                    inputFile(label: "CPF"),
-                    inputFile(label: "Data de nascimento"),
-                    inputFile(label: "Idade"),
-                    inputFile(label: "Sexo"),
-                    Image.asset(
-                      "assets/medicalForm.png",
-                    ),
-                    inputFile(label: "CRM "),
-                    inputFile(label: "Especialidade 1"),
-                    inputFile(label: "Especialidade 2"),
-                    inputFile(label: "Especialidade 3"),
-                    inputFile(label: "Ano de Formação"),
-                    inputFile(label: "Cidade de Formação"),
-                    inputFile(label: "Faculdade de Formação"),
-                    Image.asset(
-                      "assets/form.png",
-                    ),
-                    inputFile(label: "Cidade"),
-                    inputFile(label: "Estado "),
-                    inputFile(label: "Bairro"),
-                    inputFile(label: "Rua "),
-                    inputFile(label: "Nº"),
+                    Form(
+                      key: formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            controller: _controllerNomeCompleto,
+                            decoration: new InputDecoration(hintText: 'Nome'),
+                            validator: _validar,
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _controllerCpf,
+                            decoration: new InputDecoration(hintText: 'CPF'),
+                            validator: _validarCPF,
+                          ),
+                          const SizedBox(height: 10),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Data de nascimento",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black87),
+                            ),
+                          ),
+                          CupertinoDateTextBox(
+                              initialValue: _selectedDateTime,
+                              onDateChange: onBirthdayChange,
+                              hintText:
+                                  DateFormat.yMd().format(_selectedDateTime)),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _controllerIdade,
+                            decoration: new InputDecoration(hintText: 'Idade'),
+                            validator: _validar,
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _controllerSexo,
+                            decoration: new InputDecoration(hintText: 'Sexo'),
+                            validator: _validar,
+                          ),
+                          const SizedBox(height: 10),
+                          Image.asset(
+                            "assets/medicalForm.png",
+                          ),
+                          TextFormField(
+                            controller: _controllerCRM,
+                            decoration: new InputDecoration(hintText: 'CRM'),
+                            validator: _validarCRM,
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _controllerEsp1,
+                            decoration: new InputDecoration(
+                                hintText: 'Especialidade 1'),
+                            validator: _validar,
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _controllerEsp2,
+                            decoration: new InputDecoration(
+                                hintText: 'Especialidade 2'),
+                            validator: _validar,
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _controllerEsp3,
+                            decoration: new InputDecoration(
+                                hintText: 'Especialidade 3'),
+                            validator: _validar,
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _controllerAnoFormacao,
+                            decoration: new InputDecoration(
+                                hintText: 'Ano de Formação'),
+                            validator: _validar,
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _controllerCidadeFormacao,
+                            decoration: new InputDecoration(
+                                hintText: 'Cidade de Formação'),
+                            validator: _validar,
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _controllerFaculdade,
+                            decoration: new InputDecoration(
+                                hintText: 'Faculdade de formação'),
+                            validator: _validar,
+                          ),
+                          const SizedBox(height: 10),
+                          Image.asset(
+                            "assets/form.png",
+                          ),
+                          TextFormField(
+                            controller: _controllerCEP,
+                            decoration: new InputDecoration(hintText: 'CEP'),
+                            validator: _validarCEP,
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _controllerEstado,
+                            decoration: new InputDecoration(hintText: 'Estado'),
+                            validator: _validar,
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _controllerCidade,
+                            decoration: new InputDecoration(hintText: 'Cidade'),
+                            validator: _validar,
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _controllerBairro,
+                            decoration: new InputDecoration(hintText: 'Bairro'),
+                            validator: _validar,
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _controllerRua,
+                            decoration: new InputDecoration(hintText: 'Rua'),
+                            validator: _validar,
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _controllerNumero,
+                            decoration: new InputDecoration(hintText: 'N°'),
+                            validator: _validar,
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -89,7 +234,7 @@ class RegisterMedicoPage extends StatelessWidget {
             child: MaterialButton(
               minWidth: double.infinity,
               height: 60,
-              onPressed: () {},
+              onPressed: _submit,
               color: Colors.lightBlue,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50),
@@ -108,34 +253,58 @@ class RegisterMedicoPage extends StatelessWidget {
       )),
     );
   }
-}
 
-// we will be creating a widget for text field
-Widget inputFile({label, obscureText = false}) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: <Widget>[
-      Text(
-        label,
-        style: TextStyle(
-            fontSize: 15, fontWeight: FontWeight.w400, color: Colors.black87),
-      ),
-      SizedBox(
-        height: 5,
-      ),
-      TextField(
-        obscureText: obscureText,
-        decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
-            ),
-            border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.black))),
-      ),
-      SizedBox(
-        height: 10,
-      )
-    ],
-  );
+  String _validar(String value) {
+    if (value.length == 0) {
+      return "Preencha o campo";
+    }
+    return null;
+  }
+
+  String _validarCPF(String value) {
+    if (value.length == 0) {
+      return "Informe o CPF";
+    } else if (value.length < 11) {
+      return "O CPF deve ter 11 dígitos";
+    }
+    return null;
+  }
+
+  String _validarCRM(String value) {
+    if (value.length == 0) {
+      return "Informe o CRM";
+    } else if (value.length < 5) {
+      return "O CRM deve ter 5 dígitos";
+    }
+    return null;
+  }
+
+  String _validarCEP(String value) {
+    if (value.length == 0) {
+      return "Informe o CEP";
+    } else if (value.length < 9) {
+      return "O CEP deve ter 9 dígitos";
+    }
+    return null;
+  }
+
+  void onBirthdayChange(DateTime birthday) {
+    setState(() {
+      _selectedDateTime = birthday;
+    });
+  }
+
+  void _submit() {
+    final form = formKey.currentState;
+
+    if (formKey.currentState.validate()) {
+      // Sem erros na validação
+      form.save();
+    } else {
+      // erro de validação
+      setState(() {
+        _validate = true;
+      });
+    }
+  }
 }
