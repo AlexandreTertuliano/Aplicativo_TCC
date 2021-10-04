@@ -2,7 +2,16 @@ import 'package:cupertino_date_textbox/cupertino_date_textbox.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'package:MedAgenda/classes/medico_class.dart';
+import 'package:MedAgenda/services/medicos/services_medico.dart';
+
 class RegisterMedicoPage extends StatefulWidget {
+  Medico medico;
+  final String email;
+  RegisterMedicoPage({
+    this.email,
+  });
+
   @override
   _RegisterMedicoPageState createState() => _RegisterMedicoPageState();
 }
@@ -10,7 +19,6 @@ class RegisterMedicoPage extends StatefulWidget {
 class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
   TextEditingController _controllerNomeCompleto = TextEditingController();
   TextEditingController _controllerCpf = TextEditingController();
-  TextEditingController _controllerDataNascimento = TextEditingController();
   TextEditingController _controllerIdade = TextEditingController();
   TextEditingController _controllerSexo = TextEditingController();
   TextEditingController _controllerCRM = TextEditingController();
@@ -26,6 +34,7 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
   TextEditingController _controllerBairro = TextEditingController();
   TextEditingController _controllerRua = TextEditingController();
   TextEditingController _controllerNumero = TextEditingController();
+  TextEditingController _controllerTelefone = TextEditingController();
   final formKey = new GlobalKey<FormState>();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   bool _validate = false;
@@ -128,6 +137,13 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
                           TextFormField(
                             controller: _controllerSexo,
                             decoration: new InputDecoration(hintText: 'Sexo'),
+                            validator: _validar,
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _controllerTelefone,
+                            decoration:
+                                new InputDecoration(hintText: 'Telefone'),
                             validator: _validar,
                           ),
                           const SizedBox(height: 10),
@@ -294,17 +310,59 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
     });
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     final form = formKey.currentState;
 
     if (formKey.currentState.validate()) {
       // Sem erros na validação
       form.save();
+      await saveInfoMedico();
     } else {
       // erro de validação
       setState(() {
         _validate = true;
       });
+    }
+  }
+
+  Future<void> saveInfoMedico() async {
+    Medico medico = Medico(
+      nameMedico: _controllerNomeCompleto.text,
+      cpfMedico: _controllerCpf.text,
+      dnMedico: DateTime.parse(_selectedDateTime.toString()),
+      telefoneMedico: _controllerTelefone.text,
+      cepMedico: _controllerCEP.text,
+      cidadeMedico: _controllerCidade.text,
+      bairroMedico: _controllerBairro.text,
+      ruaMedico: _controllerRua.text,
+      numeroMedico: _controllerNumero.text,
+      idadeMedico: _controllerIdade.text,
+      especializacao1Medico: _controllerEsp1.text,
+      especializacao2Medico: _controllerEsp2.text,
+      especializacao3Medico: _controllerEsp3.text,
+      generoMedico: _controllerSexo.text,
+      emailMedico: widget.email,
+      anoformacaoMedico: _controllerAnoFormacao.text,
+      cidadeformacaoMedico: _controllerCidadeFormacao.text,
+      universidadeformacaoMedico: _controllerFaculdade.text,
+      crmMedico: _controllerCRM.text,
+    );
+    if (widget.medico == null) {
+      ServicesMedico.createMedico(medico).then((isSuccess) {
+        if (isSuccess) {
+          print("Deu certo");
+
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: const Text('Médico adicionado com sucesso !')));
+        } else {
+          print("Deu erro");
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: const Text('Erro ao adicionar médico !')));
+        }
+      });
+    } else {
+      return ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: const Text('Erro no Médico !')));
     }
   }
 }

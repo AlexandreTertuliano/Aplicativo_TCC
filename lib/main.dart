@@ -286,7 +286,7 @@ class _MyAppState extends State<MyApp> {
                             style: TextStyle(
                                 color: Color(0xFF5d74e3),
                                 fontFamily: "Poppins-Bold")),
-                      )
+                      ),
                     ],
                   )
                 ],

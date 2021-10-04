@@ -172,8 +172,12 @@ class _SignupPageState extends State<SignupPage> {
       form.save();
 
       if (widget.type == 1) {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => RegisterMedicoPage()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => RegisterMedicoPage(
+                      email: _controllerEmail.text,
+                    )));
       } else {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => RegisterPacientePage()));
