@@ -52,11 +52,10 @@ class FormCard_Paciente extends StatelessWidget {
                     fontFamily: "Poppins-Medium",
                     fontSize: ScreenUtil.getInstance().setSp(26))),
             TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                  hintText: "senha",
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0))
-            ),
+                obscureText: true,
+                decoration: InputDecoration(
+                    hintText: "senha",
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0))),
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(30),
             ),

@@ -3,8 +3,7 @@ import 'package:http/http.dart' as http;
 
 class ServicesClinica {
   static Future<List<Clinica>> getClinica() async {
-    final response = await http
-        .get(Uri.parse("https://api-marquemed.herokuapp.com/clinica"));
+    final response = await http.get(Uri.parse("http://api-marquemed.herokuapp.com/clinica"));
     if (response.statusCode == 200) {
       return postFromJson(response.body);
     } else {
@@ -12,9 +11,11 @@ class ServicesClinica {
     }
   }
 
+  
+
   static Future<List<Clinica>> getPegaClinica(int id) async {
     final response =
-        await http.get(Uri.parse("https://api-marquemed.herokuapp.com/$id"));
+        await http.get(Uri.parse("https://api-marquemed.herokuapp.com/clinica/$id"));
     if (response.statusCode == 200) {
       return postFromJson(response.body);
     } else {

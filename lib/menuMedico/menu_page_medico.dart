@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:MedAgenda/Clinicas/page_clinica.dart';
+import 'package:MedAgenda/agenda_medico/page_agenda.dart';
 import 'package:MedAgenda/formularios_cadastro/add_meus_dados_medicos.dart';
-import 'package:MedAgenda/tela_agendamento/page_agenda.dart';
 import 'package:flutter/material.dart';
 
 import 'home_icon_buttoms.dart';
@@ -52,7 +52,7 @@ class MenuPageMedico extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        'Olá Dr.(a) ******** ',
+                        'Olá Dr.(a), seja bem vindo! ',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                       Padding(
@@ -87,7 +87,7 @@ class MenuPageMedico extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                PageAgenda()));
+                                                PageAgendaMedico()));
                                   },
                                 )
                               ],

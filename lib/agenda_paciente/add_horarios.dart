@@ -1,5 +1,7 @@
+import 'package:MedAgenda/menuPaciente/menu_page_paciente.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
@@ -106,27 +108,27 @@ class _AddHorario extends State<AddHorario> {
                           isExpanded: true,
                           items: [
                             DropdownMenuItem<String>(
-                              child: Text('Hospital Regional'),
+                              child: Text('09:00'),
                               value: 'C1',
                             ),
                             DropdownMenuItem<String>(
-                              child: Text('Renascentista'),
+                              child: Text('10:00'),
                               value: 'C2',
                             ),
                             DropdownMenuItem<String>(
-                              child: Text('Clinica São Bento'),
+                              child: Text('11:00'),
                               value: 'C3',
                             ),
                             DropdownMenuItem<String>(
-                              child: Text('Clínica São José'),
+                              child: Text('14:00'),
                               value: 'C4',
                             ),
                             DropdownMenuItem<String>(
-                              child: Text('Hospitalar'),
+                              child: Text('16:00'),
                               value: 'C5',
                             ),
                             DropdownMenuItem<String>(
-                              child: Text('Santa Paula'),
+                              child: Text('17:00'),
                               value: 'C6',
                             ),
                           ],
@@ -135,40 +137,63 @@ class _AddHorario extends State<AddHorario> {
                               name_clinicas = value;
                             });
                           },
-                          hint: Text('Selecione a clínica'),
+                          hint: Text('Horários disponiveis'),
                           value: name_clinicas,
                         ),
                       ])),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                      child: Column(children: <Widget>[
-                    DateTimeField(
-                      decoration: InputDecoration(
-                        labelText: 'Adicionar horário',
-                        border: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(25.0),
-                          borderSide: new BorderSide(),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      margin: EdgeInsets.all(50),
+                      child: FlatButton(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Agendar 📆',
+                            style: GoogleFonts.lato(
+                              color: Colors.black,
+                              fontSize: 30,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                         ),
+                        color: Colors.lightBlue,
+                        textColor: Colors.black,
+                        onPressed: () {
+                          return showDialog<void>(
+                            context: context,
+                            barrierDismissible: false, // user must tap button!
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('Agendado com sucesso ✔'),
+                                content: SingleChildScrollView(
+                                  child: ListBody(
+                                    children: const <Widget>[
+                                      Text('Sua consulta foi marcada!'),
+                                    ],
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text('OK'),
+                                    onPressed: () {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MenuPagePaciente()));
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
                       ),
-                      format: format,
-                      onShowPicker: (context, currentValue) async {
-                        final time = await showTimePicker(
-                          context: context,
-                          initialTime: TimeOfDay.fromDateTime(
-                              currentValue ?? DateTime.now()),
-                        );
-
-                        return DateTimeField.convert(time);
-                      },
-                      onChanged: (DateTime newValue) {
-                        setState(() {
-                          _fromDate = (DateFormat('HH:mm').format(newValue));
-                        });
-                      },
                     ),
-                  ])),
+                  ),
                 ),
               ],
             ),
@@ -183,7 +208,7 @@ class _AddHorario extends State<AddHorario> {
               size: 30,
               color: Colors.white,
             ),
-            Icon(Icons.add, size: 30, color: Colors.white),
+            Icon(Icons.home, size: 30, color: Colors.white),
           ],
           onTap: (index) {
             setState(() {
@@ -191,7 +216,10 @@ class _AddHorario extends State<AddHorario> {
               if (index == 0) {
                 Navigator.pop(context);
               } else if (index == 1) {
-                //ADICIONA OS DADOS DO CONTROLLER E ENVIA PARA O SERVIDOR E DEPOIS RETORNA OS DADOS.
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MenuPagePaciente()));
               }
             });
           },
