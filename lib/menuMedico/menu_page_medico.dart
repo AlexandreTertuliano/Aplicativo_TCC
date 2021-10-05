@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:MedAgenda/Clinicas/page_clinica.dart';
 import 'package:MedAgenda/agenda_medico/page_agenda.dart';
 import 'package:MedAgenda/formularios_cadastro/add_meus_dados_medicos.dart';
+import 'package:MedAgenda/main.dart';
 import 'package:flutter/material.dart';
 
 import 'home_icon_buttoms.dart';
@@ -141,7 +142,14 @@ class MenuPageMedico extends StatelessWidget {
                                     text: 'Sair',
                                     color: Color(0xFF008080),
                                   ),
-                                  onTap: () => exit(0),
+                                  //onTap: () => exit(0),
+                                  onTap: (){
+                                    Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MyApp()));
+                                  },
                                 )
                               ],
                             ),

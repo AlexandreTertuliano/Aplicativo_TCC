@@ -5,6 +5,7 @@ import 'package:MedAgenda/pesquisarMedicos/pesquisar_medico.dart';
 import 'package:MedAgenda/agenda_paciente/page_agenda.dart';
 import 'package:flutter/material.dart';
 
+import '../main.dart';
 import 'home_icon_buttoms.dart';
 
 class MenuPagePaciente extends StatelessWidget {
@@ -85,10 +86,10 @@ class MenuPagePaciente extends StatelessWidget {
                                   ),
                                   onTap: () {
                                     Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  PageAgenda()));
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PageAgenda()));
                                   },
                                 )
                               ],
@@ -148,7 +149,13 @@ class MenuPagePaciente extends StatelessWidget {
                                     text: 'Sair',
                                     color: Color(0xFF008080),
                                   ),
-                                  onTap: () => exit(0),
+                                  //onTap: () => exit(0),
+                                  onTap: () {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => MyApp()));
+                                  },
                                 )
                               ],
                             ),

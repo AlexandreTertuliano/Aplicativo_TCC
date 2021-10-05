@@ -89,9 +89,9 @@ class _MyAppState extends State<MyApp> {
                   Row(
                     children: <Widget>[
                       Image.asset(
-                        "assets/logo.png",
-                        width: ScreenUtil.getInstance().setWidth(110),
-                        height: ScreenUtil.getInstance().setHeight(110),
+                        "assets/logo2.png",
+                        width: ScreenUtil.getInstance().setWidth(130),
+                        height: ScreenUtil.getInstance().setHeight(130),
                       ),
                       Text("MarqueMed",
                           style: TextStyle(
