@@ -1,8 +1,15 @@
+import 'package:MedAgenda/classes/paciente_class.dart';
+import 'package:MedAgenda/menuPaciente/menu_page_paciente.dart';
+import 'package:MedAgenda/services/pacientes/services_pacientes.dart';
 import 'package:cupertino_date_textbox/cupertino_date_textbox.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class RegisterPacientePage extends StatefulWidget {
+  Paciente paciente;
+  final String email;
+  final String senha;
+  RegisterPacientePage({this.email, this.senha});
   @override
   _RegisterPacientePageState createState() => _RegisterPacientePageState();
 }
@@ -22,6 +29,7 @@ class _RegisterPacientePageState extends State<RegisterPacientePage> {
   TextEditingController _controllerBairro = TextEditingController();
   TextEditingController _controllerRua = TextEditingController();
   TextEditingController _controllerNumero = TextEditingController();
+  TextEditingController _controllerTelefone = TextEditingController();
   final formKey = new GlobalKey<FormState>();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   bool _validate = false;
@@ -100,6 +108,13 @@ class _RegisterPacientePageState extends State<RegisterPacientePage> {
                             validator: _validarCPF,
                           ),
                           const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _controllerTelefone,
+                            decoration:
+                                new InputDecoration(hintText: 'Telefone'),
+                            validator: _validar,
+                          ),
+                          const SizedBox(height: 10),
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
@@ -130,28 +145,27 @@ class _RegisterPacientePageState extends State<RegisterPacientePage> {
                           const SizedBox(height: 10),
                           TextFormField(
                             controller: _controllerAltura,
-                            decoration: new InputDecoration(hintText: 'CRM'),
+                            decoration: new InputDecoration(hintText: 'Altura'),
                             validator: _validar,
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
                             controller: _controllerPeso,
-                            decoration: new InputDecoration(
-                                hintText: 'Especialidade 1'),
+                            decoration: new InputDecoration(hintText: 'Peso'),
                             validator: _validar,
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
                             controller: _controllerSangue,
-                            decoration: new InputDecoration(
-                                hintText: 'Especialidade 2'),
+                            decoration:
+                                new InputDecoration(hintText: 'Tipo Sanguineo'),
                             validator: _validar,
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
                             controller: _controllerProfissao,
-                            decoration: new InputDecoration(
-                                hintText: 'Especialidade 3'),
+                            decoration:
+                                new InputDecoration(hintText: 'Profissão'),
                             validator: _validar,
                           ),
                           const SizedBox(height: 10),
@@ -267,17 +281,85 @@ class _RegisterPacientePageState extends State<RegisterPacientePage> {
     });
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     final form = formKey.currentState;
 
     if (formKey.currentState.validate()) {
       // Sem erros na validação
       form.save();
+      await saveInfoPaciente();
     } else {
       // erro de validação
       setState(() {
         _validate = true;
       });
     }
+  }
+
+  Future<void> saveInfoPaciente() async {
+    Paciente paciente = Paciente(
+        namePaciente: _controllerNomeCompleto.text,
+        cpfPaciente: _controllerCpf.text,
+        //dnPaciente: _selectedDateTime,
+        telefonePaciente: _controllerTelefone.text,
+        cepPaciente: _controllerCEP.text,
+        cidadePaciente: _controllerCidade.text,
+        bairroPaciente: _controllerBairro.text,
+        ruaPaciente: _controllerRua.text,
+        numeroPaciente: _controllerNumero.text,
+        idadePaciente: _controllerIdade.text,
+        tipoSanguePaciente: _controllerSangue.text,
+        generoPaciente: _controllerSexo.text,
+        emailPaciente: widget.email,
+        senhaPaciente: widget.senha,
+        pesoPaciente: _controllerPeso.text,
+        alturaPaciente: _controllerAltura.text);
+    if (widget.paciente == null) {
+      ServicesPaciente.createPaciente(paciente).then((isSuccess) async {
+        if (isSuccess) {
+          await _showMyDialog();
+
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: const Text('Paciente adicionado com sucesso !')));
+        } else {
+          print("Deu erro");
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: const Text('Erro ao adicionar Paciente !')));
+        }
+      });
+    } else {
+      return ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: const Text('Erro no Paciente !')));
+    }
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Conta criada com sucesso!'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Bem vindo ao MarqueMed!'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Entrar'),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MenuPagePaciente()));
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

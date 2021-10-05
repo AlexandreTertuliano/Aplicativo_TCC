@@ -1,8 +1,12 @@
+import 'package:MedAgenda/Clinicas/page_clinica.dart';
+import 'package:MedAgenda/classes/clinica_class.dart';
+import 'package:MedAgenda/services/clinica/services_clinica.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CadastrarClinica extends StatefulWidget {
+  Clinica clinica;
   @override
   _CadastrarClinica createState() => _CadastrarClinica();
 }
@@ -157,11 +161,63 @@ class _CadastrarClinica extends State<CadastrarClinica> {
               _page = index;
               if (index == 0) {
                 Navigator.pop(context);
-              } else if (index == 1) {}
+              } else if (index == 1) {
+                saveInfoClinica();
+              }
             });
           },
         ),
       ),
+    );
+  }
+
+  Future<void> saveInfoClinica() async {
+    Clinica clinica = Clinica(
+      nameClinica: _controllerName.text,
+      cnpjClinica: _controllerCnpj.text,
+      cepClinica: _controllerCep.text,
+      telefoneClinica: _controllerTelefone.text,
+      cidadeClinica: _controllerCidade.text,
+      bairroClinica: _controllerBairro.text,
+      ruaClinica: _controllerRua.text,
+    );
+    if (widget.clinica == null) {
+      ServicesClinica.createClinica(clinica).then((isSuccess) async {
+        if (isSuccess) {
+          await _showMyDialog();
+
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: const Text('Clínica adicionada com sucesso !')));
+        } else {
+          print("Deu erro");
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: const Text('Erro ao adicionar Clínica !')));
+        }
+      });
+    } else {
+      return ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: const Text('Erro no Clínica !')));
+    }
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Clínica adicionada com sucesso!'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PageClinica()));
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

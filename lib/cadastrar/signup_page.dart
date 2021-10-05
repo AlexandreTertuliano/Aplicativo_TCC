@@ -179,8 +179,13 @@ class _SignupPageState extends State<SignupPage> {
                       email: _controllerEmail.text,
                     )));
       } else {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => RegisterPacientePage()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => RegisterPacientePage(
+                      email: _controllerEmail.text,
+                      senha: _controllerSenha.text,
+                    )));
       }
     } else {
       // erro de validação

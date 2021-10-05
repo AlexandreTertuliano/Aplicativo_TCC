@@ -1,3 +1,4 @@
+import 'package:MedAgenda/menuMedico/menu_page_medico.dart';
 import 'package:cupertino_date_textbox/cupertino_date_textbox.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -329,7 +330,7 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
     Medico medico = Medico(
       nameMedico: _controllerNomeCompleto.text,
       cpfMedico: _controllerCpf.text,
-      dnMedico: DateTime.parse(_selectedDateTime.toString()),
+      //dnMedico: _selectedDateTime,
       telefoneMedico: _controllerTelefone.text,
       cepMedico: _controllerCEP.text,
       cidadeMedico: _controllerCidade.text,
@@ -348,9 +349,9 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
       crmMedico: _controllerCRM.text,
     );
     if (widget.medico == null) {
-      ServicesMedico.createMedico(medico).then((isSuccess) {
+      ServicesMedico.createMedico(medico).then((isSuccess) async {
         if (isSuccess) {
-          print("Deu certo");
+          await _showMyDialog();
 
           ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: const Text('Médico adicionado com sucesso !')));
@@ -364,5 +365,33 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
       return ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: const Text('Erro no Médico !')));
     }
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Conta criada com sucesso!'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Bem vindo Drº ao MarqueMed!'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Entrar'),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MenuPageMedico()));
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
