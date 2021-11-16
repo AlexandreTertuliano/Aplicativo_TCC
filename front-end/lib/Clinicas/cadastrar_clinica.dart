@@ -1,11 +1,12 @@
+import 'package:MedAgenda/Clinicas/page_clinica.dart';
+import 'package:MedAgenda/classes/clinica_class.dart';
+import 'package:MedAgenda/services/clinica/services_clinica.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:table_calendar/table_calendar.dart';
-import 'package:intl/intl.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 class CadastrarClinica extends StatefulWidget {
+  Clinica clinica;
   @override
   _CadastrarClinica createState() => _CadastrarClinica();
 }
@@ -13,6 +14,15 @@ class CadastrarClinica extends StatefulWidget {
 class _CadastrarClinica extends State<CadastrarClinica> {
   int _page = 0;
   final formGlobalKey = GlobalKey<FormState>();
+  TextEditingController _controllerName = TextEditingController();
+  TextEditingController _controllerCnpj = TextEditingController();
+  TextEditingController _controllerTelefone = TextEditingController();
+  TextEditingController _controllerCep = TextEditingController();
+  TextEditingController _controllerEstado = TextEditingController();
+  TextEditingController _controllerCidade = TextEditingController();
+  TextEditingController _controllerBairro = TextEditingController();
+  TextEditingController _controllerRua = TextEditingController();
+  TextEditingController _controllerNumero = TextEditingController();
 
   @override
   void initState() {
@@ -65,53 +75,62 @@ class _CadastrarClinica extends State<CadastrarClinica> {
                       child: Column(
                         children: [
                           TextFormField(
+                            controller: _controllerName,
                             decoration: InputDecoration(
                                 labelText: "🏥 Nome Fictício :",
                                 labelStyle: TextStyle(color: Colors.black)),
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            controller: _controllerCnpj,
                             decoration: InputDecoration(
                                 labelText: "📑 CNPJ :",
                                 labelStyle: TextStyle(color: Colors.black)),
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            controller: _controllerTelefone,
                             decoration: InputDecoration(
                                 labelText: "📞 Telefone :",
                                 labelStyle: TextStyle(color: Colors.black)),
                           ),
                           TextFormField(
+                            controller: _controllerCep,
                             decoration: InputDecoration(
                                 labelText: "🌍 CEP :",
                                 labelStyle: TextStyle(color: Colors.black)),
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            controller: _controllerEstado,
                             decoration: InputDecoration(
                                 labelText: "🗾 Estado :",
                                 labelStyle: TextStyle(color: Colors.black)),
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            controller: _controllerCidade,
                             decoration: InputDecoration(
                                 labelText: "🗾 Cidade :",
                                 labelStyle: TextStyle(color: Colors.black)),
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            controller: _controllerBairro,
                             decoration: InputDecoration(
                                 labelText: "🗾 Bairro :",
                                 labelStyle: TextStyle(color: Colors.black)),
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            controller: _controllerRua,
                             decoration: InputDecoration(
                                 labelText: "🗾 Rua :",
                                 labelStyle: TextStyle(color: Colors.black)),
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            controller: _controllerNumero,
                             decoration: InputDecoration(
                                 labelText: "🗾 N° :",
                                 labelStyle: TextStyle(color: Colors.black)),
@@ -143,12 +162,62 @@ class _CadastrarClinica extends State<CadastrarClinica> {
               if (index == 0) {
                 Navigator.pop(context);
               } else if (index == 1) {
-                //ADICIONA OS DADOS DO CONTROLLER E ENVIA PARA O SERVIDOR E DEPOIS RETORNA OS DADOS.
+                saveInfoClinica();
               }
             });
           },
         ),
       ),
+    );
+  }
+
+  Future<void> saveInfoClinica() async {
+    Clinica clinica = Clinica(
+      nameClinica: _controllerName.text,
+      cnpjClinica: _controllerCnpj.text,
+      cepClinica: _controllerCep.text,
+      telefoneClinica: _controllerTelefone.text,
+      cidadeClinica: _controllerCidade.text,
+      bairroClinica: _controllerBairro.text,
+      ruaClinica: _controllerRua.text,
+    );
+    if (widget.clinica == null) {
+      ServicesClinica.createClinica(clinica).then((isSuccess) async {
+        if (isSuccess) {
+          await _showMyDialog();
+
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: const Text('Clínica adicionada com sucesso !')));
+        } else {
+          print("Deu erro");
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: const Text('Erro ao adicionar Clínica !')));
+        }
+      });
+    } else {
+      return ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: const Text('Erro no Clínica !')));
+    }
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Clínica adicionada com sucesso!'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PageClinica()));
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

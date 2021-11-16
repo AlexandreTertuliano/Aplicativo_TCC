@@ -3,7 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class FormCard_Paciente extends StatelessWidget {
+class FormCard_Paciente extends StatefulWidget {
+  @override
+  _FormCard_PacienteState createState() => _FormCard_PacienteState();
+}
+
+class _FormCard_PacienteState extends State<FormCard_Paciente> {
+  static TextEditingController _controllerSenha = TextEditingController();
+
+  static TextEditingController _controllerEmail = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -40,6 +49,7 @@ class FormCard_Paciente extends StatelessWidget {
                     fontFamily: "Poppins-Medium",
                     fontSize: ScreenUtil.getInstance().setSp(26))),
             TextField(
+              controller: _controllerEmail,
               decoration: InputDecoration(
                   hintText: "email",
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
@@ -52,11 +62,11 @@ class FormCard_Paciente extends StatelessWidget {
                     fontFamily: "Poppins-Medium",
                     fontSize: ScreenUtil.getInstance().setSp(26))),
             TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                  hintText: "senha",
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0))
-            ),
+                controller: _controllerSenha,
+                obscureText: true,
+                decoration: InputDecoration(
+                    hintText: "senha",
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0))),
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(30),
             ),

@@ -35,14 +35,14 @@ class IntroPageItem extends StatelessWidget {
 
   _buildTextContainer(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
-    
+
     var titleText = _applyTextEffects(
       translationFactor: 200.0,
       child: Padding(
         padding: const EdgeInsets.only(top: 16.0),
         child: Text(
           item.title,
-          style: textTheme.title
+          style: textTheme.bodyText1
               .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
@@ -56,7 +56,6 @@ class IntroPageItem extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-         
           titleText,
         ],
       ),

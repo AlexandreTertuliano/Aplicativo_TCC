@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ResetPassword extends StatelessWidget {
+  TextEditingController _controllerEmail = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,6 +52,7 @@ class ResetPassword extends StatelessWidget {
               height: 20,
             ),
             TextFormField(
+              controller: _controllerEmail,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                   labelText: "E-mail",
@@ -94,7 +96,32 @@ class ResetPassword extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   onPressed: () {
-                    //Aqui vai o back que manda o o pedido de renovação de senha para o email do usuário
+                    showDialog<void>(
+                      context: context,
+                      barrierDismissible: false, // user must tap button!
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text(
+                              'Pedido de recuperação de senha enviado com sucesso!'),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: const <Widget>[
+                                Text(
+                                    'Foi enviado ao seu email o código de recuperação de senha!'),
+                              ],
+                            ),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                 ),
               ),
@@ -107,4 +134,5 @@ class ResetPassword extends StatelessWidget {
       ),
     );
   }
+
 }

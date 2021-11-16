@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FormCard_Medicos extends StatelessWidget {
+  
+  TextEditingController _controllerEmail = TextEditingController();
+  TextEditingController _controllerSenha = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -41,6 +45,7 @@ class FormCard_Medicos extends StatelessWidget {
                     fontFamily: "Poppins-Medium",
                     fontSize: ScreenUtil.getInstance().setSp(26))),
             TextField(
+              controller: _controllerEmail,
               decoration: InputDecoration(
                   hintText: "email",
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
@@ -53,6 +58,7 @@ class FormCard_Medicos extends StatelessWidget {
                     fontFamily: "Poppins-Medium",
                     fontSize: ScreenUtil.getInstance().setSp(26))),
             TextField(
+              controller: _controllerSenha,
               obscureText: true,
               decoration: InputDecoration(
                   hintText: "senha",

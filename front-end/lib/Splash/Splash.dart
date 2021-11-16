@@ -37,20 +37,18 @@ class _SplashState extends State<Splash> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(top: 60.0),
+                      ),
                       CircleAvatar(
                           backgroundColor: Colors.white,
                           radius: 150.0,
                           child: Image.asset("assets/hospital.png")),
-                      Padding(
-                        padding: EdgeInsets.only(top: 30.0),
+                      Image.asset(
+                        "assets/logo1.png",
+                        width: 180,
+                        height: 180,
                       ),
-                      Text(
-                        "MarqueMed",
-                        style: TextStyle(
-                            color: Colors.cyan,
-                            fontSize: 50.0,
-                            fontWeight: FontWeight.w700),
-                      )
                     ],
                   ),
                 ),
@@ -61,9 +59,6 @@ class _SplashState extends State<Splash> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     CircularProgressIndicator(),
-                    Padding(
-                      padding: EdgeInsets.only(top: 20.0),
-                    ),
                   ],
                 ),
               )

@@ -1,7 +1,10 @@
 import 'dart:io';
 import 'package:MedAgenda/formularios_cadastro/add_meus_dados_paciente.dart';
+import 'package:MedAgenda/pesquisarMedicos/pesquisar_medico.dart';
+import 'package:MedAgenda/agenda_paciente/page_agenda.dart';
 import 'package:flutter/material.dart';
 
+import '../main.dart';
 import 'home_icon_buttoms.dart';
 
 class MenuPagePaciente extends StatelessWidget {
@@ -50,7 +53,7 @@ class MenuPagePaciente extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        'Olá ******** ',
+                        'Olá, seja bem vindo!',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                       Padding(
@@ -67,7 +70,7 @@ class MenuPagePaciente extends StatelessWidget {
                                     color: Color(0xFF008000),
                                   ),
                                   onTap: () {
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
@@ -81,7 +84,11 @@ class MenuPagePaciente extends StatelessWidget {
                                     color: Color(0xFFFFFF00),
                                   ),
                                   onTap: () {
-
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PageAgenda()));
                                   },
                                 )
                               ],
@@ -98,7 +105,13 @@ class MenuPagePaciente extends StatelessWidget {
                                     text: 'Pesquisar\n Médicos',
                                     color: Color(0xFFFD47DF),
                                   ),
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PagePesquisarMedico()));
+                                  },
                                 ),
                                 GestureDetector(
                                     child: CatigoryW(
@@ -129,7 +142,13 @@ class MenuPagePaciente extends StatelessWidget {
                                     text: 'Sair',
                                     color: Color(0xFF008080),
                                   ),
-                                  onTap: () => exit(0),
+                                  //onTap: () => exit(0),
+                                  onTap: () {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => MyApp()));
+                                  },
                                 )
                               ],
                             ),

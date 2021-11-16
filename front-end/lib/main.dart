@@ -1,13 +1,15 @@
 import 'package:MedAgenda/Widgets/FormCard_Medicos.dart';
 import 'package:MedAgenda/Splash/Splash.dart';
-import 'package:MedAgenda/Widgets/FormCard_Pacientes.dart';
-import 'package:MedAgenda/menuMedico/menu_page_medico.dart';
-import 'package:MedAgenda/menuPaciente/menu_page_paciente.dart';
+import 'package:MedAgenda/cadastrar/cadastrar_page.dart';
+import 'package:MedAgenda/services/login/class_login_paciente.dart';
+import 'package:MedAgenda/services/login/services_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'dart:ui';
+
+import 'Widgets/FormCard_Pacientes.dart';
 
 void main() => runApp(MaterialApp(
       home: Splash(),
@@ -27,6 +29,10 @@ class _MyAppState extends State<MyApp> {
       _isSelected = !_isSelected;
     });
   }
+
+  List<LoginPaciente> loginPaciente = List<LoginPaciente>();
+  // ignore: deprecated_member_use
+  List<LoginPaciente> _loginPaciente = List<LoginPaciente>();
 
   Widget radioButton(bool isSelected) => Container(
         width: 16.0,
@@ -55,6 +61,15 @@ class _MyAppState extends State<MyApp> {
       );
 
   var _tela = 0;
+
+  Future<void> VerificaLogin(String email, String senha) async {
+    ServicesLoginPaciente.getLogin(email, senha).then((list) {
+      setState(() {
+        loginPaciente = list;
+        _loginPaciente = loginPaciente;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,9 +103,9 @@ class _MyAppState extends State<MyApp> {
                   Row(
                     children: <Widget>[
                       Image.asset(
-                        "assets/logo.png",
-                        width: ScreenUtil.getInstance().setWidth(110),
-                        height: ScreenUtil.getInstance().setHeight(110),
+                        "assets/logo2.png",
+                        width: ScreenUtil.getInstance().setWidth(130),
+                        height: ScreenUtil.getInstance().setHeight(130),
                       ),
                       Text("MarqueMed",
                           style: TextStyle(
@@ -199,22 +214,23 @@ class _MyAppState extends State<MyApp> {
                           child: Material(
                             color: Colors.transparent,
                             child: InkWell(
-                              onTap: () {
+                              onTap: () async {
                                 if (_tela == 0) {
-                                  Navigator.push(
+                                  //await VerificaLogin("teste", "teste");
+                                  /*Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => MenuPagePaciente(),
                                     ),
-                                  );
+                                  );*/
                                 }
                                 if (_tela == 1) {
-                                  Navigator.push(
+                                  /*Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => MenuPageMedico(),
                                     ),
-                                  );
+                                  );*/
                                 }
                               },
                               child: Center(
@@ -273,12 +289,19 @@ class _MyAppState extends State<MyApp> {
                         style: TextStyle(fontFamily: "Poppins-Medium"),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CadastrarPage(),
+                            ),
+                          );
+                        },
                         child: Text("Cadastrar",
                             style: TextStyle(
                                 color: Color(0xFF5d74e3),
                                 fontFamily: "Poppins-Bold")),
-                      )
+                      ),
                     ],
                   )
                 ],
