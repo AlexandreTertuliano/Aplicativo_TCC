@@ -1,13 +1,26 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:MedAgenda/formularios_cadastro/add_meus_dados_paciente.dart';
 import 'package:MedAgenda/pesquisarMedicos/pesquisar_medico.dart';
 import 'package:MedAgenda/agenda_paciente/page_agenda.dart';
+import 'package:MedAgenda/services/login/services_login.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
 import 'home_icon_buttoms.dart';
 
-class MenuPagePaciente extends StatelessWidget {
+class MenuPagePaciente extends StatefulWidget {
+  String email;
+  String senha;
+  MenuPagePaciente(this.email, this.senha);
+
+  @override
+  State<MenuPagePaciente> createState() => _MenuPagePacienteState();
+}
+
+class _MenuPagePacienteState extends State<MenuPagePaciente> {
+ 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

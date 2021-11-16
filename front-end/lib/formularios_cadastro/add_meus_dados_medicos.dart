@@ -1,65 +1,138 @@
+import 'package:MedAgenda/services/login/services_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DadosMedicos extends StatefulWidget {
-  DadosMedicos({Key key}) : super(key: key);
+  String email, senha;
+  DadosMedicos(this.email, this.senha);
 
   @override
   _DadosMedicosState createState() => _DadosMedicosState();
 }
 
 class _DadosMedicosState extends State<DadosMedicos> {
-  // ignore: non_constant_identifier_names
   String _value_Nome;
-  // ignore: non_constant_identifier_names
+
   String _value_Cpf;
-  // ignore: non_constant_identifier_names
+
   String _value_Data_Aniversario;
-  // ignore: non_constant_identifier_names
+
   String _value_Telefone;
-  // ignore: non_constant_identifier_names
+
   String _value_Cidade;
-  // ignore: non_constant_identifier_names
+
   String _value_Tipo_Sangue;
-  // ignore: non_constant_identifier_names
+
   String _value_Genero;
-  // ignore: non_constant_identifier_names
+
   String _value_Doador;
 
   String _value_idade;
 
   String _value_crm;
-  // ignore: non_constant_identifier_names
+
   String _value_sexo;
 
-  // ignore: non_constant_identifier_names
   String _value_cep;
-  // ignore: non_constant_identifier_names
+
   String _value_estado;
 
-  // ignore: non_constant_identifier_names
   String _value_rua;
-  // ignore: non_constant_identifier_names
+
   String _value_bairro;
 
-  // ignore: non_constant_identifier_names
   String _value_numero;
-  // ignore: non_constant_identifier_names
+
   String _value_esp1;
 
-  // ignore: non_constant_identifier_names
   String _value_esp2;
-  // ignore: non_constant_identifier_names
+
   String _value_esp3;
 
-  // ignore: non_constant_identifier_names
   String _value_universidade;
-  // ignore: non_constant_identifier_names
+
   String _value_anograduacao;
 
-  // ignore: non_constant_identifier_names
   String _value_cidadegraduacao;
+
+  /*---------------------------------------------------------------------------------------------------*/
+
+  String nomeMedico;
+
+  String cpf;
+
+  String data_Aniversario;
+
+  String telefone;
+
+  String cidade;
+
+  String tipo_Sangue;
+
+  String genero;
+
+  String doador;
+
+  String idade;
+
+  String crm;
+
+  String sexo;
+
+  String cep;
+
+  String estado;
+
+  String rua;
+
+  String bairro;
+
+  String numero;
+
+  String esp1;
+
+  String esp2;
+
+  String esp3;
+
+  String universidade;
+
+  String anograduacao;
+
+  String cidadegraduacao;
+  @override
+  void initState() {
+    super.initState();
+    pegaNomeMedico();
+  }
+
+  Future<void> pegaNomeMedico() async {
+    final jsonMedico =
+        await ServicesLogin.getLoginMedico(widget.email, widget.senha);
+    nomeMedico = jsonMedico.medico.nameMedico;
+    cpf = jsonMedico.medico.cpfMedico;
+    data_Aniversario = jsonMedico.medico.cpfMedico;
+    telefone = jsonMedico.medico.telefoneMedico;
+    cidade = jsonMedico.medico.cidadeMedico;
+    genero = jsonMedico.medico.generoMedico;
+    idade = jsonMedico.medico.idadeMedico;
+    crm = jsonMedico.medico.crmMedico;
+    cep = jsonMedico.medico.cepMedico;
+    rua = jsonMedico.medico.ruaMedico;
+    bairro = jsonMedico.medico.bairroMedico;
+    numero = jsonMedico.medico.numeroMedico;
+    esp1 = jsonMedico.medico.especializacao1Medico;
+    esp2 = jsonMedico.medico.especializacao2Medico;
+    esp3 = jsonMedico.medico.especializacao3Medico;
+    universidade = jsonMedico.medico.universidadeFormacaoMedico;
+    anograduacao = jsonMedico.medico.anoFormacaoMedico;
+    cidadegraduacao = jsonMedico.medico.cidadeFormacaoMedico;
+
+    setState(() {
+      return nomeMedico;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +188,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : Nome Completo",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15.0)),
                         onChanged: (String value) {
                           setState(() {
                             _value_Nome = value;
@@ -130,7 +203,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : CPF",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_Cpf = value;
@@ -145,7 +218,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : 01/01/2021",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_Data_Aniversario = value;
@@ -160,7 +233,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : Masculino",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_sexo = value;
@@ -175,7 +248,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : 00 01234-5678",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_Telefone = value;
@@ -190,7 +263,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : 00",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_idade = value;
@@ -216,7 +289,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : 11111-000",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_cep = value;
@@ -231,7 +304,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : Pouso Alegre",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_Cidade = value;
@@ -246,7 +319,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : Minas Gerais",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_estado = value;
@@ -261,7 +334,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : xxxxxxxxxxxxx",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_rua = value;
@@ -276,7 +349,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : xxxxxxxxxx",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_bairro = value;
@@ -291,7 +364,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : 111",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_numero = value;
@@ -320,7 +393,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : CRM",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_crm = value;
@@ -339,7 +412,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : Cardiologia",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_esp1 = value;
@@ -358,7 +431,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : Oftalmologista ",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_esp2 = value;
@@ -377,7 +450,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : Geriatra",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_esp3 = value;
@@ -395,7 +468,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : UNIVAS",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_universidade = value;
@@ -410,7 +483,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : 2021",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_anograduacao = value;
@@ -425,7 +498,7 @@ class _DadosMedicosState extends State<DadosMedicos> {
                         decoration: InputDecoration(
                             hintText: "Ex : Pouso Alegre",
                             hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 12.0)),
+                                TextStyle(color: Colors.grey, fontSize: 15)),
                         onChanged: (String value) {
                           setState(() {
                             _value_cidadegraduacao = value;

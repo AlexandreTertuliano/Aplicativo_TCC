@@ -354,7 +354,8 @@ class _RegisterPacientePageState extends State<RegisterPacientePage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => MenuPagePaciente()));
+                        builder: (context) =>
+                            MenuPagePaciente("email", "senha")));
               },
             ),
           ],

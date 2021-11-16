@@ -1,6 +1,8 @@
+import 'package:MedAgenda/ResetPassword/reset_password.dart';
 import 'package:MedAgenda/Widgets/FormCard_Medicos.dart';
 import 'package:MedAgenda/Splash/Splash.dart';
 import 'package:MedAgenda/cadastrar/cadastrar_page.dart';
+import 'package:MedAgenda/menuMedico/menu_page_medico.dart';
 import 'package:MedAgenda/services/login/class_login_paciente.dart';
 import 'package:MedAgenda/services/login/services_login.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:ui';
 
 import 'Widgets/FormCard_Pacientes.dart';
+import 'menuPaciente/menu_page_paciente.dart';
+import 'services/login/class_login_medico.dart';
 
 void main() => runApp(MaterialApp(
       home: Splash(),
@@ -33,6 +37,17 @@ class _MyAppState extends State<MyApp> {
   List<LoginPaciente> loginPaciente = List<LoginPaciente>();
   // ignore: deprecated_member_use
   List<LoginPaciente> _loginPaciente = List<LoginPaciente>();
+
+  List<LoginMedico> loginMedico = List<LoginMedico>();
+  // ignore: deprecated_member_use
+  List<LoginMedico> _loginMedico = List<LoginMedico>();
+
+  TextEditingController _controllerSenhaPaciente = TextEditingController();
+
+  TextEditingController _controllerEmailPaciente = TextEditingController();
+  TextEditingController _controllerSenhaMedico = TextEditingController();
+
+  TextEditingController _controllerEmailMedico = TextEditingController();
 
   Widget radioButton(bool isSelected) => Container(
         width: 16.0,
@@ -61,15 +76,6 @@ class _MyAppState extends State<MyApp> {
       );
 
   var _tela = 0;
-
-  Future<void> VerificaLogin(String email, String senha) async {
-    ServicesLoginPaciente.getLogin(email, senha).then((list) {
-      setState(() {
-        loginPaciente = list;
-        _loginPaciente = loginPaciente;
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,12 +162,208 @@ class _MyAppState extends State<MyApp> {
                                 children: <Widget>[
                                   new Container(
                                     constraints: const BoxConstraints.expand(),
-                                    child: FormCard_Paciente(),
+                                    child: Container(
+                                      //height: ScreenUtil.getInstance().setHeight(300),
+                                      padding: EdgeInsets.only(bottom: 1),
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black12,
+                                                offset: Offset(0.0, 15.0),
+                                                blurRadius: 15.0),
+                                            BoxShadow(
+                                                color: Colors.black12,
+                                                offset: Offset(0.0, -10.0),
+                                                blurRadius: 10.0),
+                                          ]),
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 16.0, right: 16.0, top: 5.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text("Paciente ",
+                                                style: TextStyle(
+                                                    fontSize:
+                                                        ScreenUtil.getInstance()
+                                                            .setSp(45),
+                                                    fontFamily: "Poppins-Bold",
+                                                    letterSpacing: .6)),
+                                            SizedBox(
+                                              height: ScreenUtil.getInstance()
+                                                  .setHeight(20),
+                                            ),
+                                            Text("E-mail",
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        "Poppins-Medium",
+                                                    fontSize:
+                                                        ScreenUtil.getInstance()
+                                                            .setSp(26))),
+                                            TextField(
+                                              controller:
+                                                  _controllerEmailPaciente,
+                                              decoration: InputDecoration(
+                                                  hintText: "email",
+                                                  hintStyle: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 12.0)),
+                                            ),
+                                            SizedBox(
+                                              height: ScreenUtil.getInstance()
+                                                  .setHeight(20),
+                                            ),
+                                            Text("Senha",
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        "Poppins-Medium",
+                                                    fontSize:
+                                                        ScreenUtil.getInstance()
+                                                            .setSp(26))),
+                                            TextField(
+                                                controller:
+                                                    _controllerSenhaPaciente,
+                                                decoration: InputDecoration(
+                                                    hintText: "senha",
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: 12.0))),
+                                            SizedBox(
+                                              height: ScreenUtil.getInstance()
+                                                  .setHeight(30),
+                                            ),
+                                            Container(
+                                              height: 40,
+                                              alignment: Alignment.centerRight,
+                                              // ignore: deprecated_member_use
+                                              child: FlatButton(
+                                                child: Text(
+                                                  "Recuperar Senha",
+                                                  textAlign: TextAlign.right,
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          ResetPassword(),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                     padding: EdgeInsets.all(10),
                                   ),
                                   new Container(
                                     constraints: const BoxConstraints.expand(),
-                                    child: FormCard_Medicos(),
+                                    child: Container(
+                                      width: double.infinity,
+//      height: ScreenUtil.getInstance().setHeight(500),
+                                      padding: EdgeInsets.only(bottom: 1),
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black12,
+                                                offset: Offset(0.0, 15.0),
+                                                blurRadius: 15.0),
+                                            BoxShadow(
+                                                color: Colors.black12,
+                                                offset: Offset(0.0, -10.0),
+                                                blurRadius: 10.0),
+                                          ]),
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 16.0, right: 16.0, top: 5.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text("Médico ",
+                                                style: TextStyle(
+                                                    fontSize:
+                                                        ScreenUtil.getInstance()
+                                                            .setSp(45),
+                                                    fontFamily: "Poppins-Bold",
+                                                    letterSpacing: .6)),
+                                            SizedBox(
+                                              height: ScreenUtil.getInstance()
+                                                  .setHeight(20),
+                                            ),
+                                            Text("E-mail",
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        "Poppins-Medium",
+                                                    fontSize:
+                                                        ScreenUtil.getInstance()
+                                                            .setSp(26))),
+                                            TextField(
+                                              controller:
+                                                  _controllerEmailMedico,
+                                              decoration: InputDecoration(
+                                                  hintText: "email",
+                                                  hintStyle: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 12.0)),
+                                            ),
+                                            SizedBox(
+                                              height: ScreenUtil.getInstance()
+                                                  .setHeight(20),
+                                            ),
+                                            Text("Senha",
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        "Poppins-Medium",
+                                                    fontSize:
+                                                        ScreenUtil.getInstance()
+                                                            .setSp(26))),
+                                            TextField(
+                                              controller:
+                                                  _controllerSenhaMedico,
+                                              decoration: InputDecoration(
+                                                  hintText: "senha",
+                                                  hintStyle: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 12.0)),
+                                            ),
+                                            SizedBox(
+                                              height: ScreenUtil.getInstance()
+                                                  .setHeight(30),
+                                            ),
+                                            Container(
+                                              height: 40,
+                                              alignment: Alignment.centerRight,
+                                              // ignore: deprecated_member_use
+                                              child: FlatButton(
+                                                child: Text(
+                                                  "Recuperar Senha",
+                                                  textAlign: TextAlign.right,
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          ResetPassword(),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                     padding: EdgeInsets.all(10),
                                   ),
                                 ],
@@ -216,21 +418,53 @@ class _MyAppState extends State<MyApp> {
                             child: InkWell(
                               onTap: () async {
                                 if (_tela == 0) {
-                                  //await VerificaLogin("teste", "teste");
-                                  /*Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => MenuPagePaciente(),
-                                    ),
-                                  );*/
+                                  print(_controllerEmailPaciente.text);
+                                  print(_controllerSenhaPaciente.text);
+                                  final json =
+                                      await ServicesLogin.getLoginPaciente(
+                                          _controllerEmailPaciente.text,
+                                          _controllerSenhaPaciente.text);
+                                  if (json['verifica'] == true) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MenuPagePaciente(
+                                            _controllerEmailPaciente.text,
+                                            _controllerSenhaPaciente.text),
+                                      ),
+                                    );
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                            content: const Text(
+                                                'Erro ao realizar login, verifique os dados!')));
+                                  }
                                 }
+
                                 if (_tela == 1) {
-                                  /*Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => MenuPageMedico(),
-                                    ),
-                                  );*/
+                                  print(_controllerEmailMedico.text);
+                                  print(_controllerSenhaMedico.text);
+                                  final json =
+                                      await ServicesLogin.getLoginMedico(
+                                          _controllerEmailMedico.text,
+                                          _controllerSenhaMedico.text);
+                                  print(json.verifica);
+
+                                  if (json.verifica == true) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MenuPageMedico(
+                                            _controllerEmailMedico.text,
+                                            _controllerSenhaMedico.text),
+                                      ),
+                                    );
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                            content: const Text(
+                                                'Erro ao realizar login, verifique os dados!')));
+                                  }
                                 }
                               },
                               child: Center(

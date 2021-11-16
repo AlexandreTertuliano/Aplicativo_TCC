@@ -13,6 +13,8 @@ class _FormCard_PacienteState extends State<FormCard_Paciente> {
 
   static TextEditingController _controllerEmail = TextEditingController();
 
+  String senha = _controllerSenha.text;
+
   @override
   Widget build(BuildContext context) {
     return new Container(

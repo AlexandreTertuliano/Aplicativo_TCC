@@ -11,7 +11,7 @@ class PageAgendaMedico extends StatefulWidget {
 
 class _PageAgendaMedicoState extends State<PageAgendaMedico> {
   CalendarController _controller;
-  
+
   int _page = 0;
   bool _checkbox1 = false;
   bool _checkbox2 = false;
@@ -152,57 +152,56 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
             ),
           ],
         ),
-        
       ),
       bottomNavigationBar: CurvedNavigationBar(
-          color: Colors.lightBlue[300],
-          backgroundColor: Colors.white,
-          items: <Widget>[
-            Icon(
-              Icons.keyboard_return,
-              size: 30,
-              color: Colors.white,
-            ),
-            Icon(Icons.save, size: 30, color: Colors.white),
-          ],
-          onTap: (index) {
-            setState(() {
-              _page = index;
-              if (index == 0) {
-                Navigator.pop(context);
-              } else if (index == 1) {
-                 showDialog<void>(
-                            context: context,
-                            barrierDismissible: false, // user must tap button!
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text('Horários adicionados com sucesso ✔'),
-                                content: SingleChildScrollView(
-                                  child: ListBody(
-                                    children: const <Widget>[
-                                      Text('Sua agenda foi atualizada!'),
-                                    ],
-                                  ),
-                                ),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: const Text('OK'),
-                                    onPressed: () {
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  MenuPageMedico()));
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-              }
-            });
-          },
-        ),
+        color: Colors.lightBlue[300],
+        backgroundColor: Colors.white,
+        items: <Widget>[
+          Icon(
+            Icons.keyboard_return,
+            size: 30,
+            color: Colors.white,
+          ),
+          Icon(Icons.save, size: 30, color: Colors.white),
+        ],
+        onTap: (index) {
+          setState(() {
+            _page = index;
+            if (index == 0) {
+              Navigator.pop(context);
+            } else if (index == 1) {
+              showDialog<void>(
+                context: context,
+                barrierDismissible: false, // user must tap button!
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Horários adicionados com sucesso ✔'),
+                    content: SingleChildScrollView(
+                      child: ListBody(
+                        children: const <Widget>[
+                          Text('Sua agenda foi atualizada!'),
+                        ],
+                      ),
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text('OK'),
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      MenuPageMedico("email", "senha")));
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
+          });
+        },
+      ),
     );
   }
 }

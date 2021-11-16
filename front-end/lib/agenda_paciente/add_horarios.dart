@@ -183,7 +183,7 @@ class _AddHorario extends State<AddHorario> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  MenuPagePaciente()));
+                                                  MenuPagePaciente("email","senha")));
                                     },
                                   ),
                                 ],
@@ -219,7 +219,7 @@ class _AddHorario extends State<AddHorario> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => MenuPagePaciente()));
+                        builder: (context) => MenuPagePaciente("email","senha")));
               }
             });
           },

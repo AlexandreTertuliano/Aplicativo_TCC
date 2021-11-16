@@ -96,7 +96,7 @@ class _PagePesquisarMedicoState extends State<PagePesquisarMedico> {
               Navigator.pop(context);
             } else if (index == 1) {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => MenuPagePaciente()));
+                  MaterialPageRoute(builder: (context) => MenuPagePaciente("email","senha")));
             }
           });
         },

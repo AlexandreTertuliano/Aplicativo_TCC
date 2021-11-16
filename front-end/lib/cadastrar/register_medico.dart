@@ -386,7 +386,7 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
               child: const Text('Entrar'),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MenuPageMedico()));
+                    MaterialPageRoute(builder: (context) => MenuPageMedico("email","senha")));
               },
             ),
           ],

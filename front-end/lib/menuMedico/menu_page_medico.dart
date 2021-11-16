@@ -3,11 +3,36 @@ import 'package:MedAgenda/Clinicas/page_clinica.dart';
 import 'package:MedAgenda/agenda_medico/page_agenda.dart';
 import 'package:MedAgenda/formularios_cadastro/add_meus_dados_medicos.dart';
 import 'package:MedAgenda/main.dart';
+import 'package:MedAgenda/services/login/services_login.dart';
 import 'package:flutter/material.dart';
 
 import 'home_icon_buttoms.dart';
 
-class MenuPageMedico extends StatelessWidget {
+class MenuPageMedico extends StatefulWidget {
+  String email, senha;
+  MenuPageMedico(this.email, this.senha);
+
+  @override
+  State<MenuPageMedico> createState() => _MenuPageMedicoState();
+}
+
+class _MenuPageMedicoState extends State<MenuPageMedico> {
+  String nomeMedico;
+  @override
+  void initState() {
+    super.initState();
+    pegaNomeMedico();
+  }
+
+  Future<void> pegaNomeMedico() async {
+    final jsonMedico =
+        await ServicesLogin.getLoginMedico(widget.email, widget.senha);
+    nomeMedico = jsonMedico.medico.nameMedico;
+    setState(() {
+      return nomeMedico;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +78,7 @@ class MenuPageMedico extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        'Olá Dr.(a), seja bem vindo! ',
+                        'Bem vindo, Drº ' + nomeMedico.toString() + '.',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                       Padding(
@@ -74,7 +99,7 @@ class MenuPageMedico extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                DadosMedicos()));
+                                                DadosMedicos(widget.email,widget.senha)));
                                   },
                                 ),
                                 GestureDetector(
@@ -143,12 +168,11 @@ class MenuPageMedico extends StatelessWidget {
                                     color: Color(0xFF008080),
                                   ),
                                   //onTap: () => exit(0),
-                                  onTap: (){
+                                  onTap: () {
                                     Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  MyApp()));
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => MyApp()));
                                   },
                                 )
                               ],
