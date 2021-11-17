@@ -19,8 +19,6 @@ class MenuPagePaciente extends StatefulWidget {
 }
 
 class _MenuPagePacienteState extends State<MenuPagePaciente> {
- 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,8 +84,8 @@ class _MenuPagePacienteState extends State<MenuPagePaciente> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                DadosPessoais()));
+                                            builder: (context) => DadosPessoais(
+                                                widget.email, widget.senha)));
                                   },
                                 ),
                                 GestureDetector(

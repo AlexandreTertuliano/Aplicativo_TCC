@@ -1,52 +1,106 @@
+import 'package:MedAgenda/services/login/services_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DadosPessoais extends StatefulWidget {
-  DadosPessoais({Key key}) : super(key: key);
+  String email, senha;
+  DadosPessoais(this.email, this.senha);
 
   @override
   _DadosPessoaisState createState() => _DadosPessoaisState();
 }
 
 class _DadosPessoaisState extends State<DadosPessoais> {
-  // ignore: non_constant_identifier_names
   String _value_Nome;
-  // ignore: non_constant_identifier_names
+
   String _value_Cpf;
-  // ignore: non_constant_identifier_names
+
   String _value_Data_Aniversario;
-  // ignore: non_constant_identifier_names
+
   String _value_Telefone;
-  // ignore: non_constant_identifier_names
+
   String _value_Cidade;
-  // ignore: non_constant_identifier_names
+
   String _value_Tipo_Sangue;
-  // ignore: non_constant_identifier_names
+
   String _value_Genero;
-  // ignore: non_constant_identifier_names
+
   String _value_Doador;
 
-  // ignore: non_constant_identifier_names
   String _value_Idade;
 
-  // ignore: non_constant_identifier_names
   String _value_peso;
 
-  // ignore: non_constant_identifier_names
   String _value_altura;
 
-  // ignore: non_constant_identifier_names
   String _value_estado;
 
-  // ignore: non_constant_identifier_names
   String _value_bairro;
 
-  // ignore: non_constant_identifier_names
   String _value_rua;
 
-  // ignore: non_constant_identifier_names
   String _value_numero;
+
+  /*--------------------------------------------------------------------------------------------------*/
+
+  String nome;
+
+  String cpf;
+
+  String data_Aniversario;
+
+  String telefone;
+
+  String cidade;
+
+  String tipo_Sangue;
+
+  String genero;
+
+  String doador;
+
+  String idade;
+
+  String peso;
+
+  String altura;
+
+  String estado;
+
+  String bairro;
+
+  String rua;
+
+  String numero;
+
+  @override
+  void initState() {
+    super.initState();
+    pegaNomeMedico();
+  }
+
+  Future<void> pegaNomeMedico() async {
+    final jsonPaciente =
+        await ServicesLogin.getLoginPaciente(widget.email, widget.senha);
+
+    setState(() {
+      return {
+        nome = jsonPaciente.paciente.namePaciente,
+        cpf = jsonPaciente.paciente.namePaciente,
+        data_Aniversario = jsonPaciente.paciente.dnPaciente,
+        telefone = jsonPaciente.paciente.telefonePaciente,
+        cidade = jsonPaciente.paciente.cidadePaciente,
+        tipo_Sangue = jsonPaciente.paciente.tipoSanguePaciente,
+        genero = jsonPaciente.paciente.generoPaciente,
+        doador = jsonPaciente.paciente.doadorPaciente,
+        peso = jsonPaciente.paciente.pesoPaciente,
+        altura = jsonPaciente.paciente.alturaPaciente,
+        bairro = jsonPaciente.paciente.bairroPaciente,
+        rua = jsonPaciente.paciente.ruaPaciente,
+      };
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,9 +154,9 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                               fontSize: ScreenUtil.getInstance().setSp(26))),
                       TextField(
                         decoration: InputDecoration(
-                            hintText: "Ex : Nome Completo",
-                            hintStyle:
-                                TextStyle(color: Colors.brown, fontSize: 12.0)),
+                            hintText: nome,
+                            hintStyle: TextStyle(
+                                color: Colors.orange[700], fontSize: 15.0)),
                         onChanged: (String value) {
                           setState(() {
                             _value_Nome = value;
@@ -122,10 +176,9 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                             FilteringTextInputFormatter.allow(RegExp('[1-9]')),
                           ],
                           decoration: InputDecoration(
-                              hintText:
-                                  "Suas informações estão em um banco de Dados seguro.",
+                              hintText: cpf,
                               hintStyle: TextStyle(
-                                  color: Colors.brown, fontSize: 12.0)),
+                                  color: Colors.orange[700], fontSize: 15.0)),
                           onChanged: (String value) {
                             setState(() {
                               _value_Cpf = value;
@@ -140,9 +193,9 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                               fontSize: ScreenUtil.getInstance().setSp(26))),
                       TextField(
                           decoration: InputDecoration(
-                              hintText: "Ex : ??/??/????",
+                              hintText: data_Aniversario,
                               hintStyle: TextStyle(
-                                  color: Colors.brown, fontSize: 12.0)),
+                                  color: Colors.orange[700], fontSize: 15.0)),
                           onChanged: (String value) {
                             setState(() {
                               _value_Data_Aniversario = value;
@@ -159,7 +212,7 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                           decoration: InputDecoration(
                               hintText: "Ex :  00",
                               hintStyle: TextStyle(
-                                  color: Colors.brown, fontSize: 12.0)),
+                                  color: Colors.orange[700], fontSize: 15.0)),
                           onChanged: (String value) {
                             setState(() {
                               _value_Idade = value;
@@ -171,9 +224,9 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                               fontSize: ScreenUtil.getInstance().setSp(26))),
                       TextField(
                           decoration: InputDecoration(
-                              hintText: "Ex : (xx)xxxxx-xxxx",
+                              hintText: telefone,
                               hintStyle: TextStyle(
-                                  color: Colors.brown, fontSize: 12.0)),
+                                  color: Colors.orange[700], fontSize: 15.0)),
                           onChanged: (String value) {
                             setState(() {
                               _value_Telefone = value;
@@ -185,9 +238,9 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                               fontSize: ScreenUtil.getInstance().setSp(26))),
                       TextField(
                           decoration: InputDecoration(
-                              hintText: "Ex :  Feminino",
+                              hintText: genero,
                               hintStyle: TextStyle(
-                                  color: Colors.brown, fontSize: 12.0)),
+                                  color: Colors.orange[700], fontSize: 15.0)),
                           onChanged: (String value) {
                             setState(() {
                               _value_Tipo_Sangue = value;
@@ -199,9 +252,9 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                               fontSize: ScreenUtil.getInstance().setSp(26))),
                       TextField(
                           decoration: InputDecoration(
-                              hintText: "Ex : 50 ",
+                              hintText: peso,
                               hintStyle: TextStyle(
-                                  color: Colors.brown, fontSize: 12.0)),
+                                  color: Colors.orange[700], fontSize: 15.0)),
                           onChanged: (String value) {
                             setState(() {
                               _value_peso = value;
@@ -213,9 +266,9 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                               fontSize: ScreenUtil.getInstance().setSp(26))),
                       TextField(
                           decoration: InputDecoration(
-                              hintText: "Ex : 1,78",
+                              hintText: altura,
                               hintStyle: TextStyle(
-                                  color: Colors.brown, fontSize: 12.0)),
+                                  color: Colors.orange[700], fontSize: 15.0)),
                           onChanged: (String value) {
                             setState(() {
                               _value_altura = value;
@@ -227,9 +280,9 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                               fontSize: ScreenUtil.getInstance().setSp(26))),
                       TextField(
                           decoration: InputDecoration(
-                              hintText: "Ex :  A+",
+                              hintText: tipo_Sangue,
                               hintStyle: TextStyle(
-                                  color: Colors.brown, fontSize: 12.0)),
+                                  color: Colors.orange[700], fontSize: 15.0)),
                           onChanged: (String value) {
                             setState(() {
                               _value_Tipo_Sangue = value;
@@ -254,7 +307,7 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                           decoration: InputDecoration(
                               hintText: "Ex : 00000-000",
                               hintStyle: TextStyle(
-                                  color: Colors.brown, fontSize: 12.0)),
+                                  color: Colors.orange[700], fontSize: 15.0)),
                           onChanged: (String value) {
                             setState(() {
                               _value_Cidade = value;
@@ -266,9 +319,9 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                               fontSize: ScreenUtil.getInstance().setSp(26))),
                       TextField(
                           decoration: InputDecoration(
-                              hintText: "Ex : Pouso Alegre",
+                              hintText: cidade,
                               hintStyle: TextStyle(
-                                  color: Colors.brown, fontSize: 12.0)),
+                                  color: Colors.orange[700], fontSize: 15.0)),
                           onChanged: (String value) {
                             setState(() {
                               _value_Cidade = value;
@@ -280,9 +333,9 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                               fontSize: ScreenUtil.getInstance().setSp(26))),
                       TextField(
                           decoration: InputDecoration(
-                              hintText: "Ex : Minas Gerais",
+                              hintText: estado,
                               hintStyle: TextStyle(
-                                  color: Colors.brown, fontSize: 12.0)),
+                                  color: Colors.orange[700], fontSize: 15.0)),
                           onChanged: (String value) {
                             setState(() {
                               _value_estado = value;
@@ -294,9 +347,9 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                               fontSize: ScreenUtil.getInstance().setSp(26))),
                       TextField(
                           decoration: InputDecoration(
-                              hintText: "Ex : Centro",
+                              hintText: bairro,
                               hintStyle: TextStyle(
-                                  color: Colors.brown, fontSize: 12.0)),
+                                  color: Colors.orange[700], fontSize: 15.0)),
                           onChanged: (String value) {
                             setState(() {
                               _value_bairro = value;
@@ -308,9 +361,9 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                               fontSize: ScreenUtil.getInstance().setSp(26))),
                       TextField(
                           decoration: InputDecoration(
-                              hintText: "Ex : xxxxxxxxx",
+                              hintText: rua,
                               hintStyle: TextStyle(
-                                  color: Colors.brown, fontSize: 12.0)),
+                                  color: Colors.orange[700], fontSize: 15.0)),
                           onChanged: (String value) {
                             setState(() {
                               _value_rua = value;
@@ -322,9 +375,9 @@ class _DadosPessoaisState extends State<DadosPessoais> {
                               fontSize: ScreenUtil.getInstance().setSp(26))),
                       TextField(
                           decoration: InputDecoration(
-                              hintText: "Ex : XX",
+                              hintText: numero,
                               hintStyle: TextStyle(
-                                  color: Colors.brown, fontSize: 12.0)),
+                                  color: Colors.orange[700], fontSize: 15.0)),
                           onChanged: (String value) {
                             setState(() {
                               _value_numero = value;

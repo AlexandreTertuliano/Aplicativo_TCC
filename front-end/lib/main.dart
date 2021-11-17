@@ -1,5 +1,4 @@
 import 'package:MedAgenda/ResetPassword/reset_password.dart';
-import 'package:MedAgenda/Widgets/FormCard_Medicos.dart';
 import 'package:MedAgenda/Splash/Splash.dart';
 import 'package:MedAgenda/cadastrar/cadastrar_page.dart';
 import 'package:MedAgenda/menuMedico/menu_page_medico.dart';
@@ -8,10 +7,7 @@ import 'package:MedAgenda/services/login/services_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'dart:ui';
-
-import 'Widgets/FormCard_Pacientes.dart';
 import 'menuPaciente/menu_page_paciente.dart';
 import 'services/login/class_login_medico.dart';
 
@@ -33,14 +29,6 @@ class _MyAppState extends State<MyApp> {
       _isSelected = !_isSelected;
     });
   }
-
-  List<LoginPaciente> loginPaciente = List<LoginPaciente>();
-  // ignore: deprecated_member_use
-  List<LoginPaciente> _loginPaciente = List<LoginPaciente>();
-
-  List<LoginMedico> loginMedico = List<LoginMedico>();
-  // ignore: deprecated_member_use
-  List<LoginMedico> _loginMedico = List<LoginMedico>();
 
   TextEditingController _controllerSenhaPaciente = TextEditingController();
 
@@ -424,7 +412,7 @@ class _MyAppState extends State<MyApp> {
                                       await ServicesLogin.getLoginPaciente(
                                           _controllerEmailPaciente.text,
                                           _controllerSenhaPaciente.text);
-                                  if (json['verifica'] == true) {
+                                  if (json.verifica = true) {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
