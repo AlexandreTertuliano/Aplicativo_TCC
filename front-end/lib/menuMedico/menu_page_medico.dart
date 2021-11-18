@@ -98,8 +98,8 @@ class _MenuPageMedicoState extends State<MenuPageMedico> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                DadosMedicos(widget.email,widget.senha)));
+                                            builder: (context) => DadosMedicos(
+                                                widget.email, widget.senha)));
                                   },
                                 ),
                                 GestureDetector(
@@ -113,7 +113,8 @@ class _MenuPageMedicoState extends State<MenuPageMedico> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                PageAgendaMedico()));
+                                                PageAgendaMedico(widget.email,
+                                                    widget.senha)));
                                   },
                                 )
                               ],

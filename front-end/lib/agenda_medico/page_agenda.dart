@@ -1,16 +1,23 @@
 import 'package:MedAgenda/menuMedico/menu_page_medico.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'dart:ui';
 
 class PageAgendaMedico extends StatefulWidget {
+  String email, senha;
+
+  PageAgendaMedico(this.email, this.senha);
   @override
   _PageAgendaMedicoState createState() => _PageAgendaMedicoState();
 }
 
 class _PageAgendaMedicoState extends State<PageAgendaMedico> {
   CalendarController _controller;
+  String _date = "Não informado";
+  String _time = "Não informado";
 
   int _page = 0;
   bool _checkbox1 = false;
@@ -44,112 +51,146 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            TableCalendar(
-              initialCalendarFormat: CalendarFormat.month,
-              calendarStyle: CalendarStyle(
-                  todayColor: Colors.blue,
-                  selectedColor: Theme.of(context).primaryColor,
-                  todayStyle: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22.0,
-                      color: Colors.white)),
-              headerStyle: HeaderStyle(
-                centerHeaderTitle: true,
-                formatButtonDecoration: BoxDecoration(
-                  color: Colors.orange,
-                  borderRadius: BorderRadius.circular(22.0),
-                ),
-                formatButtonTextStyle: TextStyle(color: Colors.white),
-                formatButtonShowsNext: false,
+            Container(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    height: 20,
+                  ),
+                  RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0)),
+                    elevation: 4.0,
+                    onPressed: () {
+                      DatePicker.showDatePicker(context,
+                          theme: DatePickerTheme(
+                            containerHeight: 210.0,
+                          ),
+                          showTitleActions: true,
+                          minTime: DateTime(2000, 1, 1),
+                          maxTime: DateTime(2022, 12, 31), onConfirm: (date) {
+                        print('$date');
+                        _date = '${date.year} - ${date.month} - ${date.day}';
+                        setState(() {});
+                      }, currentTime: DateTime.now(), locale: LocaleType.en);
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 50.0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Container(
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.date_range,
+                                      size: 18.0,
+                                      color: Colors.teal,
+                                    ),
+                                    Text(
+                                      " $_date",
+                                      style: TextStyle(
+                                          color: Colors.teal,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18.0),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          Text(
+                            "  Selecionar",
+                            style: TextStyle(
+                                color: Colors.teal,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0),
+                          ),
+                        ],
+                      ),
+                    ),
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0)),
+                    elevation: 4.0,
+                    onPressed: () {
+                      DatePicker.showTimePicker(context,
+                          theme: DatePickerTheme(
+                            containerHeight: 210.0,
+                          ),
+                          showTitleActions: true, onConfirm: (time) {
+                        print('$time');
+                        _time =
+                            '${time.hour} : ${time.minute} : ${time.second}';
+                        setState(() {});
+                      }, currentTime: DateTime.now(), locale: LocaleType.en);
+                      setState(() {});
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 50.0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Container(
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.access_time,
+                                      size: 18.0,
+                                      color: Colors.teal,
+                                    ),
+                                    Text(
+                                      " $_time",
+                                      style: TextStyle(
+                                          color: Colors.teal,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18.0),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          Text(
+                            "  Selecionar",
+                            style: TextStyle(
+                                color: Colors.teal,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0),
+                          ),
+                        ],
+                      ),
+                    ),
+                    color: Colors.white,
+                  )
+                ],
               ),
-              startingDayOfWeek: StartingDayOfWeek.monday,
-              onDaySelected: (date, events, e) {
-                print(date.toUtc());
-              },
-              builders: CalendarBuilders(
-                selectedDayBuilder: (context, date, events) => Container(
-                    margin: const EdgeInsets.all(5.0),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(8.0)),
-                    child: Text(
-                      date.day.toString(),
-                      style: TextStyle(color: Colors.white),
-                    )),
-                todayDayBuilder: (context, date, events) => Container(
-                    margin: const EdgeInsets.all(5.0),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(8.0)),
-                    child: Text(
-                      date.day.toString(),
-                      style: TextStyle(color: Colors.white),
-                    )),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Center(
+              child: RaisedButton(
+                color: Colors.lightBlue[200],
+                disabledColor: Colors.green,
+                disabledTextColor: Colors.blue,
+                onPressed: () {},
+                child: Text('ADICIONAR HORÁRIO'),
               ),
-              calendarController: _controller,
-            ),
-            CheckboxListTile(
-              controlAffinity: ListTileControlAffinity.leading,
-              title: Text('08:00 AM'),
-              value: _checkbox1,
-              onChanged: (value) {
-                setState(() {
-                  _checkbox1 = !_checkbox1;
-                });
-              },
-            ),
-            CheckboxListTile(
-              controlAffinity: ListTileControlAffinity.leading,
-              title: Text('09:00 AM'),
-              value: _checkbox2,
-              onChanged: (value) {
-                setState(() {
-                  _checkbox2 = !_checkbox2;
-                });
-              },
-            ),
-            CheckboxListTile(
-              controlAffinity: ListTileControlAffinity.leading,
-              title: Text('10:00 AM'),
-              value: _checkbox3,
-              onChanged: (value) {
-                setState(() {
-                  _checkbox3 = !_checkbox3;
-                });
-              },
-            ),
-            CheckboxListTile(
-              controlAffinity: ListTileControlAffinity.leading,
-              title: Text('11:00 AM'),
-              value: _checkbox4,
-              onChanged: (value) {
-                setState(() {
-                  _checkbox4 = !_checkbox4;
-                });
-              },
-            ),
-            CheckboxListTile(
-              controlAffinity: ListTileControlAffinity.leading,
-              title: Text('14:00 AM'),
-              value: _checkbox5,
-              onChanged: (value) {
-                setState(() {
-                  _checkbox5 = !_checkbox5;
-                });
-              },
-            ),
-            CheckboxListTile(
-              controlAffinity: ListTileControlAffinity.leading,
-              title: Text('15:00 AM'),
-              value: _checkbox6,
-              onChanged: (value) {
-                setState(() {
-                  _checkbox6 = !_checkbox6;
-                });
-              },
-            ),
+            )
           ],
         ),
       ),
@@ -162,7 +203,7 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
             size: 30,
             color: Colors.white,
           ),
-          Icon(Icons.save, size: 30, color: Colors.white),
+          Icon(Icons.import_contacts, size: 30, color: Colors.white),
         ],
         onTap: (index) {
           setState(() {
@@ -190,8 +231,8 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      MenuPageMedico("email", "senha")));
+                                  builder: (context) => MenuPageMedico(
+                                      widget.email, widget.senha)));
                         },
                       ),
                     ],
