@@ -2,14 +2,12 @@ import 'package:MedAgenda/ResetPassword/reset_password.dart';
 import 'package:MedAgenda/Splash/Splash.dart';
 import 'package:MedAgenda/cadastrar/cadastrar_page.dart';
 import 'package:MedAgenda/menuMedico/menu_page_medico.dart';
-import 'package:MedAgenda/services/login/class_login_paciente.dart';
 import 'package:MedAgenda/services/login/services_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:ui';
 import 'menuPaciente/menu_page_paciente.dart';
-import 'services/login/class_login_medico.dart';
 
 void main() => runApp(MaterialApp(
       home: Splash(),

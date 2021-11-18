@@ -18,6 +18,7 @@ class MenuPageMedico extends StatefulWidget {
 
 class _MenuPageMedicoState extends State<MenuPageMedico> {
   String nomeMedico;
+  int idMedico;
   @override
   void initState() {
     super.initState();
@@ -27,9 +28,10 @@ class _MenuPageMedicoState extends State<MenuPageMedico> {
   Future<void> pegaNomeMedico() async {
     final jsonMedico =
         await ServicesLogin.getLoginMedico(widget.email, widget.senha);
-    nomeMedico = jsonMedico.medico.nameMedico;
+
     setState(() {
-      return nomeMedico;
+      nomeMedico = jsonMedico.medico.nameMedico;
+      idMedico = jsonMedico.medico.id;
     });
   }
 
@@ -98,8 +100,8 @@ class _MenuPageMedicoState extends State<MenuPageMedico> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                DadosMedicos(widget.email,widget.senha)));
+                                            builder: (context) => DadosMedicos(
+                                                widget.email, widget.senha)));
                                   },
                                 ),
                                 GestureDetector(
@@ -113,7 +115,8 @@ class _MenuPageMedicoState extends State<MenuPageMedico> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                PageAgendaMedico()));
+                                                PageAgendaMedico(widget.email,
+                                                    widget.senha, idMedico)));
                                   },
                                 )
                               ],

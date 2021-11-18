@@ -176,10 +176,12 @@ class _CadastrarClinica extends State<CadastrarClinica> {
       nameClinica: _controllerName.text,
       cnpjClinica: _controllerCnpj.text,
       cepClinica: _controllerCep.text,
+      estadoClinica: _controllerEstado.text,
       telefoneClinica: _controllerTelefone.text,
       cidadeClinica: _controllerCidade.text,
       bairroClinica: _controllerBairro.text,
       ruaClinica: _controllerRua.text,
+      numeroClinica: _controllerNumero.text,
     );
     if (widget.clinica == null) {
       ServicesClinica.createClinica(clinica).then((isSuccess) async {

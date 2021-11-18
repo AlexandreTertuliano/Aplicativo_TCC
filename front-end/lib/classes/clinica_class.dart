@@ -9,6 +9,8 @@ class Clinica {
   String cidadeClinica;
   String bairroClinica;
   String ruaClinica;
+  String estadoClinica;
+  String numeroClinica;
 
   Clinica({
     this.id,
@@ -19,6 +21,8 @@ class Clinica {
     this.cidadeClinica,
     this.bairroClinica,
     this.ruaClinica,
+    this.estadoClinica,
+    this.numeroClinica,
   });
 
   Clinica.fromJson(Map<String, dynamic> json) {
@@ -30,6 +34,8 @@ class Clinica {
     cidadeClinica = json['cidadeClinica'];
     bairroClinica = json['bairroClinica'];
     ruaClinica = json['ruaClinica'];
+    estadoClinica = json['estadoClinica'];
+    numeroClinica = json['numeroClinica'];
   }
 
   Map<String, dynamic> toJson() {
@@ -42,6 +48,8 @@ class Clinica {
     data['cidadeClinica'] = this.cidadeClinica;
     data['bairroClinica'] = this.bairroClinica;
     data['ruaClinica'] = this.ruaClinica;
+    data['estadoClinica'] = this.estadoClinica;
+    data['numeroClinica'] = this.numeroClinica;
 
     return data;
   }

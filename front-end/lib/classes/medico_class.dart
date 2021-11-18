@@ -24,7 +24,8 @@ class Doutor {
       String anoFormacaoMedico,
       String cidadeFormacaoMedico,
       String universidadeFormacaoMedico,
-      String crmMedico});
+      String crmMedico,
+      DateTime dnMedico});
 
   Doutor.fromJson(Map<String, dynamic> json) {
     medico =

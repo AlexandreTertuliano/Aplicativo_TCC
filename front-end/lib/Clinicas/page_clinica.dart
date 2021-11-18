@@ -38,6 +38,16 @@ class _PageClinicaState extends State<PageClinica> {
     });
   }
 
+  Future<void> _deleteClinica(int id) async {
+    return ServicesClinica.deleteClinica(id).then((list) {
+      setState(() {
+        clinica = list as List<Clinica>;
+        _clinicaDisplay = clinica;
+        loading = false;
+      });
+    });
+  }
+
   Future<void> _refreshPosts(BuildContext context) async {
     return ServicesClinica.getClinica().then((list) {
       setState(() {
@@ -145,7 +155,7 @@ class _PageClinicaState extends State<PageClinica> {
             color: Colors.red,
             icon: Icons.delete,
             onTap: () {
-              print("1");
+              _deleteClinica(_clinicaDisplay[index].id);
             }),
         IconSlideAction(
             caption: 'Editar',

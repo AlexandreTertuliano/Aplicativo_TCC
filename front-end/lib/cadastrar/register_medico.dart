@@ -330,7 +330,7 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
     Doutor medico = Doutor(
       nameMedico: _controllerNomeCompleto.text,
       cpfMedico: _controllerCpf.text,
-      //dnMedico: _selectedDateTime,
+      dnMedico: _selectedDateTime,
       telefoneMedico: _controllerTelefone.text,
       cepMedico: _controllerCEP.text,
       cidadeMedico: _controllerCidade.text,

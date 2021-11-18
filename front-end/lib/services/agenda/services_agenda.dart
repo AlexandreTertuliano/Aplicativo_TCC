@@ -1,20 +1,12 @@
-import 'package:MedAgenda/classes/paciente_class.dart';
+import 'dart:convert';
+
+import 'package:MedAgenda/classes/agenda_class.dart';
 import 'package:http/http.dart' as http;
 
-class ServicesPaciente {
-  static Future<List<Paciente>> getPaciente() async {
-    final response = await http
-        .get(Uri.parse("http://senai.cck.com.br/paciente"));
-    if (response.statusCode == 200) {
-      return postFromJson(response.body);
-    } else {
-      return null;
-    }
-  }
-
-  static Future<List<Paciente>> getPegaPaciente(int id) async {
+class ServicesAgenda {
+  static Future<List<Agenda>> getTodasAgenda() async {
     final response =
-        await http.get(Uri.parse("http://senai.cck.com.br/$id"));
+        await http.get(Uri.parse("http://senai.cck.com.br/Agenda"));
     if (response.statusCode == 200) {
       return postFromJson(response.body);
     } else {
@@ -22,9 +14,19 @@ class ServicesPaciente {
     }
   }
 
-  static Future<bool> createPaciente(Paciente data) async {
+  static Future<List<Agenda>> getPegaAgendaEspecifica(int id) async {
+    final response = await http
+        .get(Uri.parse("http://senai.cck.com.br/Agenda/$id"));
+    if (response.statusCode == 200) {
+      return postFromJson(response.body);
+    } else {
+      return null;
+    }
+  }
+
+  static Future<bool> createAgenda(Agenda data) async {
     final response = await http.post(
-      Uri.parse("http://senai.cck.com.br/paciente"),
+      Uri.parse("http://senai.cck.com.br/Agenda"),
       headers: {"content-type": "application/json"},
       body: postToJson(data),
     );
@@ -35,9 +37,9 @@ class ServicesPaciente {
     }
   }
 
-  static Future<bool> updatePaciente(int id, Paciente data) async {
+  static Future<bool> updateAgenda(int id, Agenda data) async {
     final response = await http.put(
-      Uri.parse("http://senai.cck.com.br/paciente/$id"),
+      Uri.parse("http://senai.cck.com.br/Agenda/$id"),
       headers: {"content-type": "application/json"},
       body: postToJson(data),
     );
@@ -48,9 +50,9 @@ class ServicesPaciente {
     }
   }
 
-  static Future<bool> deletePaciente(int id) async {
+  static Future<bool> deleteAgenda(int id) async {
     final response = await http.delete(
-      Uri.parse("http://senai.cck.com.br/paciente/$id"),
+      Uri.parse("http://senai.cck.com.br/Agenda/$id"),
       headers: {"content-type": "application/json"},
     );
     if (response.statusCode == 200) {
