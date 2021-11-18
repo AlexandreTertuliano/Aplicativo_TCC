@@ -2,9 +2,9 @@ import 'dart:convert';
 
 class LoginMedico {
   bool verifica;
-  Null paciente;
+  String paciente;
   Medico medico;
-  Null mensagem;
+  String mensagem;
 
   LoginMedico({this.verifica, this.paciente, this.medico, this.mensagem});
 
@@ -31,25 +31,25 @@ class LoginMedico {
 class Medico {
   int id;
   String nameMedico;
-  Null cpfMedico;
-  Null dnMedico;
-  Null cidadeMedico;
-  Null bairroMedico;
-  Null ruaMedico;
-  Null numeroMedico;
-  Null idadeMedico;
-  Null especializacao1Medico;
-  Null especializacao2Medico;
-  Null especializacao3Medico;
-  Null generoMedico;
+  String cpfMedico;
+  String dnMedico;
+  String cidadeMedico;
+  String bairroMedico;
+  String ruaMedico;
+  String numeroMedico;
+  String idadeMedico;
+  String especializacao1Medico;
+  String especializacao2Medico;
+  String especializacao3Medico;
+  String generoMedico;
   String emailMedico;
   String senhaMedico;
-  Null anoFormacaoMedico;
-  Null cidadeFormacaoMedico;
-  Null universidadeFormacaoMedico;
+  String anoFormacaoMedico;
+  String cidadeFormacaoMedico;
+  String universidadeFormacaoMedico;
   String crmMedico;
   String telefoneMedico;
-  Null cepMedico;
+  String cepMedico;
   Clinica clinica;
   Carteira carteira;
   int valorConsulta;

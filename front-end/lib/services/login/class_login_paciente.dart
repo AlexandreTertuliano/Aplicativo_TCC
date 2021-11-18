@@ -3,7 +3,7 @@ import 'dart:convert';
 class LoginPaciente {
   bool verifica;
   Paciente paciente;
-  Null medico;
+  String medico;
   String mensagem;
 
   LoginPaciente({this.verifica, this.paciente, this.medico, this.mensagem});
@@ -43,9 +43,9 @@ class Paciente {
   String doadorPaciente;
   String emailPaciente;
   String senhaPaciente;
-  Null pesoPaciente;
-  Null alturaPaciente;
-  Null cepPaciente;
+  String pesoPaciente;
+  String alturaPaciente;
+  String cepPaciente;
   Carteira carteira;
 
   Paciente(

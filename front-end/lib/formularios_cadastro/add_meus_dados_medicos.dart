@@ -1,4 +1,5 @@
 import 'package:MedAgenda/services/login/services_login.dart';
+import 'package:MedAgenda/widgets/button_animation_medico.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -139,6 +140,11 @@ class _DadosMedicosState extends State<DadosMedicos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Informações Pessoais"),
+        automaticallyImplyLeading: true,
+        backgroundColor: Colors.lightBlue,
+      ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
           padding: EdgeInsets.only(
@@ -174,14 +180,6 @@ class _DadosMedicosState extends State<DadosMedicos> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Informações Pessoais ",
-                          style: TextStyle(
-                              fontSize: ScreenUtil.getInstance().setSp(40),
-                              fontFamily: "Poppins-Bold",
-                              letterSpacing: .6)),
-                      SizedBox(
-                        height: ScreenUtil.getInstance().setHeight(30),
-                      ),
                       Text("Nome Completo : ",
                           style: TextStyle(
                               fontFamily: "Poppins-Medium",
@@ -510,50 +508,9 @@ class _DadosMedicosState extends State<DadosMedicos> {
                       SizedBox(
                         height: ScreenUtil.getInstance().setHeight(30),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          height: 60,
-                          alignment: Alignment.centerLeft,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              stops: [0.3, 1],
-                              colors: [
-                                Color(0xFF17ead9),
-                                Color(0xFF6078ea),
-                              ],
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(50),
-                            ),
-                          ),
-                          child: SizedBox.expand(
-                            // ignore: deprecated_member_use
-                            child: FlatButton(
-                              child: Text(
-                                "Salvar Alteração",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              onPressed: () {
-                                print(_value_Nome);
-                                print(_value_Cpf);
-                                print(_value_Data_Aniversario);
-                                print(_value_Telefone);
-                                print(_value_Cidade);
-                                print(_value_Tipo_Sangue);
-                                print(_value_Genero);
-                                print(_value_Doador);
-                              },
-                            ),
-                          ),
-                        ),
+                      Center(
+                        child: ButtonAnimation(Color.fromRGBO(0, 191, 255, 1),
+                            Color.fromRGBO(0, 191, 255, 1)),
                       ),
                       SizedBox(
                         height: ScreenUtil.getInstance().setHeight(80),

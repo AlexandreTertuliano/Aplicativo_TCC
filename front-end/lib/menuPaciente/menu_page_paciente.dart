@@ -19,6 +19,22 @@ class MenuPagePaciente extends StatefulWidget {
 }
 
 class _MenuPagePacienteState extends State<MenuPagePaciente> {
+
+  String nomePaciente;
+  @override
+  void initState() {
+    super.initState();
+    pegaNomeMedico();
+  }
+
+  Future<void> pegaNomeMedico() async {
+    final jsonMedico =
+        await ServicesLogin.getLoginPaciente(widget.email, widget.senha);
+    nomePaciente = jsonMedico.paciente.namePaciente;
+    setState(() {
+      return nomePaciente;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +80,7 @@ class _MenuPagePacienteState extends State<MenuPagePaciente> {
                         height: 10,
                       ),
                       Text(
-                        'Olá, seja bem vindo!',
+                        'Olá '+ nomePaciente.toString() +', seja bem vindo!',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                       Padding(

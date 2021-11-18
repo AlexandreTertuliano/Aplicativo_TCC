@@ -406,13 +406,11 @@ class _MyAppState extends State<MyApp> {
                             child: InkWell(
                               onTap: () async {
                                 if (_tela == 0) {
-                                  print(_controllerEmailPaciente.text);
-                                  print(_controllerSenhaPaciente.text);
                                   final json =
                                       await ServicesLogin.getLoginPaciente(
                                           _controllerEmailPaciente.text,
                                           _controllerSenhaPaciente.text);
-                                  if (json.verifica = true) {
+                                  if (json.verifica == true) {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -430,13 +428,10 @@ class _MyAppState extends State<MyApp> {
                                 }
 
                                 if (_tela == 1) {
-                                  print(_controllerEmailMedico.text);
-                                  print(_controllerSenhaMedico.text);
                                   final json =
                                       await ServicesLogin.getLoginMedico(
                                           _controllerEmailMedico.text,
                                           _controllerSenhaMedico.text);
-                                  print(json.verifica);
 
                                   if (json.verifica == true) {
                                     Navigator.push(
