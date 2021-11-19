@@ -1,3 +1,4 @@
+import 'package:MedAgenda/agenda_medico/minha_agenda.dart';
 import 'package:MedAgenda/classes/agenda_class.dart';
 import 'package:MedAgenda/menuMedico/menu_page_medico.dart';
 import 'package:MedAgenda/services/agenda/services_agenda.dart';
@@ -15,7 +16,7 @@ class PageAgendaMedico extends StatefulWidget {
   String email, senha;
   int idMedico;
 
-  PageAgendaMedico(this.email, this.senha,this.idMedico);
+  PageAgendaMedico(this.email, this.senha, this.idMedico);
   @override
   _PageAgendaMedicoState createState() => _PageAgendaMedicoState();
 }
@@ -40,15 +41,12 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
   List data = List(); //edited line
 
   Future<String> pegaNomeClinica() async {
-    var res =
-        await http.get(Uri.parse("http://senai.cck.com.br/clinica"));
+    var res = await http.get(Uri.parse("http://senai.cck.com.br/clinica"));
     var resBody = json.decode(res.body);
 
     setState(() {
       data = resBody;
     });
-
-    print(resBody);
 
     return "Sucess";
   }
@@ -271,7 +269,12 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
             _page = index;
             if (index == 0) {
               Navigator.pop(context);
-            } else if (index == 1) {}
+            } else if (index == 1) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MinhaAgenda(widget.idMedico)));
+            }
           });
         },
       ),
@@ -279,14 +282,17 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
   }
 
   Future<void> addHorarioAgenda() async {
-    print(dataCompleta);
+    String dataAjustada = dataCompleta.toString().substring(0, 10) +
+        "T" +
+        dataCompleta.toString().substring(11, 23);
+    print(dataAjustada);
     print(widget.idMedico);
     print(_mySelection);
     Agenda agenda = Agenda(
-      dadosAgenda: dataCompleta,
-      medico: widget.idMedico.toString(),
-      clinica: _mySelection,
-    );
+        dadosAgenda: dataAjustada,
+        medico: Medico(id: widget.idMedico),
+        clinica: Clinica(id: int.parse(_mySelection)),
+        ocupadoAgenda: "Não");
 
     if (widget.agenda == null) {
       ServicesAgenda.createAgenda(agenda).then((isSuccess) async {

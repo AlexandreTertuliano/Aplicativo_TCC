@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class ServicesAgenda {
   static Future<List<Agenda>> getTodasAgenda() async {
     final response =
-        await http.get(Uri.parse("http://senai.cck.com.br/Agenda"));
+        await http.get(Uri.parse("https://senai.cck.com.br/agenda"));
     if (response.statusCode == 200) {
       return postFromJson(response.body);
     } else {
@@ -15,8 +15,8 @@ class ServicesAgenda {
   }
 
   static Future<List<Agenda>> getPegaAgendaEspecifica(int id) async {
-    final response = await http
-        .get(Uri.parse("http://senai.cck.com.br/Agenda/$id"));
+    final response =
+        await http.get(Uri.parse("https://senai.cck.com.br/agenda/$id"));
     if (response.statusCode == 200) {
       return postFromJson(response.body);
     } else {
@@ -26,7 +26,7 @@ class ServicesAgenda {
 
   static Future<bool> createAgenda(Agenda data) async {
     final response = await http.post(
-      Uri.parse("http://senai.cck.com.br/Agenda"),
+      Uri.parse("https://senai.cck.com.br/agenda"),
       headers: {"content-type": "application/json"},
       body: postToJson(data),
     );
@@ -39,7 +39,7 @@ class ServicesAgenda {
 
   static Future<bool> updateAgenda(int id, Agenda data) async {
     final response = await http.put(
-      Uri.parse("http://senai.cck.com.br/Agenda/$id"),
+      Uri.parse("https://senai.cck.com.br/agenda/$id"),
       headers: {"content-type": "application/json"},
       body: postToJson(data),
     );
@@ -52,7 +52,7 @@ class ServicesAgenda {
 
   static Future<bool> deleteAgenda(int id) async {
     final response = await http.delete(
-      Uri.parse("http://senai.cck.com.br/Agenda/$id"),
+      Uri.parse("https://senai.cck.com.br/agenda/$id"),
       headers: {"content-type": "application/json"},
     );
     if (response.statusCode == 200) {
