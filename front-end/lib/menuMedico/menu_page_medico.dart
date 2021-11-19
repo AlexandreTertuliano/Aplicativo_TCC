@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:MedAgenda/Clinicas/page_clinica.dart';
 import 'package:MedAgenda/agenda_medico/page_agenda.dart';
-import 'package:MedAgenda/formularios_cadastro/add_meus_dados_medicos.dart';
+import 'package:MedAgenda/cadastro_pessoal/add_meus_dados_medicos.dart';
 import 'package:MedAgenda/main.dart';
 import 'package:MedAgenda/services/login/services_login.dart';
 import 'package:flutter/material.dart';

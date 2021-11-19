@@ -14,16 +14,6 @@ class ServicesAgenda {
     }
   }
 
-  static Future<List<Agenda>> getPegaAgendaEspecifica(int id) async {
-    final response =
-        await http.get(Uri.parse("https://senai.cck.com.br/agenda/$id"));
-    if (response.statusCode == 200) {
-      return postFromJson(response.body);
-    } else {
-      return null;
-    }
-  }
-
   static Future<bool> createAgenda(Agenda data) async {
     final response = await http.post(
       Uri.parse("https://senai.cck.com.br/agenda"),

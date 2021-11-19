@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:MedAgenda/formularios_cadastro/add_meus_dados_paciente.dart';
+import 'package:MedAgenda/cadastro_pessoal/add_meus_dados_paciente.dart';
 import 'package:MedAgenda/pesquisarMedicos/pesquisar_medico.dart';
 import 'package:MedAgenda/agenda_paciente/page_agenda.dart';
 import 'package:MedAgenda/services/login/services_login.dart';

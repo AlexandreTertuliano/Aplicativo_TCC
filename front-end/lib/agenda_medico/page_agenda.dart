@@ -270,6 +270,7 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
             if (index == 0) {
               Navigator.pop(context);
             } else if (index == 1) {
+              Navigator.pop(context);
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -317,12 +318,30 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Horário adicionado com sucesso!'),
-          content: SingleChildScrollView(),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text("Deseja adicionar outro horário ?"),
+              ],
+            ),
+          ),
           actions: <Widget>[
             TextButton(
-              child: const Text('OK'),
+              child: const Text(
+                'Sim',
+                style: TextStyle(color: Colors.green),
+              ),
               onPressed: () {
                 Navigator.pop(context);
+              },
+            ),
+            TextButton(
+              child: const Text('Não', style: TextStyle(color: Colors.red)),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MinhaAgenda(widget.idMedico)));
               },
             ),
           ],
