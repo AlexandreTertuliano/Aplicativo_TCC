@@ -13,16 +13,19 @@ class MinhaAgenda extends StatefulWidget {
 }
 
 class _MinhaAgendaState extends State<MinhaAgenda> {
+
+   List data;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: FutureBuilder(
-      future: PegaAgendaEspecifica(widget.idMedico),
+      future: pegaAgendaEspecifica(widget.idMedico),
       builder: (context, data) {
         if (data.hasError) {
           return Center(child: Text("${data.error}"));
         } else if (data.hasData) {
-          var items = data.data as List<PegaAgenda>;
+          var items = data.data.agenda as List<Agenda>;
           return ListView.builder(
               itemCount: items == null ? 0 : items.length,
               itemBuilder: (context, index) {
@@ -39,7 +42,7 @@ class _MinhaAgendaState extends State<MinhaAgenda> {
                           width: 50,
                           height: 50,
                           child: Text(
-                            items[index].agenda[index].dadosAgenda,
+                            items[index].dadosAgenda,
                           ),
                         ),
                         Expanded(
@@ -52,7 +55,7 @@ class _MinhaAgendaState extends State<MinhaAgenda> {
                               Padding(
                                 padding: EdgeInsets.only(left: 8, right: 8),
                                 child: Text(
-                                  items[index].agenda[index].ocupadoAgenda,
+                                  items[index].ocupadoAgenda,
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
@@ -61,7 +64,7 @@ class _MinhaAgendaState extends State<MinhaAgenda> {
                               Padding(
                                 padding: EdgeInsets.only(left: 8, right: 8),
                                 child: Text(
-                                    items[index].agenda[index].id.toString()),
+                                    items[index].id.toString()),
                               )
                             ],
                           ),
@@ -80,12 +83,12 @@ class _MinhaAgendaState extends State<MinhaAgenda> {
     ));
   }
 
-  // ignore: missing_return
-  Future<PegaAgenda> PegaAgendaEspecifica(int id) async {
+  Future<PegaAgenda> pegaAgendaEspecifica(int id) async {
     final response =
         await http.get(Uri.parse("https://senai.cck.com.br/medico/$id"));
-    Map<String, dynamic> data =
-        new Map<String, dynamic>.from(json.decode(response.body));
+    var data = json.decode(response.body);
     return PegaAgenda.fromJson(data);
   }
+
+ 
 }
