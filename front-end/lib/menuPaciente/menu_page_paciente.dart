@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:MedAgenda/TelaCovid/covid_main.dart';
 import 'package:MedAgenda/cadastro_pessoal/add_meus_dados_paciente.dart';
 import 'package:MedAgenda/pesquisarMedicos/pesquisar_medico.dart';
 import 'package:MedAgenda/agenda_paciente/page_agenda.dart';
@@ -19,7 +20,6 @@ class MenuPagePaciente extends StatefulWidget {
 }
 
 class _MenuPagePacienteState extends State<MenuPagePaciente> {
-
   String nomePaciente;
   @override
   void initState() {
@@ -35,6 +35,7 @@ class _MenuPagePacienteState extends State<MenuPagePaciente> {
       return nomePaciente;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +81,7 @@ class _MenuPagePacienteState extends State<MenuPagePaciente> {
                         height: 10,
                       ),
                       Text(
-                        'Olá '+ nomePaciente.toString() +', seja bem vindo!',
+                        'Olá ' + nomePaciente.toString() + ', seja bem vindo!',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                       Padding(
@@ -157,11 +158,16 @@ class _MenuPagePacienteState extends State<MenuPagePaciente> {
                               children: [
                                 GestureDetector(
                                   child: CatigoryW(
-                                    image: 'assets/configuracoes.png',
-                                    text: 'Configurações',
+                                    image: 'assets/covid.png',
+                                    text: 'Covid19',
                                     color: Color(0xFFD2691E),
                                   ),
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => CovidMain()));
+                                  },
                                 ),
                                 GestureDetector(
                                   child: CatigoryW(

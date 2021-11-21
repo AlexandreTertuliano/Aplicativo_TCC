@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:MedAgenda/Clinicas/page_clinica.dart';
+import 'package:MedAgenda/TelaCovid/covid_main.dart';
 import 'package:MedAgenda/agenda_medico/page_agenda.dart';
 import 'package:MedAgenda/cadastro_pessoal/add_meus_dados_medicos.dart';
 import 'package:MedAgenda/main.dart';
@@ -158,11 +159,16 @@ class _MenuPageMedicoState extends State<MenuPageMedico> {
                               children: [
                                 GestureDetector(
                                   child: CatigoryW(
-                                    image: 'assets/configuracoes.png',
-                                    text: 'Configurações',
+                                    image: 'assets/covid.png',
+                                    text: 'Covid19',
                                     color: Color(0xFFD2691E),
                                   ),
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => CovidMain()));
+                                  },
                                 ),
                                 GestureDetector(
                                   child: CatigoryW(

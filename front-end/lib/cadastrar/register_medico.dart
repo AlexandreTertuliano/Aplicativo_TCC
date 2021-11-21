@@ -1,4 +1,4 @@
-import 'package:MedAgenda/menuMedico/menu_page_medico.dart';
+import 'package:MedAgenda/main.dart';
 import 'package:cupertino_date_textbox/cupertino_date_textbox.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -11,6 +11,7 @@ class RegisterMedicoPage extends StatefulWidget {
   final String email;
   RegisterMedicoPage({
     this.email,
+    String senha,
   });
 
   @override
@@ -378,15 +379,21 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
             child: ListBody(
               children: const <Widget>[
                 Text('Bem vindo Drº ao MarqueMed!'),
+                Text(
+                    'Enviamos um email a você com o código de validação de conta!'),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Entrar'),
+              child: const Text('Inicio'),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MenuPageMedico("email","senha")));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyApp(),
+                  ),
+                );
               },
             ),
           ],

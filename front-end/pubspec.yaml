@@ -36,10 +36,17 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   syncfusion_flutter_calendar: ^19.3.44
   flutter_datetime_picker: ^1.5.1
+  flutter_spinkit: ^5.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.9.2"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo1.png"
 
 
 # For information on the generic Dart part of this file, see the
@@ -60,13 +67,10 @@ flutter:
    - assets/image_02.png
    - assets/logo.png
    - assets/resetPassword.png
-   - assets/covid2.png
    - assets/agenda.png
-   - assets/covid.png
    - assets/doutor.png
    - assets/carteira.png
    - assets/hospital.png
-   - assets/configuracoes.png
    - assets/exit.png
    - assets/perfil.png
    - assets/clinica.png
@@ -80,6 +84,9 @@ flutter:
    - assets/terms.png
    - assets/logo1.png
    - assets/logo2.png
+   - assets/validar.png
+   - assets/corona.png
+   - assets/covid.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

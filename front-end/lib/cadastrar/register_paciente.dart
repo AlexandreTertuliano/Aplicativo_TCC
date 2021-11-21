@@ -1,9 +1,10 @@
 import 'package:MedAgenda/classes/paciente_class.dart';
-import 'package:MedAgenda/menuPaciente/menu_page_paciente.dart';
 import 'package:MedAgenda/services/pacientes/services_pacientes.dart';
 import 'package:cupertino_date_textbox/cupertino_date_textbox.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../main.dart';
 
 class RegisterPacientePage extends StatefulWidget {
   Paciente paciente;
@@ -344,6 +345,8 @@ class _RegisterPacientePageState extends State<RegisterPacientePage> {
             child: ListBody(
               children: const <Widget>[
                 Text('Bem vindo ao MarqueMed!'),
+                Text(
+                    'Enviamos um email a você com o código de validação de conta!'),
               ],
             ),
           ),
@@ -352,10 +355,11 @@ class _RegisterPacientePageState extends State<RegisterPacientePage> {
               child: const Text('Entrar'),
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            MenuPagePaciente("email", "senha")));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyApp(),
+                  ),
+                );
               },
             ),
           ],

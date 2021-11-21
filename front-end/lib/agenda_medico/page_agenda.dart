@@ -57,7 +57,7 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
       appBar: AppBar(
         backgroundColor: Colors.lightBlue[300],
         title: Text(
-          "Minha Agenda",
+          "Adicionar horários:",
           style: GoogleFonts.lato(
             textStyle: Theme.of(context).textTheme.headline4,
             fontSize: 30,
@@ -274,7 +274,8 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => MinhaAgenda(widget.idMedico)));
+                      builder: (context) => MinhaAgenda(
+                          widget.idMedico, widget.email, widget.senha)));
             }
           });
         },
@@ -341,7 +342,8 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => MinhaAgenda(widget.idMedico)));
+                        builder: (context) => MinhaAgenda(
+                            widget.idMedico, widget.email, widget.senha)));
               },
             ),
           ],

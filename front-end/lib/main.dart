@@ -1,6 +1,7 @@
 import 'package:MedAgenda/ResetPassword/reset_password.dart';
 import 'package:MedAgenda/Splash/Splash.dart';
 import 'package:MedAgenda/cadastrar/cadastrar_page.dart';
+import 'package:MedAgenda/cadastrar/confirmar_login.dart';
 import 'package:MedAgenda/menuMedico/menu_page_medico.dart';
 import 'package:MedAgenda/services/login/services_login.dart';
 import 'package:flutter/material.dart';
@@ -369,16 +370,24 @@ class _MyAppState extends State<MyApp> {
                           SizedBox(
                             width: 12.0,
                           ),
-                          GestureDetector(
-                            onTap: _radio,
-                            child: radioButton(_isSelected),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              textStyle: const TextStyle(
+                                  fontSize: 15, color: Colors.black),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ConfirmarLoginPage(),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              'Validar',
+                              style: TextStyle(color: Colors.black),
+                            ),
                           ),
-                          SizedBox(
-                            width: 8.0,
-                          ),
-                          Text("Lembrar Senha",
-                              style: TextStyle(
-                                  fontSize: 12, fontFamily: "Poppins-Medium"))
                         ],
                       ),
                       InkWell(

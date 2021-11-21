@@ -177,6 +177,7 @@ class _SignupPageState extends State<SignupPage> {
             MaterialPageRoute(
                 builder: (context) => RegisterMedicoPage(
                       email: _controllerEmail.text,
+                      senha: _controllerSenha.text,
                     )));
       } else {
         Navigator.push(
