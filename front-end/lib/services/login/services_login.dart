@@ -8,7 +8,7 @@ class ServicesLogin {
   static Future<LoginPaciente> getLoginPaciente(
       String email, String senha) async {
     final response = await http.get(Uri.parse(
-        "http://senai.cck.com.br/login/paciente?email=$email&senha=$senha"));
+        "https://api-marquemed.herokuapp.com/login/paciente?email=$email&senha=$senha"));
     var json = jsonDecode(response.body);
 
     return LoginPaciente.fromJson(json);
@@ -16,7 +16,7 @@ class ServicesLogin {
 
   static Future<LoginMedico> getLoginMedico(String email, String senha) async {
     final response = await http.get(Uri.parse(
-        "http://senai.cck.com.br/login/medico?email=$email&senha=$senha"));
+        "https://api-marquemed.herokuapp.com/login/medico?email=$email&senha=$senha"));
     var json = jsonDecode(response.body);
 
     return LoginMedico.fromJson(json);

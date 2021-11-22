@@ -161,8 +161,8 @@ class _MinhaAgendaState extends State<MinhaAgenda> {
   }
 
   Future<PegaAgenda> pegaAgendaEspecifica(int id) async {
-    final response =
-        await http.get(Uri.parse("https://senai.cck.com.br/medico/$id"));
+    final response = await http
+        .get(Uri.parse("https://api-marquemed.herokuapp.com/medico/$id"));
     var data = json.decode(response.body);
     return PegaAgenda.fromJson(data);
   }

@@ -1,10 +1,41 @@
 import 'dart:convert';
 
+class Finalizar {
+  Agenda agenda;
+  int id;
+  Paciente paciente;
+  String status;
+
+  Finalizar({this.agenda, this.id, this.paciente, this.status});
+
+  Finalizar.fromJson(Map<String, dynamic> json) {
+    agenda =
+        json['agenda'] != null ? new Agenda.fromJson(json['agenda']) : null;
+    id = json['id'];
+    paciente = json['paciente'] != null
+        ? new Paciente.fromJson(json['paciente'])
+        : null;
+    status = json['status'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.agenda != null) {
+      data['agenda'] = this.agenda.toJson();
+    }
+    data['id'] = this.id;
+    if (this.paciente != null) {
+      data['paciente'] = this.paciente.toJson();
+    }
+    data['status'] = this.status;
+    return data;
+  }
+}
+
 class Agenda {
   Clinica clinica;
   String dadosAgenda;
   int id;
-  String status;
   Medico medico;
   String ocupadoAgenda;
 
@@ -12,7 +43,6 @@ class Agenda {
       {this.clinica,
       this.dadosAgenda,
       this.id,
-      this.status,
       this.medico,
       this.ocupadoAgenda});
 
@@ -21,7 +51,6 @@ class Agenda {
         json['clinica'] != null ? new Clinica.fromJson(json['clinica']) : null;
     dadosAgenda = json['dadosAgenda'];
     id = json['id'];
-    status = json['status'];
     medico =
         json['medico'] != null ? new Medico.fromJson(json['medico']) : null;
     ocupadoAgenda = json['ocupadoAgenda'];
@@ -34,7 +63,6 @@ class Agenda {
     }
     data['dadosAgenda'] = this.dadosAgenda;
     data['id'] = this.id;
-    data['status'] = this.status;
     if (this.medico != null) {
       data['medico'] = this.medico.toJson();
     }
@@ -228,12 +256,97 @@ class Carteira {
   }
 }
 
-List<Agenda> postFromJson(String jsonData) {
-  final data = json.decode(jsonData);
-  return List<Agenda>.from(data.map((item) => Agenda.fromJson(item)));
+class Paciente {
+  String alturaPaciente;
+  String bairroPaciente;
+  Carteira carteira;
+  String cepPaciente;
+  String cidadePaciente;
+  String cpfPaciente;
+  String dnPaciente;
+  String doadorPaciente;
+  String emailPaciente;
+  String generoPaciente;
+  int id;
+  String namePaciente;
+  String pesoPaciente;
+  String ruaPaciente;
+  String senhaPaciente;
+  String telefonePaciente;
+  String tipoSanguePaciente;
+
+  Paciente(
+      {this.alturaPaciente,
+      this.bairroPaciente,
+      this.carteira,
+      this.cepPaciente,
+      this.cidadePaciente,
+      this.cpfPaciente,
+      this.dnPaciente,
+      this.doadorPaciente,
+      this.emailPaciente,
+      this.generoPaciente,
+      this.id,
+      this.namePaciente,
+      this.pesoPaciente,
+      this.ruaPaciente,
+      this.senhaPaciente,
+      this.telefonePaciente,
+      this.tipoSanguePaciente});
+
+  Paciente.fromJson(Map<String, dynamic> json) {
+    alturaPaciente = json['alturaPaciente'];
+    bairroPaciente = json['bairroPaciente'];
+    carteira = json['carteira'] != null
+        ? new Carteira.fromJson(json['carteira'])
+        : null;
+    cepPaciente = json['cepPaciente'];
+    cidadePaciente = json['cidadePaciente'];
+    cpfPaciente = json['cpfPaciente'];
+    dnPaciente = json['dnPaciente'];
+    doadorPaciente = json['doadorPaciente'];
+    emailPaciente = json['emailPaciente'];
+    generoPaciente = json['generoPaciente'];
+    id = json['id'];
+    namePaciente = json['namePaciente'];
+    pesoPaciente = json['pesoPaciente'];
+    ruaPaciente = json['ruaPaciente'];
+    senhaPaciente = json['senhaPaciente'];
+    telefonePaciente = json['telefonePaciente'];
+    tipoSanguePaciente = json['tipoSanguePaciente'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['alturaPaciente'] = this.alturaPaciente;
+    data['bairroPaciente'] = this.bairroPaciente;
+    if (this.carteira != null) {
+      data['carteira'] = this.carteira.toJson();
+    }
+    data['cepPaciente'] = this.cepPaciente;
+    data['cidadePaciente'] = this.cidadePaciente;
+    data['cpfPaciente'] = this.cpfPaciente;
+    data['dnPaciente'] = this.dnPaciente;
+    data['doadorPaciente'] = this.doadorPaciente;
+    data['emailPaciente'] = this.emailPaciente;
+    data['generoPaciente'] = this.generoPaciente;
+    data['id'] = this.id;
+    data['namePaciente'] = this.namePaciente;
+    data['pesoPaciente'] = this.pesoPaciente;
+    data['ruaPaciente'] = this.ruaPaciente;
+    data['senhaPaciente'] = this.senhaPaciente;
+    data['telefonePaciente'] = this.telefonePaciente;
+    data['tipoSanguePaciente'] = this.tipoSanguePaciente;
+    return data;
+  }
 }
 
-String postToJson(Agenda data) {
+List<Finalizar> postFromJson(String jsonData) {
+  final data = json.decode(jsonData);
+  return List<Finalizar>.from(data.map((item) => Finalizar.fromJson(item)));
+}
+
+String postToJson(Finalizar data) {
   final jsonData = data.toJson();
   return json.encode(jsonData);
 }

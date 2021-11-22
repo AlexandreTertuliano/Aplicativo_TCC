@@ -21,6 +21,7 @@ class MenuPagePaciente extends StatefulWidget {
 
 class _MenuPagePacienteState extends State<MenuPagePaciente> {
   String nomePaciente;
+  int idPaciente;
   @override
   void initState() {
     super.initState();
@@ -31,6 +32,7 @@ class _MenuPagePacienteState extends State<MenuPagePaciente> {
     final jsonMedico =
         await ServicesLogin.getLoginPaciente(widget.email, widget.senha);
     nomePaciente = jsonMedico.paciente.namePaciente;
+    idPaciente = jsonMedico.paciente.id;
     setState(() {
       return nomePaciente;
     });
@@ -138,7 +140,10 @@ class _MenuPagePacienteState extends State<MenuPagePaciente> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                PagePesquisarMedico()));
+                                                PagePesquisarMedico(
+                                                  widget.email,
+                                                  widget.senha,
+                                                )));
                                   },
                                 ),
                                 GestureDetector(

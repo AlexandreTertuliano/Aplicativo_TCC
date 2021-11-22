@@ -251,7 +251,7 @@ class _ConfirmarLoginPageState extends State<ConfirmarLoginPage> {
   // ignore: missing_return
   Future<bool> getLoginPaciente(String codigo, String email) async {
     final response = await http.get(Uri.parse(
-        "https://senai.cck.com.br/codigo?codigo=$codigo&email=$email"));
+        "https://api-marquemed.herokuapp.com/codigo?codigo=$codigo&email=$email"));
     var json = jsonDecode(response.body);
     setState(() {
       widget.validar = json.toString();

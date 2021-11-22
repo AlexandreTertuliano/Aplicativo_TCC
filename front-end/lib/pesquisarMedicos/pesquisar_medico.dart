@@ -1,4 +1,4 @@
-import 'package:MedAgenda/agenda_paciente/add_horarios.dart';
+import 'package:MedAgenda/agenda_paciente/marcar_page.dart';
 import 'package:MedAgenda/classes/medico_class.dart';
 import 'package:MedAgenda/menuPaciente/menu_page_paciente.dart';
 import 'package:MedAgenda/services/medicos/services_medico.dart';
@@ -10,6 +10,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'dart:core';
 
 class PagePesquisarMedico extends StatefulWidget {
+  String email, senha;
+
+  PagePesquisarMedico(this.email, this.senha);
   @override
   _PagePesquisarMedicoState createState() => _PagePesquisarMedicoState();
 }
@@ -32,7 +35,7 @@ class _PagePesquisarMedicoState extends State<PagePesquisarMedico> {
   }
 
   Future<void> _getmedico() async {
-    ServicesMedico.getMedico().then((list) {
+    await ServicesMedico.getMedico().then((list) {
       setState(() {
         medico = list;
         _medicoDisplay = medico;
@@ -95,8 +98,11 @@ class _PagePesquisarMedicoState extends State<PagePesquisarMedico> {
             if (index == 0) {
               Navigator.pop(context);
             } else if (index == 1) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => MenuPagePaciente("email","senha")));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          MenuPagePaciente(widget.email, widget.senha)));
             }
           });
         },
@@ -131,24 +137,23 @@ class _PagePesquisarMedicoState extends State<PagePesquisarMedico> {
       actionExtentRatio: 0.25,
       secondaryActions: [
         IconSlideAction(
-            caption: 'Excluir',
-            color: Colors.red,
-            icon: Icons.delete,
+            caption: 'Info',
+            color: Colors.white,
+            icon: Icons.info,
             onTap: () {
               print("1");
-            }),
-        IconSlideAction(
-            caption: 'Editar',
-            color: Colors.blue,
-            icon: Icons.edit,
-            onTap: () {
-              print("2");
             }),
       ],
       child: GestureDetector(
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddHorario()));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MarcarHorarioPage(
+                      _medicoDisplay[index].medico.id,
+                      _medicoDisplay[index].medico.agenda.id,
+                      widget.email,
+                      widget.senha)));
         },
         child: Card(
           shape: RoundedRectangleBorder(
@@ -163,8 +168,11 @@ class _PagePesquisarMedicoState extends State<PagePesquisarMedico> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5.0),
                   child: new Text(
-                    _medicoDisplay[index].medico.nameMedico != null
-                        ? _medicoDisplay[index].medico.nameMedico
+                    "👨‍⚕️ Médico (a): " +
+                                _medicoDisplay[index].medico.nameMedico !=
+                            null
+                        ? "👨‍⚕️ Médico (a): " +
+                            _medicoDisplay[index].medico.nameMedico
                         : 'default value',
                     style: GoogleFonts.didactGothic(
                       fontSize: 20.0,
@@ -182,7 +190,7 @@ class _PagePesquisarMedicoState extends State<PagePesquisarMedico> {
                       ? _medicoDisplay[index].medico.especializacao1Medico
                       : 'default value',
                   style: GoogleFonts.didactGothic(
-                    fontSize: 15.0,
+                    fontSize: 17.0,
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     decorationColor: Colors.white,
@@ -192,11 +200,14 @@ class _PagePesquisarMedicoState extends State<PagePesquisarMedico> {
                   ),
                 ),
                 new Text(
-                  "📞  " + _medicoDisplay[index].medico.telefoneMedico != null
-                      ? "📞 " + _medicoDisplay[index].medico.telefoneMedico
+                  "📞 Telefone: " +
+                              _medicoDisplay[index].medico.telefoneMedico !=
+                          null
+                      ? "📞 Telefone: " +
+                          _medicoDisplay[index].medico.telefoneMedico
                       : 'default value',
                   style: GoogleFonts.didactGothic(
-                    fontSize: 15.0,
+                    fontSize: 17.0,
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     decorationColor: Colors.white,
@@ -205,47 +216,82 @@ class _PagePesquisarMedicoState extends State<PagePesquisarMedico> {
                     wordSpacing: 5.0,
                   ),
                 ),
-                Center(
-                  child: RatingBar.builder(
-                    initialRating: _medicoDisplay[index].avaliacao.toDouble(),
-                    itemCount: 5,
-                    itemSize: 30,
-                    // ignore: missing_return
-                    itemBuilder: (context, index) {
-                      switch (index) {
-                        case 0:
-                          return Icon(
-                            Icons.sentiment_very_dissatisfied,
-                            color: Colors.red,
-                          );
-                        case 1:
-                          return Icon(
-                            Icons.sentiment_dissatisfied,
-                            color: Colors.redAccent,
-                          );
-                        case 2:
-                          return Icon(
-                            Icons.sentiment_neutral,
-                            color: Colors.amber,
-                          );
-                        case 3:
-                          return Icon(
-                            Icons.sentiment_satisfied,
-                            color: Colors.lightGreen,
-                          );
-                        case 4:
-                          return Icon(
-                            Icons.sentiment_very_satisfied,
-                            color: Colors.green,
-                          );
-                      }
-                    },
-
-                    onRatingUpdate: (rating) {
-                      print(rating);
-                    },
+                new Text(
+                  "💵 Valor da consulta: R\$  " +
+                              _medicoDisplay[index]
+                                  .medico
+                                  .valorConsulta
+                                  .toString() !=
+                          null
+                      ? "💵 Valor da consulta: R\$" +
+                          _medicoDisplay[index].medico.valorConsulta.toString()
+                      : 'default value',
+                  style: GoogleFonts.didactGothic(
+                    fontSize: 17.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    decorationColor: Colors.white,
+                    decorationStyle: TextDecorationStyle.solid,
+                    letterSpacing: -1.0,
+                    wordSpacing: 5.0,
                   ),
                 ),
+                Row(children: [
+                  Text(
+                    "📊 Avaliação: ",
+                    style: GoogleFonts.didactGothic(
+                      fontSize: 20.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      decorationColor: Colors.white,
+                      decorationStyle: TextDecorationStyle.solid,
+                      letterSpacing: -1.0,
+                      wordSpacing: 5.0,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: RatingBar.builder(
+                      initialRating: _medicoDisplay[index].avaliacao.toDouble(),
+                      itemCount: 5,
+                      itemSize: 30,
+                      // ignore: missing_return
+                      itemBuilder: (context, index) {
+                        switch (index) {
+                          case 0:
+                            return Icon(
+                              Icons.sentiment_very_dissatisfied,
+                              color: Colors.red,
+                            );
+                          case 1:
+                            return Icon(
+                              Icons.sentiment_dissatisfied,
+                              color: Colors.redAccent,
+                            );
+                          case 2:
+                            return Icon(
+                              Icons.sentiment_neutral,
+                              color: Colors.amber,
+                            );
+                          case 3:
+                            return Icon(
+                              Icons.sentiment_satisfied,
+                              color: Colors.lightGreen,
+                            );
+                          case 4:
+                            return Icon(
+                              Icons.sentiment_very_satisfied,
+                              color: Colors.green,
+                            );
+                        }
+                      },
+
+                      onRatingUpdate: (rating) {
+                        print(rating);
+                      },
+                    ),
+                  ),
+                ]),
               ],
             ),
           ),

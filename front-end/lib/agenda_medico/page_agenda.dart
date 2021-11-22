@@ -41,7 +41,8 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
   List data = List(); //edited line
 
   Future<String> pegaNomeClinica() async {
-    var res = await http.get(Uri.parse("http://senai.cck.com.br/clinica"));
+    var res = await http
+        .get(Uri.parse("https://api-marquemed.herokuapp.com/clinica"));
     var resBody = json.decode(res.body);
 
     setState(() {

@@ -3,14 +3,17 @@ import 'dart:convert';
 class PegaAgenda {
   Medico medico;
   int avaliacao;
+
+  String status;
   List<Agenda> agenda;
 
-  PegaAgenda({this.medico, this.avaliacao, this.agenda});
+  PegaAgenda({this.medico, this.avaliacao, this.status, this.agenda, paciente});
 
   PegaAgenda.fromJson(Map<String, dynamic> json) {
     medico =
         json['medico'] != null ? new Medico.fromJson(json['medico']) : null;
     avaliacao = json['avaliacao'];
+    status = json['status'];
     if (json['agenda'] != null) {
       agenda = new List<Agenda>();
       json['agenda'].forEach((v) {
@@ -25,6 +28,7 @@ class PegaAgenda {
       data['medico'] = this.medico.toJson();
     }
     data['avaliacao'] = this.avaliacao;
+    data['status'] = this.status;
     if (this.agenda != null) {
       data['agenda'] = this.agenda.map((v) => v.toJson()).toList();
     }
@@ -35,28 +39,28 @@ class PegaAgenda {
 class Medico {
   int id;
   String nameMedico;
-  Null cpfMedico;
-  Null dnMedico;
-  Null cidadeMedico;
-  Null bairroMedico;
-  Null ruaMedico;
-  Null numeroMedico;
-  Null idadeMedico;
-  Null especializacao1Medico;
-  Null especializacao2Medico;
-  Null especializacao3Medico;
-  Null generoMedico;
+  String cpfMedico;
+  String dnMedico;
+  String cidadeMedico;
+  String bairroMedico;
+  String ruaMedico;
+  String numeroMedico;
+  String idadeMedico;
+  String especializacao1Medico;
+  String especializacao2Medico;
+  String especializacao3Medico;
+  String generoMedico;
   String emailMedico;
   String senhaMedico;
-  Null anoFormacaoMedico;
-  Null cidadeFormacaoMedico;
-  Null universidadeFormacaoMedico;
+  String anoFormacaoMedico;
+  String cidadeFormacaoMedico;
+  String universidadeFormacaoMedico;
   String crmMedico;
   String telefoneMedico;
-  Null cepMedico;
+  String cepMedico;
   Clinica clinica;
   Carteira carteira;
-  int valorConsulta;
+  double valorConsulta;
 
   Medico(
       {this.id,
@@ -111,7 +115,7 @@ class Medico {
     carteira = json['carteira'] != null
         ? new Carteira.fromJson(json['carteira'])
         : null;
-    valorConsulta = json['valorConsulta'].toInt();
+    valorConsulta = json['valorConsulta'].toDouble();
   }
 
   Map<String, dynamic> toJson() {
@@ -217,17 +221,106 @@ class Carteira {
   }
 }
 
+class Paciente {
+  String alturaPaciente;
+  String bairroPaciente;
+  Carteira carteira;
+  String cepPaciente;
+  String cidadePaciente;
+  String cpfPaciente;
+  String dnPaciente;
+  String doadorPaciente;
+  String emailPaciente;
+  String generoPaciente;
+  int id;
+  String namePaciente;
+  String pesoPaciente;
+  String ruaPaciente;
+  String senhaPaciente;
+  String telefonePaciente;
+  String tipoSanguePaciente;
+
+  Paciente(
+      {this.alturaPaciente,
+      this.bairroPaciente,
+      this.carteira,
+      this.cepPaciente,
+      this.cidadePaciente,
+      this.cpfPaciente,
+      this.dnPaciente,
+      this.doadorPaciente,
+      this.emailPaciente,
+      this.generoPaciente,
+      this.id,
+      this.namePaciente,
+      this.pesoPaciente,
+      this.ruaPaciente,
+      this.senhaPaciente,
+      this.telefonePaciente,
+      this.tipoSanguePaciente});
+
+  Paciente.fromJson(Map<String, dynamic> json) {
+    alturaPaciente = json['alturaPaciente'];
+    bairroPaciente = json['bairroPaciente'];
+    carteira = json['carteira'] != null
+        ? new Carteira.fromJson(json['carteira'])
+        : null;
+    cepPaciente = json['cepPaciente'];
+    cidadePaciente = json['cidadePaciente'];
+    cpfPaciente = json['cpfPaciente'];
+    dnPaciente = json['dnPaciente'];
+    doadorPaciente = json['doadorPaciente'];
+    emailPaciente = json['emailPaciente'];
+    generoPaciente = json['generoPaciente'];
+    id = json['id'];
+    namePaciente = json['namePaciente'];
+    pesoPaciente = json['pesoPaciente'];
+    ruaPaciente = json['ruaPaciente'];
+    senhaPaciente = json['senhaPaciente'];
+    telefonePaciente = json['telefonePaciente'];
+    tipoSanguePaciente = json['tipoSanguePaciente'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['alturaPaciente'] = this.alturaPaciente;
+    data['bairroPaciente'] = this.bairroPaciente;
+    if (this.carteira != null) {
+      data['carteira'] = this.carteira.toJson();
+    }
+    data['cepPaciente'] = this.cepPaciente;
+    data['cidadePaciente'] = this.cidadePaciente;
+    data['cpfPaciente'] = this.cpfPaciente;
+    data['dnPaciente'] = this.dnPaciente;
+    data['doadorPaciente'] = this.doadorPaciente;
+    data['emailPaciente'] = this.emailPaciente;
+    data['generoPaciente'] = this.generoPaciente;
+    data['id'] = this.id;
+    data['namePaciente'] = this.namePaciente;
+    data['pesoPaciente'] = this.pesoPaciente;
+    data['ruaPaciente'] = this.ruaPaciente;
+    data['senhaPaciente'] = this.senhaPaciente;
+    data['telefonePaciente'] = this.telefonePaciente;
+    data['tipoSanguePaciente'] = this.tipoSanguePaciente;
+    return data;
+  }
+}
+
 class Agenda {
   int id;
   String dadosAgenda;
   String ocupadoAgenda;
-  Null medico;
+  String status;
+  Paciente paciente;
+  Medico medico;
   Clinica clinica;
 
   Agenda(
       {this.id,
       this.dadosAgenda,
       this.ocupadoAgenda,
+      this.status,
+      this.paciente,
       this.medico,
       this.clinica});
 
@@ -235,7 +328,10 @@ class Agenda {
     id = json['id'];
     dadosAgenda = json['dadosAgenda'];
     ocupadoAgenda = json['ocupadoAgenda'];
-    medico = json['medico'];
+    status = json['status'];
+    paciente = json['paciente'];
+    medico =
+        json['medico'] != null ? new Medico.fromJson(json['medico']) : null;
     clinica =
         json['clinica'] != null ? new Clinica.fromJson(json['clinica']) : null;
   }
@@ -245,7 +341,11 @@ class Agenda {
     data['id'] = this.id;
     data['dadosAgenda'] = this.dadosAgenda;
     data['ocupadoAgenda'] = this.ocupadoAgenda;
-    data['medico'] = this.medico;
+    data['status'] = this.status;
+    data['paciente'] = this.paciente;
+    if (this.medico != null) {
+      data['medico'] = this.medico.toJson();
+    }
     if (this.clinica != null) {
       data['clinica'] = this.clinica.toJson();
     }
@@ -259,6 +359,16 @@ List<PegaAgenda> postFromJsonPegaAgenda(String jsonData) {
 }
 
 String postToJsonPegaAgenda(PegaAgenda data) {
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
+}
+
+List<Agenda> postFromJson(String jsonData) {
+  final data = json.decode(jsonData);
+  return List<Agenda>.from(data.map((item) => Agenda.fromJson(item)));
+}
+
+String postToJson(Agenda data) {
   final jsonData = data.toJson();
   return json.encode(jsonData);
 }
