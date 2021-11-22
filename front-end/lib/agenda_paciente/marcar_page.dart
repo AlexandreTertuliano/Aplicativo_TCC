@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:MedAgenda/classes/finaliza_agenda_class.dart' as fAgenda;
 import 'package:MedAgenda/classes/pega_agenda_class.dart';
 import 'package:MedAgenda/menuMedico/menu_page_medico.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -160,12 +161,13 @@ class _MarcarHorarioPageState extends State<MarcarHorarioPage> {
   }
 
   Future<void> finalizarMarcacao(int idAgenda, int idMedico) async {
-    PegaAgenda pegaAgenda = PegaAgenda(
-        agenda: List<Agenda>(idAgenda),
-        medico: Medico(id: idMedico),
-        status: "");
+    fAgenda.FinalizaAgendaClass finalizaAgenda = fAgenda.FinalizaAgendaClass(
+      agenda: fAgenda.Agenda(id: 5),
+      paciente: fAgenda.Paciente(id: 5),
+      status:"",
+    );
     if (widget.agenda == null) {
-      FinalizaConsulta(pegaAgenda).then((isSuccess) async {
+      FinalizaConsulta(finalizaAgenda).then((isSuccess) async {
         if (isSuccess) {
           await _showMyDialog();
 
@@ -213,11 +215,11 @@ class _MarcarHorarioPageState extends State<MarcarHorarioPage> {
     );
   }
 
-  static Future<bool> FinalizaConsulta(PegaAgenda data) async {
+  static Future<bool> FinalizaConsulta(fAgenda.FinalizaAgendaClass data) async {
+    print(data.toJson());
     final response = await http.post(
-      Uri.parse("https://api-marquemed.herokuapp.com/finalizar"),
-      headers: {"content-type": "application/json"},
-      body: postToJsonPegaAgenda(data),
+      Uri.parse("https://api-marquemed.herokuapp.com/finalizar/analise"),
+      body: jsonEncode(data.toJson()),
     );
     if (response.statusCode == 201) {
       return true;

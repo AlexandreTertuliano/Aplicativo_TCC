@@ -1,5 +1,5 @@
 import 'package:MedAgenda/agenda_paciente/marcar_page.dart';
-import 'package:MedAgenda/classes/medico_class.dart';
+import 'package:MedAgenda/classes/doutor_class.dart';
 import 'package:MedAgenda/menuPaciente/menu_page_paciente.dart';
 import 'package:MedAgenda/services/medicos/services_medico.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -150,8 +150,8 @@ class _PagePesquisarMedicoState extends State<PagePesquisarMedico> {
               context,
               MaterialPageRoute(
                   builder: (context) => MarcarHorarioPage(
-                      _medicoDisplay[index].medico.id,
-                      _medicoDisplay[index].medico.agenda.id,
+                      _medicoDisplay[index].medico?.id,
+                      _medicoDisplay[index].medico.agenda?.id,
                       widget.email,
                       widget.senha)));
         },

@@ -1,10 +1,10 @@
+import 'package:MedAgenda/classes/medico_class.dart';
 import 'package:MedAgenda/main.dart';
 import 'package:cupertino_date_textbox/cupertino_date_textbox.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'package:MedAgenda/classes/medico_class.dart';
-import 'package:MedAgenda/services/medicos/services_medico.dart';
+import 'package:http/http.dart' as http;
 
 class RegisterMedicoPage extends StatefulWidget {
   Medico medico;
@@ -37,6 +37,7 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
   TextEditingController _controllerRua = TextEditingController();
   TextEditingController _controllerNumero = TextEditingController();
   TextEditingController _controllerTelefone = TextEditingController();
+  TextEditingController _controllerValorConsulta = TextEditingController();
   final formKey = new GlobalKey<FormState>();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   bool _validate = false;
@@ -156,6 +157,13 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
                             controller: _controllerCRM,
                             decoration: new InputDecoration(hintText: 'CRM'),
                             validator: _validarCRM,
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _controllerValorConsulta,
+                            decoration: new InputDecoration(
+                                hintText: 'Valor da consulta'),
+                            validator: _validar,
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
@@ -328,10 +336,10 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
   }
 
   Future<void> saveInfoMedico() async {
-    Doutor medico = Doutor(
+    Medico medico = Medico(
       nameMedico: _controllerNomeCompleto.text,
       cpfMedico: _controllerCpf.text,
-      dnMedico: _selectedDateTime,
+      //dnMedico: _selectedDateTime,
       telefoneMedico: _controllerTelefone.text,
       cepMedico: _controllerCEP.text,
       cidadeMedico: _controllerCidade.text,
@@ -348,9 +356,10 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
       cidadeFormacaoMedico: _controllerCidadeFormacao.text,
       universidadeFormacaoMedico: _controllerFaculdade.text,
       crmMedico: _controllerCRM.text,
+      valorConsulta: double.parse(_controllerValorConsulta.text),
     );
     if (widget.medico == null) {
-      ServicesMedico.createMedico(medico).then((isSuccess) async {
+      createMedico(medico).then((isSuccess) async {
         if (isSuccess) {
           await _showMyDialog();
 
@@ -400,5 +409,18 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
         );
       },
     );
+  }
+
+  static Future<bool> createMedico(Medico data) async {
+    final response = await http.post(
+      Uri.parse("https://api-marquemed.herokuapp.com/medico"),
+      headers: {"content-type": "application/json"},
+      body: postToJson(data),
+    );
+    if (response.statusCode == 201) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

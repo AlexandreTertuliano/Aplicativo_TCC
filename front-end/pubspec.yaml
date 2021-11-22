@@ -37,6 +37,7 @@ dependencies:
   syncfusion_flutter_calendar: ^19.3.44
   flutter_datetime_picker: ^1.5.1
   flutter_spinkit: ^5.1.0
+  pdf: ^3.6.3
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,4 @@
-import 'package:MedAgenda/classes/medico_class.dart';
+import 'package:MedAgenda/classes/doutor_class.dart';
 import 'package:http/http.dart' as http;
 
 class ServicesMedico {
@@ -22,18 +22,7 @@ class ServicesMedico {
     }
   }
 
-  static Future<bool> createMedico(Doutor data) async {
-    final response = await http.post(
-      Uri.parse("https://api-marquemed.herokuapp.com/medico"),
-      headers: {"content-type": "application/json"},
-      body: postToJson(data),
-    );
-    if (response.statusCode == 201) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  
 
   static Future<bool> updateMedico(int id, Doutor data) async {
     final response = await http.put(

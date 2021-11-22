@@ -22,7 +22,6 @@ class _RegisterPacientePageState extends State<RegisterPacientePage> {
   TextEditingController _controllerIdade = TextEditingController();
   TextEditingController _controllerSexo = TextEditingController();
   TextEditingController _controllerSangue = TextEditingController();
-  TextEditingController _controllerProfissao = TextEditingController();
   TextEditingController _controllerPeso = TextEditingController();
   TextEditingController _controllerCEP = TextEditingController();
   TextEditingController _controllerEstado = TextEditingController();
@@ -31,6 +30,7 @@ class _RegisterPacientePageState extends State<RegisterPacientePage> {
   TextEditingController _controllerRua = TextEditingController();
   TextEditingController _controllerNumero = TextEditingController();
   TextEditingController _controllerTelefone = TextEditingController();
+  TextEditingController _controllerDoador = TextEditingController();
   final formKey = new GlobalKey<FormState>();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   bool _validate = false;
@@ -164,11 +164,12 @@ class _RegisterPacientePageState extends State<RegisterPacientePage> {
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
-                            controller: _controllerProfissao,
+                            controller: _controllerDoador,
                             decoration:
-                                new InputDecoration(hintText: 'Profissão'),
+                                new InputDecoration(hintText: 'Doador de sangue'),
                             validator: _validar,
                           ),
+                          
                           const SizedBox(height: 10),
                           Image.asset(
                             "assets/form.png",
@@ -258,14 +259,7 @@ class _RegisterPacientePageState extends State<RegisterPacientePage> {
     return null;
   }
 
-  String _validarCRM(String value) {
-    if (value.length == 0) {
-      return "Informe o CRM";
-    } else if (value.length < 5) {
-      return "O CRM deve ter 5 dígitos";
-    }
-    return null;
-  }
+
 
   String _validarCEP(String value) {
     if (value.length == 0) {
@@ -314,6 +308,7 @@ class _RegisterPacientePageState extends State<RegisterPacientePage> {
         emailPaciente: widget.email,
         senhaPaciente: widget.senha,
         pesoPaciente: _controllerPeso.text,
+        doadorPaciente: _controllerDoador.text,
         alturaPaciente: _controllerAltura.text);
     if (widget.paciente == null) {
       ServicesPaciente.createPaciente(paciente).then((isSuccess) async {

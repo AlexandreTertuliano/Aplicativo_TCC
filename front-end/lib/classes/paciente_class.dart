@@ -18,6 +18,8 @@ class Paciente {
   String senhaPaciente;
   String pesoPaciente;
   String alturaPaciente;
+  String estadoPaciente;
+  String doadorPaciente;
   Paciente({
     this.id,
     this.namePaciente,
@@ -36,6 +38,8 @@ class Paciente {
     this.senhaPaciente,
     this.pesoPaciente,
     this.alturaPaciente,
+    this.estadoPaciente,
+    this.doadorPaciente,
   });
 
   Paciente.fromJson(Map<String, dynamic> json) {
@@ -56,6 +60,8 @@ class Paciente {
     senhaPaciente = json['senhaPaciente'];
     pesoPaciente = json['pesoPaciente'];
     alturaPaciente = json['alturaPaciente'];
+    estadoPaciente = json['estadoPaciente'];
+    doadorPaciente = json['doadorPaciente'];
   }
 
   Map<String, dynamic> toJson() {
@@ -77,6 +83,8 @@ class Paciente {
     data['senhaPaciente'] = this.senhaPaciente;
     data['pesoPaciente'] = this.pesoPaciente;
     data['alturaPaciente'] = this.alturaPaciente;
+    data['estadoPaciente'] = this.alturaPaciente;
+    data['doadorPaciente'] = this.doadorPaciente;
     return data;
   }
 }

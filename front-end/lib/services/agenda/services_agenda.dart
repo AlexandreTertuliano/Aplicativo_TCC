@@ -16,7 +16,7 @@ class ServicesAgenda {
 
   static Future<bool> createAgenda(Agenda data) async {
     final response = await http.post(
-      Uri.parse("https://api-marquemed.herokuapp.com/finaliza"),
+      Uri.parse("https://api-marquemed.herokuapp.com/agenda"),
       headers: {"content-type": "application/json"},
       body: postToJson(data),
     );
