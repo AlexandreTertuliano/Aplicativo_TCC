@@ -50,6 +50,7 @@ class Medico {
   String crmMedico;
   String telefoneMedico;
   String cepMedico;
+  String estadoMedico;
   Clinica clinica;
   Carteira carteira;
   int valorConsulta;
@@ -76,6 +77,7 @@ class Medico {
       this.crmMedico,
       this.telefoneMedico,
       this.cepMedico,
+      this.estadoMedico,
       this.clinica,
       this.carteira,
       this.valorConsulta});
@@ -100,6 +102,7 @@ class Medico {
     cidadeFormacaoMedico = json['cidadeFormacaoMedico'];
     universidadeFormacaoMedico = json['universidadeFormacaoMedico'];
     crmMedico = json['crmMedico'];
+    estadoMedico = json['estadoMedico'];
     telefoneMedico = json['telefoneMedico'];
     cepMedico = json['cepMedico'];
     clinica =
@@ -133,6 +136,7 @@ class Medico {
     data['crmMedico'] = this.crmMedico;
     data['telefoneMedico'] = this.telefoneMedico;
     data['cepMedico'] = this.cepMedico;
+    data['estadoMedico'] = this.estadoMedico;
     if (this.clinica != null) {
       data['clinica'] = this.clinica.toJson();
     }

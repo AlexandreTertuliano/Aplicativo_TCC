@@ -1,34 +1,34 @@
-import 'dart:convert';
-
+import 'package:MedAgenda/agenda_medico/page_agenda.dart';
 import 'package:MedAgenda/classes/pega_agenda_class.dart';
-import 'package:MedAgenda/menuMedico/menu_page_medico.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 
-class MinhaAgenda extends StatefulWidget {
+import 'minha_agenda.dart';
+
+class AnaliseAgenda extends StatefulWidget {
   int idMedico;
   String email, senha;
 
-  MinhaAgenda(this.idMedico, this.email, this.senha);
+  AnaliseAgenda(this.idMedico, this.email, this.senha);
+
   @override
-  _MinhaAgendaState createState() => _MinhaAgendaState();
+  _AnaliseAgendaState createState() => _AnaliseAgendaState();
 }
 
-class _MinhaAgendaState extends State<MinhaAgenda> {
+class _AnaliseAgendaState extends State<AnaliseAgenda> {
   List data;
   int _page = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightBlue[300],
         title: Text(
-          "Minha agenda:",
+          "Consulta em análise: ",
           style: GoogleFonts.lato(
             textStyle: Theme.of(context).textTheme.headline4,
             fontSize: 30,
@@ -38,7 +38,7 @@ class _MinhaAgendaState extends State<MinhaAgenda> {
         ),
       ),
       body: FutureBuilder(
-        future: pegaAgendaEspecifica(widget.idMedico),
+        future: listaConsulta(widget.idMedico),
         builder: (context, data) {
           if (data.hasError) {
             return Center(child: Text("${data.error}"));
@@ -97,8 +97,8 @@ class _MinhaAgendaState extends State<MinhaAgenda> {
                                   Padding(
                                     padding: EdgeInsets.only(left: 8, right: 8),
                                     child: Text(
-                                      "📍 Agenda Ocupada: " +
-                                          items[index].ocupadoAgenda,
+                                      "👨‍💼 Paciente: " +
+                                          items[index].paciente.namePaciente,
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold),
@@ -146,13 +146,18 @@ class _MinhaAgendaState extends State<MinhaAgenda> {
             _page = index;
             if (index == 0) {
               Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PageAgendaMedico(
+                          widget.email, widget.senha, widget.idMedico)));
             } else if (index == 1) {
               Navigator.pop(context);
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          MenuPageMedico(widget.email, widget.senha)));
+                      builder: (context) => MinhaAgenda(
+                          widget.idMedico, widget.email, widget.senha)));
             }
           });
         },
@@ -160,22 +165,12 @@ class _MinhaAgendaState extends State<MinhaAgenda> {
     );
   }
 
-  Future<List<PegaAgenda>> pegaAgendaEspecifica(int id) async {
-    final response = await http
-        .get(Uri.parse("https://api-marquemed.herokuapp.com/medico/$id"));
+  Future<List<PegaAgenda>> listaConsulta(int id) async {
+    final response = await http.get(Uri.parse(
+        "https://api-marquemed.herokuapp.com/medico/listConsulta/$id"));
 
     if (response.statusCode == 200) {
       return postFromJsonPegaAgenda(response.body);
-    } else {
-      return null;
-    }
-  }
-
-  static Future<List<Agenda>> getTodasAgenda() async {
-    final response =
-        await http.get(Uri.parse("https://api-marquemed.herokuapp.com/agenda"));
-    if (response.statusCode == 200) {
-      return postFromJson(response.body);
     } else {
       return null;
     }

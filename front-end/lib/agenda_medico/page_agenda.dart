@@ -1,6 +1,6 @@
+import 'package:MedAgenda/agenda_medico/analise_agenda.dart';
 import 'package:MedAgenda/agenda_medico/minha_agenda.dart';
 import 'package:MedAgenda/classes/agenda_class.dart';
-import 'package:MedAgenda/menuMedico/menu_page_medico.dart';
 import 'package:MedAgenda/services/agenda/services_agenda.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +58,7 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
       appBar: AppBar(
         backgroundColor: Colors.lightBlue[300],
         title: Text(
-          "Adicionar horários:",
+          "ADD HORÁRIO 📅",
           style: GoogleFonts.lato(
             textStyle: Theme.of(context).textTheme.headline4,
             fontSize: 30,
@@ -259,11 +259,12 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
         backgroundColor: Colors.white,
         items: <Widget>[
           Icon(
-            Icons.keyboard_return,
+            Icons.add_alarm,
             size: 30,
             color: Colors.white,
           ),
           Icon(Icons.import_contacts, size: 30, color: Colors.white),
+          Icon(Icons.fact_check, size: 30, color: Colors.white),
         ],
         onTap: (index) {
           setState(() {
@@ -276,6 +277,12 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => MinhaAgenda(
+                          widget.idMedico, widget.email, widget.senha)));
+            } else {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AnaliseAgenda(
                           widget.idMedico, widget.email, widget.senha)));
             }
           });
@@ -295,7 +302,7 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
         dadosAgenda: dataAjustada,
         medico: Medico(id: widget.idMedico),
         clinica: Clinica(id: int.parse(_mySelection)),
-        ocupadoAgenda: "Não");
+        ocupadoAgenda: "Nao");
 
     if (widget.agenda == null) {
       ServicesAgenda.createAgenda(agenda).then((isSuccess) async {

@@ -29,7 +29,7 @@ class _MenuPageMedicoState extends State<MenuPageMedico> {
   Future<void> pegaNomeMedico() async {
     final jsonMedico =
         await ServicesLogin.getLoginMedico(widget.email, widget.senha);
-
+    print(jsonMedico.medico.id);
     setState(() {
       nomeMedico = jsonMedico.medico.nameMedico;
       idMedico = jsonMedico.medico.id;

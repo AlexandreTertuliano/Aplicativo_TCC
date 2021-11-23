@@ -3,6 +3,7 @@ import 'package:MedAgenda/services/pacientes/services_pacientes.dart';
 import 'package:cupertino_date_textbox/cupertino_date_textbox.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:search_cep/search_cep.dart';
 
 import '../main.dart';
 
@@ -16,6 +17,7 @@ class RegisterPacientePage extends StatefulWidget {
 }
 
 class _RegisterPacientePageState extends State<RegisterPacientePage> {
+  final viaCepSearchCep = ViaCepSearchCep();
   TextEditingController _controllerNomeCompleto = TextEditingController();
   TextEditingController _controllerCpf = TextEditingController();
   TextEditingController _controllerAltura = TextEditingController();
@@ -165,11 +167,10 @@ class _RegisterPacientePageState extends State<RegisterPacientePage> {
                           const SizedBox(height: 10),
                           TextFormField(
                             controller: _controllerDoador,
-                            decoration:
-                                new InputDecoration(hintText: 'Doador de sangue'),
+                            decoration: new InputDecoration(
+                                hintText: 'Doador de sangue'),
                             validator: _validar,
                           ),
-                          
                           const SizedBox(height: 10),
                           Image.asset(
                             "assets/form.png",
@@ -180,6 +181,29 @@ class _RegisterPacientePageState extends State<RegisterPacientePage> {
                             validator: _validarCEP,
                           ),
                           const SizedBox(height: 10),
+                          IconButton(
+                            icon: const Icon(Icons.search),
+                            color: Colors.black,
+                            onPressed: () async {
+                              final infoCepJSON = await viaCepSearchCep
+                                  .searchInfoByCep(cep: _controllerCEP.text);
+                              print(infoCepJSON.fold(
+                                  (_) => null, (data) => data));
+                              setState(() {
+                                _controllerBairro.text = infoCepJSON.fold(
+                                    (_) => null, (data) => data.bairro);
+                                _controllerRua.text = infoCepJSON.fold(
+                                    (_) => null, (data) => data.logradouro);
+                                _controllerCidade.text = infoCepJSON.fold(
+                                    (_) => null, (data) => data.localidade);
+                                _controllerEstado.text = infoCepJSON.fold(
+                                    (_) => null, (data) => data.uf);
+                              });
+                            },
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
                           TextFormField(
                             controller: _controllerEstado,
                             decoration: new InputDecoration(hintText: 'Estado'),
@@ -259,13 +283,11 @@ class _RegisterPacientePageState extends State<RegisterPacientePage> {
     return null;
   }
 
-
-
   String _validarCEP(String value) {
     if (value.length == 0) {
       return "Informe o CEP";
-    } else if (value.length < 9) {
-      return "O CEP deve ter 9 dígitos";
+    } else if (value.length < 8 && value.length > 8) {
+      return "O CEP deve ter 8 dígitos";
     }
     return null;
   }

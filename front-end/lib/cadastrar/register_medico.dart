@@ -1,17 +1,22 @@
+import 'dart:convert';
+
 import 'package:MedAgenda/classes/medico_class.dart';
 import 'package:MedAgenda/main.dart';
+import 'package:MedAgenda/services/crm/class_crm.dart' as FCrm;
+import 'package:MedAgenda/services/crm/crm_services.dart';
 import 'package:cupertino_date_textbox/cupertino_date_textbox.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:search_cep/search_cep.dart';
 
 class RegisterMedicoPage extends StatefulWidget {
   Medico medico;
-  final String email;
+  final String email, senha;
   RegisterMedicoPage({
     this.email,
-    String senha,
+    this.senha,
   });
 
   @override
@@ -19,6 +24,7 @@ class RegisterMedicoPage extends StatefulWidget {
 }
 
 class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
+  final viaCepSearchCep = ViaCepSearchCep();
   TextEditingController _controllerNomeCompleto = TextEditingController();
   TextEditingController _controllerCpf = TextEditingController();
   TextEditingController _controllerIdade = TextEditingController();
@@ -104,6 +110,20 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
                       child: Column(
                         children: [
                           TextFormField(
+                            controller: _controllerCRM,
+                            decoration: new InputDecoration(hintText: 'CRM'),
+                            validator: _validarCRM,
+                          ),
+                          const SizedBox(height: 10),
+                          IconButton(
+                            icon: const Icon(Icons.search),
+                            color: Colors.black,
+                            onPressed: () async {
+                              await pegaCrm(_controllerCRM.text);
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
                             controller: _controllerNomeCompleto,
                             decoration: new InputDecoration(hintText: 'Nome'),
                             validator: _validar,
@@ -153,12 +173,6 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
                           Image.asset(
                             "assets/medicalForm.png",
                           ),
-                          TextFormField(
-                            controller: _controllerCRM,
-                            decoration: new InputDecoration(hintText: 'CRM'),
-                            validator: _validarCRM,
-                          ),
-                          const SizedBox(height: 10),
                           TextFormField(
                             controller: _controllerValorConsulta,
                             decoration: new InputDecoration(
@@ -215,6 +229,27 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
                             controller: _controllerCEP,
                             decoration: new InputDecoration(hintText: 'CEP'),
                             validator: _validarCEP,
+                          ),
+                          const SizedBox(height: 10),
+                          IconButton(
+                            icon: const Icon(Icons.search),
+                            color: Colors.black,
+                            onPressed: () async {
+                              final infoCepJSON = await viaCepSearchCep
+                                  .searchInfoByCep(cep: _controllerCEP.text);
+                              print(infoCepJSON.fold(
+                                  (_) => null, (data) => data));
+                              setState(() {
+                                _controllerBairro.text = infoCepJSON.fold(
+                                    (_) => null, (data) => data.bairro);
+                                _controllerRua.text = infoCepJSON.fold(
+                                    (_) => null, (data) => data.logradouro);
+                                _controllerCidade.text = infoCepJSON.fold(
+                                    (_) => null, (data) => data.localidade);
+                                _controllerEstado.text = infoCepJSON.fold(
+                                    (_) => null, (data) => data.uf);
+                              });
+                            },
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
@@ -308,8 +343,8 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
   String _validarCEP(String value) {
     if (value.length == 0) {
       return "Informe o CEP";
-    } else if (value.length < 9) {
-      return "O CEP deve ter 9 dígitos";
+    } else if (value.length < 8 || value.length > 8) {
+      return "O CEP deve ter 8 dígitos";
     }
     return null;
   }
@@ -337,27 +372,27 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
 
   Future<void> saveInfoMedico() async {
     Medico medico = Medico(
-      nameMedico: _controllerNomeCompleto.text,
-      cpfMedico: _controllerCpf.text,
-      //dnMedico: _selectedDateTime,
-      telefoneMedico: _controllerTelefone.text,
-      cepMedico: _controllerCEP.text,
-      cidadeMedico: _controllerCidade.text,
-      bairroMedico: _controllerBairro.text,
-      ruaMedico: _controllerRua.text,
-      numeroMedico: _controllerNumero.text,
-      idadeMedico: _controllerIdade.text,
-      especializacao1Medico: _controllerEsp1.text,
-      especializacao2Medico: _controllerEsp2.text,
-      especializacao3Medico: _controllerEsp3.text,
-      generoMedico: _controllerSexo.text,
-      emailMedico: widget.email,
-      anoFormacaoMedico: _controllerAnoFormacao.text,
-      cidadeFormacaoMedico: _controllerCidadeFormacao.text,
-      universidadeFormacaoMedico: _controllerFaculdade.text,
-      crmMedico: _controllerCRM.text,
-      valorConsulta: double.parse(_controllerValorConsulta.text),
-    );
+        nameMedico: _controllerNomeCompleto.text,
+        cpfMedico: _controllerCpf.text,
+        //dnMedico: _selectedDateTime,
+        telefoneMedico: _controllerTelefone.text,
+        cepMedico: _controllerCEP.text,
+        cidadeMedico: _controllerCidade.text,
+        bairroMedico: _controllerBairro.text,
+        ruaMedico: _controllerRua.text,
+        numeroMedico: _controllerNumero.text,
+        idadeMedico: _controllerIdade.text,
+        especializacao1Medico: _controllerEsp1.text,
+        especializacao2Medico: _controllerEsp2.text,
+        especializacao3Medico: _controllerEsp3.text,
+        generoMedico: _controllerSexo.text,
+        emailMedico: widget.email,
+        anoFormacaoMedico: _controllerAnoFormacao.text,
+        cidadeFormacaoMedico: _controllerCidadeFormacao.text,
+        universidadeFormacaoMedico: _controllerFaculdade.text,
+        crmMedico: _controllerCRM.text,
+        valorConsulta: double.parse(_controllerValorConsulta.text),
+        senhaMedico: widget.senha);
     if (widget.medico == null) {
       createMedico(medico).then((isSuccess) async {
         if (isSuccess) {
@@ -366,7 +401,6 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
           ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: const Text('Médico adicionado com sucesso !')));
         } else {
-          print("Deu erro");
           ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: const Text('Erro ao adicionar médico !')));
         }
@@ -421,6 +455,22 @@ class _RegisterMedicoPageState extends State<RegisterMedicoPage> {
       return true;
     } else {
       return false;
+    }
+  }
+
+  Future<void> pegaCrm(String crm) async {
+    final jsonCrm = await CrmServices.getCrm(crm);
+
+    if (jsonCrm.item.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: const Text('Falha ao localizar CRM !')));
+    } else {
+      setState(() {
+        _controllerNomeCompleto.text = jsonCrm.item[0].nome;
+        _controllerEsp1.text = jsonCrm.item[0].profissao;
+        _controllerEsp2.text = jsonCrm.item[0].profissao;
+        _controllerEsp3.text = jsonCrm.item[0].profissao;
+      });
     }
   }
 }

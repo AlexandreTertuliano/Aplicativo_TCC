@@ -132,7 +132,8 @@ class _DadosMedicosState extends State<DadosMedicos> {
         esp3 = jsonMedico.medico.especializacao3Medico,
         universidade = jsonMedico.medico.universidadeFormacaoMedico,
         anograduacao = jsonMedico.medico.anoFormacaoMedico,
-        cidadegraduacao = jsonMedico.medico.cidadeFormacaoMedico
+        cidadegraduacao = jsonMedico.medico.cidadeFormacaoMedico,
+        estado = jsonMedico.medico.estadoMedico
       };
     });
   }
@@ -296,6 +297,11 @@ class _DadosMedicosState extends State<DadosMedicos> {
                           });
                         },
                       ),
+                      IconButton(
+            icon: const Icon(Icons.search),
+            color: Colors.white,
+            onPressed: () {},
+          ),
                       Text("Cidade",
                           style: TextStyle(
                               fontFamily: "Poppins-Medium",
