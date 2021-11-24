@@ -1,6 +1,7 @@
 import 'package:MedAgenda/TelaCovid/covid_main.dart';
 import 'package:MedAgenda/agenda_paciente/agendamentos.dart';
 import 'package:MedAgenda/cadastro_pessoal/add_meus_dados_paciente.dart';
+import 'package:MedAgenda/carteira_paciente/screen_home_paciente.dart';
 import 'package:MedAgenda/pesquisarMedicos/pesquisar_medico.dart';
 import 'package:MedAgenda/services/login/services_login.dart';
 import 'package:flutter/material.dart';
@@ -153,7 +154,13 @@ class _MenuPagePacienteState extends State<MenuPagePaciente> {
                                       text: 'Carteira',
                                       color: Color(0xFF1E90FF),
                                     ),
-                                    onTap: () {})
+                                    onTap: () {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomeScreen(idPaciente)));
+                                    })
                               ],
                             ),
                             SizedBox(

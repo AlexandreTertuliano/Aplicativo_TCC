@@ -3,6 +3,7 @@ import 'package:MedAgenda/Clinicas/page_clinica.dart';
 import 'package:MedAgenda/TelaCovid/covid_main.dart';
 import 'package:MedAgenda/agenda_medico/page_agenda.dart';
 import 'package:MedAgenda/cadastro_pessoal/add_meus_dados_medicos.dart';
+import 'package:MedAgenda/carteira_medico/screen_home_medico.dart';
 import 'package:MedAgenda/main.dart';
 import 'package:MedAgenda/services/login/services_login.dart';
 import 'package:flutter/material.dart';
@@ -134,7 +135,13 @@ class _MenuPageMedicoState extends State<MenuPageMedico> {
                                     text: 'Carteira',
                                     color: Color(0xFFFD47DF),
                                   ),
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                HomeScreen(idMedico)));
+                                  },
                                 ),
                                 GestureDetector(
                                     child: CatigoryW(

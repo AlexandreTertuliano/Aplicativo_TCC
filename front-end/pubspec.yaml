@@ -38,6 +38,9 @@ dependencies:
   flutter_datetime_picker: ^1.5.1
   flutter_spinkit: ^5.1.0
   search_cep: ^4.0.0
+  quick_feedback: ^0.1.1
+  clipboard_manager: ^0.0.4
+ 
 
 dev_dependencies:
   flutter_test:
