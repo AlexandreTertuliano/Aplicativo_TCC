@@ -91,7 +91,6 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
                           showTitleActions: true,
                           minTime: DateTime(2000, 1, 1),
                           maxTime: DateTime(2022, 12, 31), onConfirm: (date) {
-                        print('$date');
                         _date = '${date.year} - ${date.month} - ${date.day}';
                         setState(() {});
                       }, currentTime: DateTime.now(), locale: LocaleType.en);
@@ -149,7 +148,6 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
                             containerHeight: 210.0,
                           ),
                           showTitleActions: true, onConfirm: (time) {
-                        print('$time');
                         dataCompleta = time;
                         _time =
                             '${time.hour} : ${time.minute} : ${time.second}';
@@ -229,7 +227,6 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
                     onChanged: (newVal) {
                       setState(() {
                         _mySelection = newVal;
-                        print(_mySelection);
                       });
                     },
                     value: _mySelection,
@@ -295,9 +292,7 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
     String dataAjustada = dataCompleta.toString().substring(0, 10) +
         "T" +
         dataCompleta.toString().substring(11, 23);
-    print(dataAjustada);
-    print(widget.idMedico);
-    print(_mySelection);
+
     Agenda agenda = Agenda(
         dadosAgenda: dataAjustada,
         medico: Medico(id: widget.idMedico),
@@ -309,7 +304,6 @@ class _PageAgendaMedicoState extends State<PageAgendaMedico> {
         if (isSuccess) {
           await _showMyDialog();
         } else {
-          print("Deu erro");
           ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: const Text('Erro ao adicionar horário !')));
         }

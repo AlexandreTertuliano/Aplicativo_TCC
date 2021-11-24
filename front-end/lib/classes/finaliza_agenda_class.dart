@@ -1,4 +1,4 @@
-import 'package:MedAgenda/classes/paciente_class.dart';
+import 'dart:convert';
 
 class FinalizaAgendaClass {
   FinalizaAgendaClass({
@@ -26,18 +26,25 @@ class FinalizaAgendaClass {
 }
 
 class Agenda {
-  Agenda({
-    this.id,
-  });
+  Agenda({this.id, this.nameClinica, this.dadosAgenda, this.ocupadoAgenda});
 
   int id;
+  String nameClinica;
+  String dadosAgenda;
+  String ocupadoAgenda;
 
   factory Agenda.fromJson(Map<String, dynamic> json) => Agenda(
         id: json["id"],
+        nameClinica: json["nameClinica"],
+        dadosAgenda: json["dadosAgenda"],
+        ocupadoAgenda: json["ocupadoAgenda"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "nameClinica": nameClinica,
+        "dadosAgenda": dadosAgenda,
+        "ocupadoAgenda": ocupadoAgenda
       };
 }
 
@@ -55,4 +62,15 @@ class Paciente {
   Map<String, dynamic> toJson() => {
         "id": id,
       };
+}
+
+List<FinalizaAgendaClass> postFromJson(String jsonData) {
+  final data = json.decode(jsonData);
+  return List<FinalizaAgendaClass>.from(
+      data.map((item) => FinalizaAgendaClass.fromJson(item)));
+}
+
+String postToJson(FinalizaAgendaClass data) {
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
 }

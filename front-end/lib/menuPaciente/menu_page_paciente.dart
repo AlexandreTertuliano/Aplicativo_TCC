@@ -1,5 +1,5 @@
-
 import 'package:MedAgenda/TelaCovid/covid_main.dart';
+import 'package:MedAgenda/agenda_paciente/agendamentos.dart';
 import 'package:MedAgenda/cadastro_pessoal/add_meus_dados_paciente.dart';
 import 'package:MedAgenda/pesquisarMedicos/pesquisar_medico.dart';
 import 'package:MedAgenda/services/login/services_login.dart';
@@ -112,7 +112,13 @@ class _MenuPagePacienteState extends State<MenuPagePaciente> {
                                     color: Color(0xFFFFFF00),
                                   ),
                                   onTap: () {
-                                   
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AgendamentosPaciente(
+                                                  idPaciente,
+                                                )));
                                   },
                                 )
                               ],
@@ -135,6 +141,7 @@ class _MenuPagePacienteState extends State<MenuPagePaciente> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 PagePesquisarMedico(
+                                                  idPaciente,
                                                   widget.email,
                                                   widget.senha,
                                                 )));

@@ -4,6 +4,7 @@ import 'package:MedAgenda/services/clinica/services_clinica.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:search_cep/search_cep.dart';
 
 class CadastrarClinica extends StatefulWidget {
   Clinica clinica;
@@ -12,6 +13,7 @@ class CadastrarClinica extends StatefulWidget {
 }
 
 class _CadastrarClinica extends State<CadastrarClinica> {
+  final viaCepSearchCep = ViaCepSearchCep();
   int _page = 0;
   final formGlobalKey = GlobalKey<FormState>();
   TextEditingController _controllerName = TextEditingController();
@@ -100,6 +102,28 @@ class _CadastrarClinica extends State<CadastrarClinica> {
                                 labelText: "🌍 CEP :",
                                 labelStyle: TextStyle(color: Colors.black)),
                           ),
+                          const SizedBox(height: 10),
+                          IconButton(
+                            icon: const Icon(Icons.search),
+                            color: Colors.black,
+                            onPressed: () async {
+                              final infoCepJSON = await viaCepSearchCep
+                                  .searchInfoByCep(cep: _controllerCep.text);
+                              print(infoCepJSON.fold(
+                                  (_) => null, (data) => data));
+                              setState(() {
+                                _controllerBairro.text = infoCepJSON.fold(
+                                    (_) => null, (data) => data.bairro);
+                                _controllerRua.text = infoCepJSON.fold(
+                                    (_) => null, (data) => data.logradouro);
+                                _controllerCidade.text = infoCepJSON.fold(
+                                    (_) => null, (data) => data.localidade);
+                                _controllerEstado.text = infoCepJSON.fold(
+                                    (_) => null, (data) => data.uf);
+                              });
+                            },
+                          ),
+                          const SizedBox(height: 10),
                           const SizedBox(height: 10),
                           TextFormField(
                             controller: _controllerEstado,

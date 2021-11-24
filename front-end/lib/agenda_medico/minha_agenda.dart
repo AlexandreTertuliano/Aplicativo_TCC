@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:MedAgenda/agenda_medico/analise_agenda.dart';
+import 'package:MedAgenda/agenda_medico/page_agenda.dart';
 import 'package:MedAgenda/classes/pega_agenda_class.dart';
 import 'package:MedAgenda/menuMedico/menu_page_medico.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -135,24 +137,31 @@ class _MinhaAgendaState extends State<MinhaAgenda> {
         backgroundColor: Colors.white,
         items: <Widget>[
           Icon(
-            Icons.keyboard_return,
+            Icons.add_alarm,
             size: 30,
             color: Colors.white,
           ),
-          Icon(Icons.home, size: 30, color: Colors.white),
+          Icon(Icons.import_contacts, size: 30, color: Colors.white),
+          Icon(Icons.fact_check, size: 30, color: Colors.white),
         ],
         onTap: (index) {
           setState(() {
             _page = index;
             if (index == 0) {
               Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PageAgendaMedico(
+                          widget.email, widget.senha, widget.idMedico)));
             } else if (index == 1) {
+            } else {
               Navigator.pop(context);
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          MenuPageMedico(widget.email, widget.senha)));
+                      builder: (context) => AnaliseAgenda(
+                          widget.idMedico, widget.email, widget.senha)));
             }
           });
         },
@@ -160,24 +169,10 @@ class _MinhaAgendaState extends State<MinhaAgenda> {
     );
   }
 
-  Future<List<PegaAgenda>> pegaAgendaEspecifica(int id) async {
+  Future<PegaAgenda> pegaAgendaEspecifica(int id) async {
     final response = await http
         .get(Uri.parse("https://api-marquemed.herokuapp.com/medico/$id"));
-
-    if (response.statusCode == 200) {
-      return postFromJsonPegaAgenda(response.body);
-    } else {
-      return null;
-    }
-  }
-
-  static Future<List<Agenda>> getTodasAgenda() async {
-    final response =
-        await http.get(Uri.parse("https://api-marquemed.herokuapp.com/agenda"));
-    if (response.statusCode == 200) {
-      return postFromJson(response.body);
-    } else {
-      return null;
-    }
+    var data = json.decode(response.body);
+    return PegaAgenda.fromJson(data);
   }
 }

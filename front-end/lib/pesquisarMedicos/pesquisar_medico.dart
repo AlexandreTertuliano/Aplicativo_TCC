@@ -11,8 +11,9 @@ import 'dart:core';
 
 class PagePesquisarMedico extends StatefulWidget {
   String email, senha;
+  int idPaciente;
 
-  PagePesquisarMedico(this.email, this.senha);
+  PagePesquisarMedico(this.idPaciente, this.email, this.senha);
   @override
   _PagePesquisarMedicoState createState() => _PagePesquisarMedicoState();
 }
@@ -150,8 +151,8 @@ class _PagePesquisarMedicoState extends State<PagePesquisarMedico> {
               context,
               MaterialPageRoute(
                   builder: (context) => MarcarHorarioPage(
-                      _medicoDisplay[index].medico?.id,
-                      _medicoDisplay[index].medico.agenda?.id,
+                      widget.idPaciente,
+                      _medicoDisplay[index].medico.id,
                       widget.email,
                       widget.senha)));
         },

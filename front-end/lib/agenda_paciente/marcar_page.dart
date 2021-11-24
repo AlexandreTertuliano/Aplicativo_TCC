@@ -11,10 +11,10 @@ import 'package:intl/intl.dart';
 
 class MarcarHorarioPage extends StatefulWidget {
   Agenda agenda;
-  int idMedico, idAgenda;
+  int idMedico, idPaciente;
   String email, senha;
 
-  MarcarHorarioPage(this.idMedico, this.idAgenda, this.email, this.senha);
+  MarcarHorarioPage(this.idPaciente, this.idMedico, this.email, this.senha);
   @override
   _MarcarHorarioPageState createState() => _MarcarHorarioPageState();
 }
@@ -61,55 +61,63 @@ class _MarcarHorarioPageState extends State<MarcarHorarioPage> {
                     child: GestureDetector(
                       onTap: () async {
                         await finalizarMarcacao(
-                            widget.idMedico, widget.idAgenda);
+                            items[index].id, widget.idPaciente);
                       },
-                      child: Card(
-                        color: (items[index].ocupadoAgenda == "Sim" ||
-                                items[index].ocupadoAgenda == "sim"
-                            ? Colors.red[200]
-                            : Colors.green[200]),
-                        elevation: 5,
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                        child: Container(
-                          padding: EdgeInsets.all(8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                  child: Container(
-                                padding: EdgeInsets.only(bottom: 8),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        "📅 Horário: " +
-                                            DateFormat('yyyy-MM-dd – kk:mm')
-                                                .format(DateTime.parse(
-                                                    items[index].dadosAgenda)),
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
+                      child: Visibility(
+                        visible: items[index].ocupadoAgenda == "Nao" ||
+                            items[index].ocupadoAgenda == "Não" ||
+                            items[index].ocupadoAgenda == "nao" ||
+                            items[index].ocupadoAgenda == "",
+                        child: Card(
+                          color: (items[index].ocupadoAgenda == "Sim" ||
+                                  items[index].ocupadoAgenda == "sim"
+                              ? Colors.red[200]
+                              : Colors.green[200]),
+                          elevation: 5,
+                          margin:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          child: Container(
+                            padding: EdgeInsets.all(8),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                    child: Container(
+                                  padding: EdgeInsets.only(bottom: 8),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          "📅 Horário: " +
+                                              DateFormat('yyyy-MM-dd – kk:mm')
+                                                  .format(DateTime.parse(
+                                                      items[index]
+                                                          .dadosAgenda)),
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        "🏥 Local de atendimento: " +
-                                            items[index].clinica.nameClinica,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          "🏥 Local de atendimento: " +
+                                              items[index].clinica.nameClinica,
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ))
-                            ],
+                                    ],
+                                  ),
+                                ))
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -160,11 +168,11 @@ class _MarcarHorarioPageState extends State<MarcarHorarioPage> {
     return PegaAgenda.fromJson(data);
   }
 
-  Future<void> finalizarMarcacao(int idAgenda, int idMedico) async {
+  Future<void> finalizarMarcacao(int idAgenda, int idPaciente) async {
     fAgenda.FinalizaAgendaClass finalizaAgenda = fAgenda.FinalizaAgendaClass(
-      agenda: fAgenda.Agenda(id: 5),
-      paciente: fAgenda.Paciente(id: 5),
-      status:"",
+      agenda: fAgenda.Agenda(id: idAgenda),
+      paciente: fAgenda.Paciente(id: idPaciente),
+      status: "",
     );
     if (widget.agenda == null) {
       FinalizaConsulta(finalizaAgenda).then((isSuccess) async {
@@ -219,9 +227,10 @@ class _MarcarHorarioPageState extends State<MarcarHorarioPage> {
     print(data.toJson());
     final response = await http.post(
       Uri.parse("https://api-marquemed.herokuapp.com/finalizar/analise"),
-      body: jsonEncode(data.toJson()),
+      headers: {"content-type": "application/json"},
+      body: fAgenda.postToJson(data),
     );
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       return true;
     } else {
       return false;
