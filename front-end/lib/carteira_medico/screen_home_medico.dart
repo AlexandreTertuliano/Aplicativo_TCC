@@ -1,6 +1,5 @@
 import 'package:MedAgenda/carteira_medico/card_medico.dart';
 import 'package:MedAgenda/classes/carteira_medico_class.dart';
-import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -42,222 +41,42 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  Future<void> _refreshPosts(BuildContext context) async {
+    return listaCarteiraMedico(widget.idMedico).then((list) {
+      setState(() {
+        medicoCarteira = list;
+        _medicoCarteiraDisplay = medicoCarteira;
+        loading = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: double.infinity,
-        child: Stack(
-          children: <Widget>[
-            //Container for top data
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 32, vertical: 32),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        valorTotal.toString(),
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 36,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ],
-                  ),
-                  Text(
-                    "Saldo",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
-                        color: Colors.blue[100]),
-                  ),
-                  SizedBox(
-                    height: 24,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Container(
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: Color.fromRGBO(243, 245, 248, 1),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(18))),
-                              child: Icon(
-                                Icons.attach_money,
-                                color: Colors.blue[900],
-                                size: 30,
-                              ),
-                              padding: EdgeInsets.all(12),
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Text(
-                              "PIX",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 14,
-                                  color: Colors.blue[100]),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Center(
-                        child: Column(
-                          children: <Widget>[
-                            Text("Chave Pix:" + chavePix,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 20,
-                                    color: Colors.black)),
-                            RaisedButton(
-                              child: Text('Copiar'),
-                              onPressed: () {
-                                ClipboardManager.copyToClipBoard(chavePix)
-                                    .then((result) {
-                                  final snackBar = SnackBar(
-                                    content: Text('Copied to Clipboard'),
-                                    action: SnackBarAction(
-                                      label: 'Undo',
-                                      onPressed: () {},
-                                    ),
-                                  );
-                                  Scaffold.of(context).showSnackBar(snackBar);
-                                });
-                              },
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-
-            //draggable sheet
-            DraggableScrollableSheet(
-              builder: (context, scrollController) {
-                return Container(
-                  decoration: BoxDecoration(
-                      color: Color.fromRGBO(243, 245, 248, 1),
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(40),
-                          topRight: Radius.circular(40))),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 24,
-                        ),
-                        Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text(
-                                "Transações recentes",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 24,
-                                    color: Colors.black),
-                              ),
-                            ],
-                          ),
-                          padding: EdgeInsets.symmetric(horizontal: 32),
-                        ),
-                        SizedBox(
-                          height: 24,
-                        ),
-
-                        //Container for buttons
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 32),
-                          child: Row(
-                            children: <Widget>[
-                              Container(
-                                child: Text(
-                                  "Todas",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 14,
-                                      color: Colors.grey[900]),
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey[200],
-                                          blurRadius: 10.0,
-                                          spreadRadius: 4.5)
-                                    ]),
-                               
-                              ),
-                              SizedBox(
-                                width: 16,
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        SizedBox(
-                          height: 16,
-                        ),
-                        //Container Listview for expenses and incomes
-                        Container(
-                          child: Text(
-                            "TODAY",
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.grey[500]),
-                          ),
-                          padding: EdgeInsets.symmetric(horizontal: 32),
-                        ),
-
-                        SizedBox(
-                          height: 16,
-                        ),
-
-                        ListView.builder(
-                          itemBuilder: (context, index) {
-                            if (_medicoCarteiraDisplay.length > 0) {
-                              return index == 0
-                                  ? _searchBar()
-                                  : _listItem(index - 1);
-                            } else {
-                              return Padding(
-                                padding: const EdgeInsets.all(40.0),
-                                child:
-                                    Center(child: CircularProgressIndicator()),
-                              );
-                            }
-                          },
-                          itemCount: _medicoCarteiraDisplay.length + 1,
-                        ),
-                      ],
-                    ),
-                    controller: scrollController,
-                  ),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xff00BFFF), Color(0xFFFFFAFA)],
+          ),
+        ),
+        child: RefreshIndicator(
+          onRefresh: () => _refreshPosts(context),
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              if (_medicoCarteiraDisplay.length > 0) {
+                return index == 0 ? _searchBar() : _listItem(index - 1);
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.all(40.0),
+                  child: Center(child: CircularProgressIndicator()),
                 );
-              },
-              initialChildSize: 0.65,
-              minChildSize: 0.65,
-              maxChildSize: 1,
-            )
-          ],
+              }
+            },
+            itemCount: _medicoCarteiraDisplay.length + 1,
+          ),
         ),
       ),
       bottomNavigationBar: CurvedNavigationBar(
@@ -359,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static Future<List<MedicoCarteira>> listaCarteiraMedico(int id) async {
     final response = await http.get(
-        Uri.parse("http://api-marquemed.herokuapp.com/paciente/agenda/$id"));
+        Uri.parse("https://api-marquemed.herokuapp.com/carteira/medico/$id"));
     if (response.statusCode == 200) {
       return postFromJson(response.body);
     } else {

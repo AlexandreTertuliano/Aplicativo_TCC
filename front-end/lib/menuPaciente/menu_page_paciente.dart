@@ -155,7 +155,7 @@ class _MenuPagePacienteState extends State<MenuPagePaciente> {
                                       color: Color(0xFF1E90FF),
                                     ),
                                     onTap: () {
-                                      Navigator.pushReplacement(
+                                      Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
@@ -190,7 +190,7 @@ class _MenuPagePacienteState extends State<MenuPagePaciente> {
                                   ),
                                   //onTap: () => exit(0),
                                   onTap: () {
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => MyApp()));

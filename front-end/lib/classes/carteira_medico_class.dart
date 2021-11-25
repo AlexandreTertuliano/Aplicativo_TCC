@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class MedicoCarteira {
-  int valorConsulta;
+  double valorConsulta;
   String chavePix;
   String paciente;
 

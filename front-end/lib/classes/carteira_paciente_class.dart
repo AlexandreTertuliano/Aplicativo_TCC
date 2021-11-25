@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class PacienteCarteira {
   String medico;
-  int valorConsulta;
+  double valorConsulta;
 
   PacienteCarteira({this.medico, this.valorConsulta});
 
@@ -21,7 +21,8 @@ class PacienteCarteira {
 
 List<PacienteCarteira> postFromJson(String jsonData) {
   final data = json.decode(jsonData);
-  return List<PacienteCarteira>.from(data.map((item) => PacienteCarteira.fromJson(item)));
+  return List<PacienteCarteira>.from(
+      data.map((item) => PacienteCarteira.fromJson(item)));
 }
 
 String postToJson(PacienteCarteira data) {

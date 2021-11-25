@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:MedAgenda/classes/finaliza_agenda_class.dart' as fAgenda;
 import 'package:MedAgenda/classes/pega_agenda_class.dart';
-import 'package:MedAgenda/menuMedico/menu_page_medico.dart';
+import 'package:MedAgenda/menuPaciente/menu_page_paciente.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -153,7 +153,7 @@ class _MarcarHorarioPageState extends State<MarcarHorarioPage> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          MenuPageMedico(widget.email, widget.senha)));
+                          MenuPagePaciente(widget.email, widget.senha)));
             }
           });
         },
