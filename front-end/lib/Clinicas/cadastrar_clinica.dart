@@ -66,7 +66,7 @@ class _CadastrarClinica extends State<CadastrarClinica> {
                         children: [
                           TextFormField(
                             decoration: InputDecoration(
-                                labelText: "🏥 Nome Fictício :",
+                                labelText: "🝥 Nome Fictício :",
                                 labelStyle: TextStyle(color: Colors.black)),
                           ),
                           const SizedBox(height: 10),
@@ -83,7 +83,7 @@ class _CadastrarClinica extends State<CadastrarClinica> {
                           ),
                           TextFormField(
                             decoration: InputDecoration(
-                                labelText: "🌍 CEP :",
+                                labelText: "🌝 CEP :",
                                 labelStyle: TextStyle(color: Colors.black)),
                           ),
                           const SizedBox(height: 10),
