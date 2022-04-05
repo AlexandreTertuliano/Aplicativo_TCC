@@ -56,7 +56,7 @@ class _SignupPageState extends State<SignupPage> {
               ),
               Form(
                 key: formKey,
-                autovalidate: _validate,
+                // autovalidate: _validate,
                 child: Column(
                   children: <Widget>[
                     TextFormField(
