@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 class ServicesPaciente {
   static Future<List<Paciente>> getPaciente() async {
     final response = await http
-        .get(Uri.parse("https://api-marquemed.herokuapp.com/paciente"));
+        .get(Uri.parse("https://marquemed-api.herokuapp.com/paciente"));
     if (response.statusCode == 200) {
       return postFromJson(response.body);
     } else {
@@ -14,7 +14,7 @@ class ServicesPaciente {
 
   static Future<List<Paciente>> getPegaPaciente(int id) async {
     final response =
-        await http.get(Uri.parse("https://api-marquemed.herokuapp.com/$id"));
+        await http.get(Uri.parse("https://marquemed-api.herokuapp.com/$id"));
     if (response.statusCode == 200) {
       return postFromJson(response.body);
     } else {
@@ -24,7 +24,7 @@ class ServicesPaciente {
 
   static Future<bool> createPaciente(Paciente data) async {
     final response = await http.post(
-      Uri.parse("https://api-marquemed.herokuapp.com/paciente"),
+      Uri.parse("https://marquemed-api.herokuapp.com/paciente"),
       headers: {"content-type": "application/json"},
       body: postToJson(data),
     );
@@ -37,7 +37,7 @@ class ServicesPaciente {
 
   static Future<bool> updatePaciente(int id, Paciente data) async {
     final response = await http.put(
-      Uri.parse("https://api-marquemed.herokuapp.com/paciente/$id"),
+      Uri.parse("https://marquemed-api.herokuapp.com/paciente/$id"),
       headers: {"content-type": "application/json"},
       body: postToJson(data),
     );
@@ -50,7 +50,7 @@ class ServicesPaciente {
 
   static Future<bool> deletePaciente(int id) async {
     final response = await http.delete(
-      Uri.parse("https://api-marquemed.herokuapp.com/paciente/$id"),
+      Uri.parse("https://marquemed-api.herokuapp.com/paciente/$id"),
       headers: {"content-type": "application/json"},
     );
     if (response.statusCode == 200) {
